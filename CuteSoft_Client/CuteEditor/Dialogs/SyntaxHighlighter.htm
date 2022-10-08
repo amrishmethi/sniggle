@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>[[SyntaxHighlighter]]</title>
+		
+		<meta name="content-type" content="text/html ;charset=Unicode" />
+		<meta http-equiv="Page-Enter" content="blendTrans(Duration=0.1)" />
+		<meta http-equiv="Page-Exit" content="blendTrans(Duration=0.1)" />
+		<link href='Load.ashx?type=themecss&file=dialog.css&theme=[[_Theme_]]' type="text/css" rel="stylesheet" />
+		<!--[if IE]>
+			<link href="Load.ashx?type=style&file=IE.css" type="text/css" rel="stylesheet" />
+		<![endif]-->
+		<script type="text/javascript" src="Load.ashx?type=dialogscript&verfix=1003&file=DialogHead.js"></script>
+		<style type="text/css">
+		html, body,#ajaxdiv {height: 100%;}
+		</style>
+	</head>
+	<body>
+		<div id="ajaxdiv">
+			<table>
+				<tr>
+					<td width="80">[[CodeLanguage]]:</td>
+					<td><select id="sel_lang"></select></td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea id="ta_code" name="ta_code_name" style="width:400px;height:300px"></textarea></td>
+				</tr>
+			</table>
+			
+			<div id="container-bottom">
+				<input type="button" value="[[OK]]" class="formbutton" onclick="DoHighlight()">
+				<input type="button" value="[[Cancel]]" class="formbutton" onclick="Close()">
+			</div>					
+		</div>
+	</body>
+	<script type="text/javascript" src="Load.ashx?type=dialogscript&verfix=1003&file=DialogFoot.js"></script>
+	<script type="text/javascript" src="Load.ashx?type=scripts&file=SyntaxHighlighter"></script>
+	<script>
+	
+
+var OxO3e3e=["=","; path=/;"," expires=",";","cookie","length","","sel_lang","ta_code","Brushes","sh","Aliases","options","CESHBRUSH","value","language",":nocontrols","opera","all","innerHTML","display","style","previousSibling","\x3Cdiv class=\x22dp-highlighter\x22\x3E","\x3C/div\x3E","parentNode"];function SetCookie(name,Ox4f,Ox55){var Ox56=name+OxO3e3e[0]+escape(Ox4f)+OxO3e3e[1];if(Ox55){var Ox57= new Date();Ox57.setSeconds(Ox57.getSeconds()+Ox55);Ox56+=OxO3e3e[2]+Ox57.toUTCString()+OxO3e3e[3];} ;document[OxO3e3e[4]]=Ox56;} ;function GetCookie(name){var Ox59=document[OxO3e3e[4]].split(OxO3e3e[3]);for(var i=0;i<Ox59[OxO3e3e[5]];i++){var Ox5a=Ox59[i].split(OxO3e3e[0]);if(name==Ox5a[0].replace(/\s/g,OxO3e3e[6])){return unescape(Ox5a[1]);} ;} ;} ;var editor=Window_GetDialogArguments(window);var sel_lang=document.getElementById(OxO3e3e[7]);var ta_code=document.getElementById(OxO3e3e[8]);for(var brush in dp[OxO3e3e[10]][OxO3e3e[9]]){var aliases=dp[OxO3e3e[10]][OxO3e3e[9]][brush][OxO3e3e[11]];if(aliases==null){continue ;} ;sel_lang[OxO3e3e[12]].add( new Option(aliases,brush));var b=GetCookie(OxO3e3e[13]);if(b){sel_lang[OxO3e3e[14]]=b;} ;} ;function DoHighlight(){SetCookie(OxO3e3e[13],sel_lang.value,3600*24*30);var b=dp[OxO3e3e[10]][OxO3e3e[9]][sel_lang[OxO3e3e[14]]];ta_code[OxO3e3e[15]]=b[OxO3e3e[11]][0]+OxO3e3e[16];if(window[OxO3e3e[17]]||!document[OxO3e3e[18]]){ta_code[OxO3e3e[19]]=ta_code[OxO3e3e[14]];} ;dp[OxO3e3e[10]].HighlightAll(ta_code.name);ta_code[OxO3e3e[21]][OxO3e3e[20]]=OxO3e3e[6];var Ox60=ta_code[OxO3e3e[22]];editor.PasteHTML(OxO3e3e[23]+Ox60[OxO3e3e[19]]+OxO3e3e[24]);Ox60[OxO3e3e[25]].removeChild(Ox60);Close();} ;
+
+
+
+	</script>
+</html>

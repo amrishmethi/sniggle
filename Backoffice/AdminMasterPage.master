@@ -1,0 +1,850 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="Backoffice_AdminMasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Sniggle</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- favicon
+		============================================ -->
+    <link rel="icon" type="img" href="../img/favicon.png">
+    <link rel="shortcut icon" type="../Admin/image/x-icon" href="img/favicon.ico" />
+
+    <!-- Google Fonts
+		============================================ -->
+    <%--<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800" rel="stylesheet" />--%>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300italic,800italic,800,700italic,700,600italic,600,400italic,300%7CRoboto+Condensed:400,400i,700,700i%7CGreat+Vibes" rel="stylesheet" />
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/bootstrap.min.css" />
+    <!-- Bootstrap CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/font-awesome.min.css" />
+    <!-- adminpro icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/adminpro-custon-icon.css" />
+    <!-- meanmenu icon CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/meanmenu.min.css" />
+    <!-- mCustomScrollbar CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/jquery.mCustomScrollbar.min.css" />
+    <!-- animate CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/animate.css" />
+    <!-- data-table CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/data-table/bootstrap-table.css" />
+
+    <link rel="stylesheet" href="../Admin/css/data-table/bootstrap-editable.css" />
+
+    <!-- data-table CSS
+
+    <!-- normalize CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/normalize.css" />
+    <!-- modals CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/modals.css">
+    <!-- buttons CSS
+		============================================ -->
+    <link href="../Admin/css/buttons.css" rel="stylesheet" />
+    <!-- touchspin CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/touchspin/jquery.bootstrap-touchspin.min.css">
+    <!-- datapicker CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/datapicker/datepicker3.css">
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/form/themesaller-forms.css">
+
+    <!-- select2 CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/select2/select2.min.css">
+    <!-- chosen CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/chosen/bootstrap-chosen.css">
+    <!-- ionRangeSlider CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/ionRangeSlider/ion.rangeSlider.css">
+    <link rel="stylesheet" href="../Admin/css/ionRangeSlider/ion.rangeSlider.skinFlat.css">
+    <!-- charts C3 CSS
+		============================================ -->
+    <link href="../Admin/../Admin/css/c3.min.css" rel="stylesheet" />
+
+    <!-- forms CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/form/all-type-forms.css">
+    <link rel="stylesheet" href="../Admin/css/form.css">
+    <!-- tree viewer CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/tree-viewer/tree-viewer.css">
+
+    <!-- duallistbox CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/duallistbox/bootstrap-duallistbox.min.css">
+    <!-- x-editor CSS
+		============================================ -->
+    <%--    <link rel="stylesheet" href="../Admin/css/select2.css">
+    <link rel="stylesheet" href="../Admin/css/datetimepicker.css">
+    <link rel="stylesheet" href="../Admin/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="../Admin/css/x-editor-style.css">--%>
+    <!-- Tag CSS  -->
+    <link rel="stylesheet" href="../Admin/tags/bootstrap-tagsinput.css" />
+    <!-- style CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/style.css" />
+    <!-- responsive CSS
+		============================================ -->
+    <link rel="stylesheet" href="../Admin/css/responsive.css" />
+    <link href="../Admin/Arjs/DragCss.css" rel="stylesheet" />
+    <!-- modernizr JS
+		============================================ -->
+    <%--<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>--%>
+
+    <script src="../Admin/Arjs/Drag.js"></script>
+    <%-- <script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>--%>
+
+    <%-- <script type="text/javascript">
+        tinymce.init({
+           // mode : "textareas",
+            mode: "textarea",
+            editor_selector: "myTextEditor",
+            theme: "simple"
+        });
+    </script>--%>
+
+    <script src="../Admin/js/vendor/modernizr-2.8.3.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        /*td {
+    font-size: 1px;
+  }*/
+        /* th {
+    font-size: 12px;
+  }*/
+        .page_enabled, .page_disabled {
+            display: inline-block;
+            /* height: 20px;*/
+            min-width: 20px;
+            line-height: 20px;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #ccc;
+        }
+
+        .page_enabled {
+            background-color: #ffffff;
+            color: #00aff0;
+        }
+
+        .page_disabled {
+            background-color: #00aff0;
+            color: #ffffff !important;
+        }
+    </style>
+    <style>
+        [type="date"] {
+            background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+        }
+
+            [type="date"]::-webkit-inner-spin-button {
+                display: none;
+            }
+
+            [type="date"]::-webkit-calendar-picker-indicator {
+                opacity: 0;
+            }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Body_Selectall').checked = false;
+            $('#Body_Unselectall').checked = false;
+            $('#Body_Selectall').click(function (event) {
+                if (this.checked) {
+                    $('.checkitem').each(function () {
+                        this.checked = true;
+                        $('#Body_Unselectall').checked = false;
+                    });
+                }
+            });
+
+            $('#Body_Unselectall').click(function (event) {
+                if (this.checked) {
+                    $('.checkitem').each(function () {
+                        this.checked = false;
+                        $('#Body_Selectall').checked = false;
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+<body class="materialdesign">
+    <!-- Header top area start-->
+    <div class="wrapper-pro">
+        <!-- side menu Start-->
+        <div class="left-sidebar-pro">
+            <nav id="sidebar">
+
+                <div class="left-custom-menu-adp-wrap">
+                    <ul class="nav navbar-nav left-sidebar-menu-pro">
+                        <li class="nav-item">
+                            <a href="index.aspx" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa fa-tachometer"></i>&nbsp;&nbsp;<span class="mini-dn"> Dashboard</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <%--<div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="dashboard.html" class="dropdown-item">Dashboard v.1</a>
+                                <a href="dashboard-2.html" class="dropdown-item">Dashboard v.2</a>
+                                <a href="analytics.html" class="dropdown-item">Analytics</a>
+                                <a href="widgets.html" class="dropdown-item">Widgets</a>
+                            </div>--%>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Catalog</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Products.aspx" class="dropdown-item">Products</a>
+                                <a href="Categories.aspx" class="dropdown-item">Categories</a>
+                                <a href="AttributesGroups.aspx" class="dropdown-item">Product Attributes</a>
+                                <a href="Features.aspx" class="dropdown-item">Product Features</a>
+                                <a href="Tags.aspx" class="dropdown-item">Tags</a>
+                                <a href="ProductTag.aspx" class="dropdown-item">Product Tags</a>
+                                <a href="SizeChart.aspx" class="dropdown-item">Size Chart</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Orders</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Orders.aspx" class="dropdown-item">Orders</a>
+                                <a href="OrderStatuses.aspx" class="dropdown-item">Status</a>
+                                <%-- <a href="dashboard-2.html" class="dropdown-item">Invoices</a>
+                                <a href="analytics.html" class="dropdown-item">Merchandise Returns	</a>
+                                <a href="widgets.html" class="dropdown-item">Delivery Slips</a>
+                                <a href="analytics.html" class="dropdown-item">Credit Slips</a>
+                                <a href="analytics.html" class="dropdown-item">Statuses</a>
+                                <a href="analytics.html" class="dropdown-item">Order Messages</a>--%>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Customers</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Customers.aspx" class="dropdown-item">Customers</a>
+                                <a href="CartList.aspx" class="dropdown-item">Shopping Carts</a>
+                                <a href="CustomerPaymentStatus.aspx" class="dropdown-item">Customer Payment Status</a>
+                                <%--  <a href="analytics.html" class="dropdown-item">Groups	</a>
+                                <a href="widgets.html" class="dropdown-item">Shopping Carts</a>
+                                <a href="analytics.html" class="dropdown-item">Customer Service</a>
+                                <a href="analytics.html" class="dropdown-item">Contacts</a>
+                                <a href="analytics.html" class="dropdown-item">Titles</a>
+                                <a href="analytics.html" class="dropdown-item">Quotes By Users	</a>--%>
+                            </div>
+                        </li>
+                        <%-- <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Price Rules</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="dashboard.html" class="dropdown-item">Cart Rules</a>
+                                <a href="dashboard-2.html" class="dropdown-item">Catalog Price Rules</a>
+                                <a href="analytics.html" class="dropdown-item">Marketing	</a>
+                            </div>
+                        </li>--%>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Modules</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="menu.aspx" class="dropdown-item">Menu</a>
+                                <a href="Banner.aspx" class="dropdown-item">Banner</a>
+                                <a href="cms.aspx" class="dropdown-item">CMS</a>
+
+                                <a href="PaymentMethod.aspx" class="dropdown-item">Payment Method</a>
+                                <a href="Request_Quote.aspx" class="dropdown-item">Request Quote</a>
+                                <a href="CustomOrder.aspx" class="dropdown-item">Custom Order</a>
+                                <a href="ContactUs.aspx" class="dropdown-item">Contact Us</a>
+                                <a href="Product_Review.aspx" class="dropdown-item">Product Review</a>
+                                <a href="Enquire.aspx" class="dropdown-item">Product Enquire </a>
+                                <a href="Testimonials.aspx" class="dropdown-item">Testimonials </a>
+                                <a href="FilterTemplate.aspx" class="dropdown-item">Filter Template </a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Enquire</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="ReOrder.aspx" class="dropdown-item">Reorder Enquire</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Creative Cuts</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="CreativeCuts.aspx" class="dropdown-item">Creative Cuts Category</a>
+                                <a href="FancyShape.aspx" class="dropdown-item">Creative Cuts</a>
+                                <a href="CreativeCutsEnquiry.aspx" class="dropdown-item">Creative Cuts Enquire</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Shipping</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Zone.aspx" class="dropdown-item">Zone</a>
+                                <a href="Country.aspx" class="dropdown-item">Countries</a>
+                                <a href="Carrier.aspx" class="dropdown-item">Carrier</a>
+                                <a href="ZipCode.aspx" class="dropdown-item">Zip Code</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Cart Rules</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="CartRules.aspx" class="dropdown-item">Cart Rules</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Blog</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Blog.aspx" class="dropdown-item">Blog Category</a>
+                                <a href="BlogComment.aspx" class="dropdown-item">Blog Comments</a>
+                                <a href="BlogPost.aspx" class="dropdown-item">Blog Post</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Newsletter</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Newsletter.aspx" class="dropdown-item">Newsletter</a>
+                                <a href="CustomerNewsletter.aspx" class="dropdown-item">Customer Newsletter</a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Mail</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Mail.aspx" class="dropdown-item">Mail</a>
+
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Error Log</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="ErrorLog.aspx" class="dropdown-item">Error Log</a>
+
+                            </div>
+                        </li>
+                        <%-- <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Last View Product</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="LastViewedProduct.aspx" class="dropdown-item">Last View Product</a>
+
+                            </div>
+                        </li>--%>
+                        <%-- <li class="nav-item">
+                            <a href="index.aspx" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><i class="fa big-icon fa-home"></i>&nbsp;&nbsp;<span class="mini-dn">Review</span> <span class="indicator-right-menu mini-dn"><i class="fa indicator-mn fa-angle-left"></i></span></a>
+                            <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
+                                <a href="Review.aspx" class="dropdown-item">Review</a>
+
+                            </div>
+                        </li>--%>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+        <!-- side menu end-->
+        <div class="content-inner-all">
+            <!-- top menu start-->
+            <div class="header-top-area">
+                <div class="fixed-header-top">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-1 col-md-6 col-sm-6 col-xs-12" style="margin-top: 5px">
+                                <a href="index.aspx" style="padding: 10px 0px; margin-top: 5px">
+                                    <img src="../Admin/img/logo/log.png" alt="" />
+                                </a>
+                                <%-- <button type="button" id="sidebarCollapse" class="btn bar-button-pro header-drl-controller-btn btn-info navbar-btn">
+                                    <i class="fa fa-bars"></i>
+                                </button>--%>
+                                <%--<div class="admin-logo logo-wrap-pro">
+                                    <a href="#">
+                                        <img src="../Admin/img/logo/log.png" alt="" />
+                                    </a>
+                                </div>--%>
+                            </div>
+                            <div class="col-lg-7 col-md-1 col-sm-1 col-xs-12">
+                                <div class="header-right-info">
+                                    <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                        <li class="nav-item dropdown">sniggle
+                                        </li>
+                                    </ul>
+                                    <ul class="nav navbar-nav mai-top-nav header-right-menu">
+
+                                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i><span class="indicator-nt" runat="server" id="Onn"></span></a>
+                                            <div role="menu" class="notification-author dropdown-menu animated flipInX" style="color: black;">
+                                                <div class="notification-single-top">
+                                                    <h4 style="text-align: center;">Orders</h4>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repOrder" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="Orders.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px">Order Id &nbsp;:&nbsp;; <%#Eval("id_order") %>&nbsp;&nbsp; Total  &nbsp;<%#Eval("total_paid_tax_incl") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+
+                                            </div>
+                                        </li>
+                                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i><span class="indicator-nt" runat="server" id="Alln"></span></a>
+                                            <div role="menu" class="notification-author dropdown-menu animated flipInX" style="color: black;">
+                                                <div class="notification-single-top">
+                                                    <h4 style="text-align: center;">
+                                                        <asp:Label ID="lblContact" runat="server">Contact Us</asp:Label>
+                                                    </h4>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repContact" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="ContactUs.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px">Name &nbsp;:&nbsp; <%#Eval("Name") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                                <div class="notification-single-top">
+                                                    <h4 style="text-align: center;">
+                                                        <asp:Label ID="lblRequest" runat="server">Request Quote</asp:Label>
+                                                    </h4>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repRequest" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="Request_Quote.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px">Name &nbsp;:&nbsp; <%#Eval("FullName") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                                <div class="notification-single-top">
+                                                    <h4 style="text-align: center;">
+                                                        <asp:Label ID="lblCustomOrder" runat="server">Custom Order</asp:Label>
+                                                    </h4>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repCustom" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="CustomOrder.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px">Name &nbsp;:&nbsp; <%#Eval("FullName") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                                <div class="notification-single-top">
+                                                    <h4 style="text-align: center;">
+                                                        <asp:Label ID="lblEnquire" runat="server">Enquire</asp:Label>
+                                                    </h4>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repEnquire" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="Enquire.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px">Name &nbsp;:&nbsp; <%#Eval("Name") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                                <div class="notification-single-top">
+                                                    <h4 style="text-align: center;">
+                                                        <asp:Label ID="lblCuts" runat="server">Creative Cuts</asp:Label>
+                                                    </h4>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repCut" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="CreativeCutsEnquiry.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px">Name &nbsp;:&nbsp; <%#Eval("Name") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+
+                                                <div class="notification-single-top">
+                                                    <h4 style="text-align: center;">
+                                                        <asp:Label ID="lblReOrder" runat="server">Reorder Enquire</asp:Label>
+                                                    </h4>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repReOrder" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="ReOrder.aspx?Notification=yes" style="color: #0077a4;">Name &nbsp;:&nbsp; <%#Eval("Name") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                            </div>
+
+
+                                        </li>
+                                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                            <i class="fa fa-user" aria-hidden="true"></i><span class="indicator-nt" runat="server" id="rn"></span></a>
+                                            <div role="menu" class="notification-author dropdown-menu animated flipInX">
+                                                <div class="notification-single-top">
+                                                    <h1>Latest Registrations</h1>
+                                                </div>
+                                                <ul>
+                                                    <asp:Repeater ID="repReg" runat="server">
+                                                        <ItemTemplate>
+                                                            <li>
+                                                                <a href="Customers.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px">Name &nbsp;:&nbsp; <%#Eval("firstname") %>&nbsp;<%#Eval("lastname") %>
+                                                                </a>
+                                                            </li>
+                                                            <br />
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+                                            <img src="../Upload/error1600.png" style="width:22px; height:22px;" /> <span class="indicator-nt" runat="server" id="spanerr"></span></a>
+                                            <div role="menu" class="notification-author dropdown-menu animated flipInX">
+                                                <div class="notification-single-top">
+                                                    <h1>Excel Error</h1>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <a href="ErrorLog.aspx?Notification=yes" style="color: #0077a4; margin-left: 50px"><asp:Label ID="lblEror" runat="server" ></asp:Label>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12 ">
+                                <div class="header-right-info" style="float: right;">
+                                    <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                        <li class="nav-item dropdown ">
+                                            <a href="<%=ConfigurationSettings.AppSettings["siteurl"] %>" target="_blank">
+                                                <h5>My Shop</h5>
+                                            </a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-5 col-sm-6 col-xs-12">
+                                <div class="header-right-info">
+
+                                    <ul class="nav navbar-nav mai-top-nav header-right-menu">
+                                        <li class="nav-item">
+                                            <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
+
+                                                <span class="admin-name">Admin</span>
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                            </a>
+                                            <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated flipInX" style="background-color: #343434">
+                                                <li><a href="#"><span class="adminpro-icon adminpro-home-admin author-log-ic"></span>My Account</a>
+                                                </li>
+                                                <li><a href="#"><span class="adminpro-icon adminpro-user-rounded author-log-ic"></span>My Profile</a>
+                                                </li>
+                                                <%--  <li><a href="#"><span class="adminpro-icon adminpro-money author-log-ic"></span>User Billing</a>
+                                                </li>
+                                                <li><a href="#"><span class="adminpro-icon adminpro-settings author-log-ic"></span>Settings</a>
+                                                </li>--%>
+                                                <li><a href="AdminLogin.aspx?logout=true"><span class="adminpro-icon adminpro-locked author-log-ic"></span>Log Out</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- top menu end-->
+            <!-- Mobile Menu start -->
+            <div class="mobile-menu-area">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="mobile-menu">
+                                <nav id="dropdown">
+                                    <ul id="ul1" runat="server" class="mobile-menu-nav">
+                                        <li><a data-toggle="collapse" data-target="#Charts" href="Default.aspx">Dashboard <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+
+                                        </li>
+
+                                        <li><a data-toggle="collapse" data-target="#others" href="#">Master <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                                            <ul id="others" class="collapse dropdown-header-top">
+                                                <li><a href="#">User</a>
+                                                </li>
+                                                <li><a href="#">Client</a>
+                                                </li>
+                                                <li><a href="#">Product Category</a>
+                                                </li>
+                                                <li><a href="#">Product</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#others" href="#">Order <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                                            <ul id="others1" class="collapse dropdown-header-top">
+                                                <li><a href="#">Order</a>
+                                                </li>
+                                                <%-- <li><a href="#">Client</a>
+                                    </li>
+                                    <li><a href="#">Product Category</a>
+                                    </li>
+                                    <li><a href="#">Product</a>
+                                    </li>--%>
+                                            </ul>
+                                        </li>
+                                        <li><a data-toggle="collapse" data-target="#others" href="#">Report <span class="admin-project-icon adminpro-icon adminpro-down-arrow"></span></a>
+                                            <ul id="others21" class="collapse dropdown-header-top">
+                                                <li><a href="#">Order</a>
+                                                </li>
+                                                <%-- <li><a href="#">Client</a>
+                                    </li>
+                                    <li><a href="#">Product Category</a>
+                                    </li>
+                                    <li><a href="#">Product</a>
+                                    </li>--%>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Mobile Menu end -->
+
+            <!-- Breadcome start-->
+
+            <form id="form1" runat="server" autocomplete="off">
+                <asp:ScriptManager ID="ScriptManager1" runat="server" EnableCdn="true" EnablePageMethods="true">
+                </asp:ScriptManager>
+                <div style="min-height: 640px;">
+                    <asp:ContentPlaceHolder ID="Body" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Footer Start-->
+    <div class="footer-copyright-area">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="footer-copy-right">
+                        <p>2020 sniggle All rights reserved. Design & Development By  <a href="http://www.sscompusoft.com/">SS Compusoft</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End-->
+    <script src="../Admin/js/vendor/jquery-1.11.3.min.js"></script>
+
+
+    <!-- bootstrap JS
+		============================================ -->
+    <script src="../Admin/js/bootstrap.min.js"></script>
+    <!-- meanmenu JS
+		============================================ -->
+    <script src="../Admin/js/jquery.meanmenu.js"></script>
+    <!-- mCustomScrollbar JS
+		============================================ -->
+    <script src="../Admin/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- sticky JS
+		============================================ -->
+    <script src="../Admin/js/jquery.sticky.js"></script>
+    <!-- scrollUp JS
+		============================================ -->
+    <script src="../Admin/js/jquery.scrollUp.min.js"></script>
+    <script src="../Admin/js/wow/wow.min.js"></script>
+    <!-- counterup JS
+		============================================ -->
+    <script src="../Admin/js/counterup/jquery.counterup.min.js"></script>
+    <script src="../Admin/js/counterup/waypoints.min.js"></script>
+    <script src="../Admin/js/counterup/counterup-active.js"></script>
+    <!-- jvectormap JS
+		============================================ -->
+    <script src="../Admin/js/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="../Admin/js/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="../Admin/js/jvectormap/jvectormap-active.js"></script>
+    <!-- peity JS
+		============================================ -->
+    <script src="../Admin/js/peity/jquery.peity.min.js"></script>
+    <script src="../Admin/js/peity/peity-active.js"></script>
+    <!-- flot JS
+		============================================ -->
+    <%--    <script src="../Admin/js/flot/Chart.min.js"></script>
+    <script src="../Admin/js/flot/dashtwo-flot-active.js"></script>--%>
+    <!-- sparkline JS
+		============================================ -->
+    <script src="../Admin/js/sparkline/jquery.sparkline.min.js"></script>
+    <script src="../Admin/js/sparkline/sparkline-active.js"></script>
+    <!-- Tag js  -->
+    <script src="../Admin/tags/bootstrap-tagsinput.min.js"></script>
+    <!-- data table JS
+		============================================ -->
+    <script src="../Admin/js/data-table/bootstrap-table.js"></script>
+    <script src="../Admin/js/data-table/tableExport.js"></script>
+    <%-- <script src="../Admin/js/data-table/data-table-active.js"></script>--%>
+    <%--<script src="../Admin/js/data-table/bootstrap-table-editable.js"></script>
+    <script src="../Admin/js/data-table/bootstrap-editable.js"></script>
+    <script src="../Admin/js/data-table/bootstrap-table-resizable.js"></script>--%>
+    <%-- <script src="../Admin/js/data-table/colResizable-1.5.source.js"></script>--%>
+    <script src="../Admin/js/data-table/bootstrap-table-export.js"></script>
+
+    <!-- input-mask JS
+		============================================ -->
+    <script src="../Admin/js/jquery.maskedinput.min.js"></script>
+    <script src="../Admin/js/masking-active.js"></script>
+    <!-- chosen JS
+		============================================ -->
+    <script src="../Admin/js/chosen/chosen.jquery.js"></script>
+    <script src="../Admin/js/chosen/chosen-active.js"></script>
+    <!-- select2 JS
+		============================================ -->
+    <script src="../Admin/js/select2/select2.full.min.js"></script>
+    <script src="../Admin/js/select2/select2-active.js"></script>
+    <!-- datepicker JS
+		============================================ -->
+
+    <%--  <script src="../Admin/Arjs/DragUi.js"></script>--%>
+    <script src="../Admin/js/jquery-ui.min.js"></script>
+    <script src="../Admin/js/datapicker/bootstrap-datepicker.js"></script>
+    <script src="../Admin/js/datapicker/datepicker-active.js"></script>
+    <!-- modal JS
+		============================================ -->
+    <script src="../Admin/js/modal-active.js"></script>
+    <!-- Tree Viewer JS
+		============================================ -->
+    <script src="../Admin/js/tree-line/jstree.min.js"></script>
+    <script src="../Admin/js/tree-line/jstree.active.js"></script>
+    <!--  editable JS
+		============================================ -->
+    <%-- <script src="../Admin/js/jquery.mockjax.js"></script>
+    <script src="../Admin/js/mock-active.js"></script>
+    <script src="../Admin/js/select2.js"></script>
+    <script src="../Admin/js/moment.min.js"></script>
+    <script src="../Admin/js/bootstrap-datetimepicker.js"></script>
+    <script src="../Admin/js/bootstrap-editable.js"></script>
+    <script src="../Admin/js/xediable-active.js"></script>--%>
+    <!-- duallistbox JS
+		============================================ -->
+    <script src="../Admin/js/duallistbox/jquery.bootstrap-duallistbox.js"></script>
+    <script src="../Admin/js/duallistbox/duallistbox.active.js"></script>
+    <!-- multiple email JS
+		============================================ -->
+    <script src="../Admin/js/multiple-email/multiple-email-active.js"></script>
+    <!-- main JS
+		============================================ -->
+    <script src="../Admin/js/main.js"></script>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.dpk').datepicker({
+                //inline=true,
+                todayHighlight: true,
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        // When the document is ready
+        $(document).ready(function () {
+            $('.datePicK').datepicker({
+                dateFormat: "dd/mm/yyyy",
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                autoclose: true,
+                changeMonth: true,
+                changeYear: true,
+                todayHighlight: true,
+                orientation: "top"
+            });
+
+        });
+    </script>
+    <script> 
+        if (document.body.contains(document.getElementById('Body_txtMetatitle'))) {
+            $('#Body_txtMetatitle').keyup(function () {
+                var max = 70;
+                var len = $(this).val().length;
+                var char = max - len;
+                $('#mtitle').text(char);
+                //if (len >= max) {
+                //    $('#mtitle').text(' you have reached the limit');
+                //} else {
+                //    debugger
+                //    var char = max - len;
+                //    $('#mtitle').text(char + ' characters left');
+                //}updateLinkRewrite
+            });
+            $('#Body_txtMetadescription').keyup(function () {
+                var max = 160;
+                var len = $(this).val().length;
+                var char = max - len;
+                $('#mDes').text(char);
+            });
+            $(document).ready(function () {
+                $('#Body_Selectall').prop('checked', false);
+                $('#Body_Unselectall').prop('checked', false);
+                var max = 70;
+                var len = $('#Body_txtMetatitle').val().length;
+                var char = max - len;
+                $('#mtitle').text(char);
+
+                var max1 = 160;
+                var len1 = $('#Body_txtMetadescription').val().length;
+                var char1 = max1 - len1;
+                $('#mDes').text(char1);
+            });
+            function DisableButton(id) {
+
+                document.getElementbyId(id).disabled = true;
+            }
+        } else {
+            //alert('Element does not exist!');
+        }
+
+        $("#Body_Selectall").click(function () {
+            //  alert('Ar')
+            $('#Body_Unselectall').prop('checked', false);
+
+        });
+        $("#Body_Unselectall").click(function () {
+            /*  $('#Body_Selectall').val('');*/
+            $('#Body_Selectall').prop('checked', false);
+            // alert('Ar Un')
+        });
+    </script>
+
+    <asp:ContentPlaceHolder ID="footer" runat="server">
+    </asp:ContentPlaceHolder>
+</body>
+</html>

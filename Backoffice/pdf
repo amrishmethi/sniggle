@@ -1,0 +1,179 @@
+ASP ASP Forums
+
+[X]
+Forums
+Questions
+Search
+Contact
+Login
+Home
+  
+ASP.Net
+  
+ASP.Net Thirdparty controls
+  
+Generate Invoice (Bill) Receipt with Image PDF from database in ASP.Net using C# and VB.Net
+Generate Invoice (Bill) Receipt with Image PDF from database in ASP.Net using C# and VB.Net
+AnsweredSolved
+Last Reply one year ago By pandeyism
+1716 Views 1 Replies 1 Answers
+
+Sadakat
+Questioner
+Joined: Feb 13, 2018 12:26 AM
+India 
+Location:  Mumbai,
+India
+Asked: 10
+Question
+ Posted one year ago
+I am generating an pdf invoice by passing table in string builder but dont know how to insert image in the invoice can somebody please help
+
+
+Oldest Newest Answered Liked
+
+pandeyism
+Professional
+Joined: Apr 04, 2018 12:27 AM
+India 
+Location:  Mumbai,
+India
+Answered: 1468
+Attempted: 1579
+ReplyAnswer
+ Posted one year ago
+Hi Sadakat,
+
+Refer below sample.
+
+HTML
+
+1
+<asp:Button ID="Button1" Text="Generate Invoice" OnClick="GenerateInvoicePDF" runat="server" />
+Namespaces
+
+C#
+
+1
+2
+3
+4
+5
+using System.IO;
+using System.Text;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text.html.simpleparser;
+VB.Net
+
+1
+2
+3
+4
+Imports System.IO
+Imports iTextSharp.text.html.simpleparser
+Imports iTextSharp.text.pdf
+Imports iTextSharp.text
+Code
+
+ C#
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+protected void GenerateInvoicePDF(object sender, EventArgs e)
+{
+    string path = Server.MapPath("~/File/2.png");
+    StringBuilder sb = new StringBuilder();
+    sb.Append("<div align='center';>");
+    sb.Append(@"<img src='" + path + "' height='50px' width='50px' />");       
+    sb.Append("<h2>AL-MADANI INTERNATIONAL</h2><table class='table table-bordered'><tr><td colspan='3'>Invoice No.</td><td colspan='3'>Invoice Date:</td></tr><tr><td colspan='3'>Tourist Name:</td><td colspan='3'>Total Passengers:</td></tr><tr><td colspan='3'>City:</td><td colspan='3'>District:</td></tr><tr><td colspan='3'>State:</td><td colspan='3'>Post Code:</td></tr><tr><td colspan='3'>Payment Mode:</td><td colspan='3'>Payment Date:</td><tr><tr><td colspan='3'>Payment Details*:</td><td colspan='3'>Journey Date:</td><tr><th colspan='6'>DETAILS OF RECEIVER - BILLED TO</th><tr><td colspan='6'>Name:</td></tr><tr><td colspan='6'>Address:</td></tr></tr><tr><th colspan='3'>Description</th><th>Rate</th><th>Total Passenger</th><th>Total Amount</th></tr><tr><td colspan='3'>ECONOMY PACKAGE FOR UMRAH ON OCTOBER 2019</td><td>40000</td><td>2</td><td>80000</td></tr><tr><td colspan='3'>PAID AMOUNT = </td><td></td><td></td><td></td></tr><tr><tr><td colspan='3'>BALANCE AMOUNT = </td><td></td><td></td><td></td></tr><tr><th colspan='6'>TOTAL</tr><tr></th><th colspan='3' rowspan='5'>Amount in words</th><th colspan='2'>Total Amount</th><td>80000</td><tr><th colspan='2'>.</th><td></td></tr><tr><th colspan='2'>.</th><td></td></tr><tr><th colspan='2'>.</th><td></td></tr><tr><th colspan='2'>Grand Total</th><td>80000</td></tr></table>");
+    sb.Append("</div>");
+    StringReader sr = new StringReader(sb.ToString());
+    Document pdfDoc = new Document(PageSize.A4, 10f, 10f, 10f, 10f);
+    HTMLWorker htmlparser = new HTMLWorker(pdfDoc);
+    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
+    pdfDoc.Open();
+    htmlparser.Parse(sr);
+    pdfDoc.Close();
+    Response.ContentType = "application/pdf";
+    Response.AddHeader("content-disposition", "attachment;filename=Invoice_" + "invoice" + ".pdf");
+    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+    Response.Write(pdfDoc);
+    Response.End();
+}
+VB.Net
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+Protected Sub GenerateInvoicePDF(ByVal sender As Object, ByVal e As EventArgs) Handles Button1.Click
+    Dim path As String = Server.MapPath("~/File/2.png")
+    Dim sb As StringBuilder = New StringBuilder()
+    sb.Append("<div align='center';>")
+    sb.Append("<img src='" & path & "' height='50px' width='50px' />")
+    sb.Append("<h2>AL-MADANI INTERNATIONAL</h2><table class='table table-bordered'><tr><td colspan='3'>Invoice No.</td><td colspan='3'>Invoice Date:</td></tr><tr><td colspan='3'>Tourist Name:</td><td colspan='3'>Total Passengers:</td></tr><tr><td colspan='3'>City:</td><td colspan='3'>District:</td></tr><tr><td colspan='3'>State:</td><td colspan='3'>Post Code:</td></tr><tr><td colspan='3'>Payment Mode:</td><td colspan='3'>Payment Date:</td><tr><tr><td colspan='3'>Payment Details*:</td><td colspan='3'>Journey Date:</td><tr><th colspan='6'>DETAILS OF RECEIVER - BILLED TO</th><tr><td colspan='6'>Name:</td></tr><tr><td colspan='6'>Address:</td></tr></tr><tr><th colspan='3'>Description</th><th>Rate</th><th>Total Passenger</th><th>Total Amount</th></tr><tr><td colspan='3'>ECONOMY PACKAGE FOR UMRAH ON OCTOBER 2019</td><td>40000</td><td>2</td><td>80000</td></tr><tr><td colspan='3'>PAID AMOUNT = </td><td></td><td></td><td></td></tr><tr><tr><td colspan='3'>BALANCE AMOUNT = </td><td></td><td></td><td></td></tr><tr><th colspan='6'>TOTAL</tr><tr></th><th colspan='3' rowspan='5'>Amount in words</th><th colspan='2'>Total Amount</th><td>80000</td><tr><th colspan='2'>.</th><td></td></tr><tr><th colspan='2'>.</th><td></td></tr><tr><th colspan='2'>.</th><td></td></tr><tr><th colspan='2'>Grand Total</th><td>80000</td></tr></table>")
+    sb.Append("</div>")
+    Dim sr As StringReader = New StringReader(sb.ToString())
+    Dim pdfDoc As Document = New Document(PageSize.A4, 10.0F, 10.0F, 10.0F, 10.0F)
+    Dim htmlparser As HTMLWorker = New HTMLWorker(pdfDoc)
+    Dim writer As PdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream)
+    pdfDoc.Open()
+    htmlparser.Parse(sr)
+    pdfDoc.Close()
+    Response.ContentType = "application/pdf"
+    Response.AddHeader("content-disposition", "attachment;filename=Invoice_" & "invoice" & ".pdf")
+    Response.Cache.SetCacheability(HttpCacheability.NoCache)
+    Response.Write(pdfDoc)
+    Response.[End]()
+End Sub
+Screenshot
+
+
+
+We are helping you for free, please support us.
+Subscribe: Youtube
+Follow: Facebook | Twitter | Instagram
+I agree, here is the link: https://www.e-iceblue.com/Introduce/spire-office-for-net-free.html
+
+Report Ad
+Google+ | FaceBook | Privacy Policy | Glossary | Contact
+© 2020 www.aspforums.net All rights reserved. Powered by Excelasoft Solutions. Excelasoft Solutions
+Disclaimer: This site is started with intent to serve the ASP.Net Community by providing forums (question-answer) site where people can help each other. The content posted here is free for public and is the content of its poster. The site does not provide any warranties for the posted content. If you feel any content is violating any terms please contact.
+Disclaimer
+This site makes use of Cookies. Please refer Privacy Policy for more details.
