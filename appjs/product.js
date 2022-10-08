@@ -406,6 +406,7 @@ app.controller('ProductDetailController', function ($scope, $http) {
             contentType: "application/json; charset=utf-8",
             dataType: "json"
         }).then(function (response) {
+            debugger
             var price = response.data;
             price = price.d;
             var ffff = price.split('_');
@@ -610,13 +611,13 @@ app.controller('ProductDetailController', function ($scope, $http) {
     };
 });
 
-function getPrice(th) {
+function getPrice(th) { 
     var cartype = "";
     var selectData = $('#selectDataquik').html();
     var selectArray = selectData.split(',');
     for (var i = 0; i < selectArray.length; i++) {
         var aa = selectArray[i];
-        if (aa == 13) {
+        if (aa == 13 || aa == 18) {
             var sz = th.split('-');
             if (sz.length > 0) {
                 $('#drpquik' + aa + '').val(sz[1]);
@@ -657,8 +658,10 @@ function getPrice(th) {
         dataType: "json"
     }).then(function (response) {
         var price = response.d;
+        debugger
         $('#sppricenewquik').html("" + price.split('_')[1]);
         $('#sppricequik').html("" + price.split('_')[0]);
+        $('#prodwithoutdiscountprice').html("" + price.split('_')[0]);
         $('#spdispricequik').html("" + price.split('_')[1]);
         $('#lblattIDquik').html(price.split('_')[2]);
         $('#skuquik').html(price.split('_')[3]);
@@ -693,7 +696,7 @@ function getPrice(th) {
         $('#' + imggid).click();
         $(".popMySlides").css("display", "none");
         $('#' + imggid).css("display", "block");
-        quickViewImgPopup(imggid);
+        //quickViewImgPopup(imggid);
     }, function (error) {
     });
 };

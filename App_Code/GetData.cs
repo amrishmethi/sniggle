@@ -1175,7 +1175,7 @@ public class GetData
         str += " <a data-bs-toggle=\"tab\" href=\"#review\" class=\"customer-review ml-2 nav-link\">(" + ds.Tables[0].Rows[0]["ReviewCount"].ToString() + ")</a>";
         str += "</div>";
         //str += "<div class=\"price\">₹ <del>" + ds.Tables[0].Rows[0]["ProdPrice"].ToString() + "</del></div>";
-        str += "<div class=\"price\"><del class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">₹" + ds.Tables[0].Rows[0]["ProdPrice"].ToString() + "</del> ₹<span id=\"sppricenewquik\">" + ds.Tables[0].Rows[0]["DiscountPrice"].ToString() + "</span> <span  class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">(" + ds.Tables[0].Rows[0]["Discount"].ToString() + "% Off)</span></div>";
+        str += "<div class=\"price\"><del class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">₹<span id=\"prodwithoutdiscountprice\">" + ds.Tables[0].Rows[0]["ProdPrice"].ToString() + "</span></del> ₹<span id=\"sppricenewquik\">" + ds.Tables[0].Rows[0]["DiscountPrice"].ToString() + "</span> <span  class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">(" + ds.Tables[0].Rows[0]["Discount"].ToString() + "% Off)</span></div>";
         str += "</div>";
         str += " <hr/>";
         str += "  <h4 class=\"title pb-2 pt-2\">Available Options</h4>";
@@ -1354,11 +1354,26 @@ public class GetData
                             {
                                 sizeStr += "<div id=\"size_" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "\" class=\"eachSize activeSize\" onclick=\"getPrice('s-" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "');\"><span>" + dsi.Tables[0].Rows[j]["attributename"].ToString() + "</span></div>";
                             }
+                            else if (dsi.Tables[0].Rows[j]["groupname"].ToString() == "Weight")
+                            {
+                                sizeStr += "<div id=\"size_" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "\" class=\"eachSize activeSize\" onclick=\"getPrice('s-" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "');\"><span>" + dsi.Tables[0].Rows[j]["attributename"].ToString() + "</span></div>";
+                            }
                             str += "<option selected value = \"" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "\" title=\"40x60cm\" >" + dsi.Tables[0].Rows[j]["attributename"].ToString() + "</option>";
                         }
                         else
                         {
                             if (dsi.Tables[0].Rows[j]["groupname"].ToString() == "Size")
+                            {
+                                if (sizeStr == "")
+                                {
+                                    sizeStr = "<div class=\"d-flex align-items-center\">";
+                                    sizeStr += "<div class=\"variable-single-item\">";
+                                    sizeStr += "<span>Slect Size</span>";
+                                    sizeStr += "<div class=\"selectSize\">";
+                                }
+                                sizeStr += "<div id=\"size_" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "\" class=\"eachSize\" onclick=\"getPrice('s-" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "');\"><span>" + dsi.Tables[0].Rows[j]["attributename"].ToString() + "</span></div>";
+                            }
+                            else if (dsi.Tables[0].Rows[j]["groupname"].ToString() == "Weight")
                             {
                                 if (sizeStr == "")
                                 {
@@ -1411,7 +1426,7 @@ public class GetData
         str += " </div>";
         str += "</div>";
         #region Customize Image 
-        if(IsPersonalized == "True")
+        if (IsPersonalized == "True")
         {
             str += "<div class=\"product-details-meta mb-20\">";
             str += " <b>Upload Your Personalize Image </b> :- <input id=\"fluCustomize\" type=\"file\" runat=\"server\" style=\"width:50%;\" />";
@@ -1420,7 +1435,7 @@ public class GetData
         #endregion
         #region Notes
         str += "<div class=\"product-details-meta mb-20\">";
-        str += " <br/>100% Original Products. <br/> Easy 7 days returns and exchanges (T&C apply). <br/> No return/exchanges on customized products. <br/> Price of customized goods may vary as per design.<br/>";
+        str += " <br/>100% Original Products. <br/> Easy 7 days returns and exchanges (T&C apply). <br/> No return/exchanges on customized and bakery products. <br/> Price of customized goods may vary as per design.<br/>";
         str += "</div>";
         #endregion
         str += "<div class=\"product-details-meta mb-20\">";

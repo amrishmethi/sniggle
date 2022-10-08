@@ -657,7 +657,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="Server">
-    <script src="/appjs/product.js"></script>
+    <script src="/appjs/product.js?v=1"></script>
 
     <script>
         // Get the modal
