@@ -317,9 +317,7 @@
                                             <div class="login-input-area">
                                                 <asp:TextBox runat="server" ID="txtName"></asp:TextBox>
                                             </div>
-
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-2">
@@ -384,16 +382,9 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <asp:DropDownList ID="drpStatus" runat="server" class="form-control">
-
                                                 <asp:ListItem Value="1">Yes</asp:ListItem>
                                                 <asp:ListItem Value="0">No</asp:ListItem>
-                                            </asp:DropDownList>
-                                            <%--   <div class="switch-field">
-                                                <input type="radio" id="radio-one" name="one" value="yes" checked />
-                                                <label for="radio-one">Yes</label>
-                                                <input type="radio" id="radio-two" name="one" value="no" />
-                                                <label for="radio-two">No</label>
-                                            </div>--%>
+                                            </asp:DropDownList> 
                                         </div>
                                     </div>
                                     <div class="row">
@@ -472,9 +463,7 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="login-input-area">
-                                                <br />
-                                                <asp:CheckBox ID="chkorder" runat="server" Text="Available for order" /><br />
-                                                <asp:CheckBox ID="chkprice" runat="server" Text="Show price" Checked Enabled="false" /><br />
+                                                <br /> 
                                                 <asp:CheckBox ID="chkOnline" runat="server" Text="Online only (not sold in your retail store)" /><br />
                                             </div>
                                         </div>
@@ -1351,7 +1340,6 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class=" alignleft">
-
                                                 <asp:LinkButton ID="btnAssoCancel" runat="server" OnClick="btnAssoCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
                                             </div>
                                         </div>

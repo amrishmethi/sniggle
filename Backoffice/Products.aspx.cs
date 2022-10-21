@@ -29,6 +29,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
     string excelConnStr;
     OleDbConnection excelConn = new OleDbConnection();
     DataTable dt = new DataTable();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["Backoffice"] != null)
@@ -63,6 +64,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
             }
         }
     }
+
     public void FillData(int pageIndex)
     {
         int dd = Convert.ToInt32(pageIndex);
@@ -115,7 +117,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
         Session["Barcode"] = drpBarcode.SelectedValue;
         this.FillData(1);
     }
-
 
     protected void rep_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
@@ -226,6 +227,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
         rptPager.DataSource = pages;
         rptPager.DataBind();
     }
+
     protected void Page_Changed(object sender, EventArgs e)
     {
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
@@ -255,6 +257,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
 
         Response.Redirect("Products.aspx?PageNo=" + pageNo.ToString() + "&&PageSize=" + drpPageSize.SelectedValue);
     }
+
     protected void btnDelete_Click(object sender, EventArgs e)
     {
 
@@ -279,6 +282,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
 
         Response.Redirect("Products.aspx?PageNo=" + pageNo.ToString() + "&&PageSize=" + drpPageSize.SelectedValue);
     }
+
     protected void btnEnable_Click(object sender, EventArgs e)
     {
         Label lblid;
@@ -323,6 +327,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
 
         Response.Redirect("Products.aspx?PageNo=" + pageNo.ToString() + "&&PageSize=" + drpPageSize.SelectedValue);
     }
+
     public string Url(object id_product)
     {
         string ss = "";
@@ -342,45 +347,34 @@ public partial class Backoffice_Products : System.Web.UI.Page
     protected void btnDownload_Click(object sender, EventArgs e)
     {
         string sp = "";
-        Label lblid;
-        //workbook.LoadFromFile("F:\\Arvind\\MyEarthBackoffice\\Excel\\MyEarthExcel.xlsx");
-
-
+        Label lblid; 
         for (int i = 0; i < rep.Items.Count; i++)
         {
             HtmlInputCheckBox chk = (HtmlInputCheckBox)rep.Items[i].FindControl("chk");
             lblid = (Label)rep.Items[i].FindControl("lblid");
             if (chk.Checked == true)
             {
-
                 sp += (sp == "") ? lblid.Text : "," + lblid.Text;
-
-
-                //ds = data.getDataSet("Usp_DownloadExcel " + lblid.Text);
-                //if(ds.Tables[0].Rows.Count>0)
-                //{
-
-                //  //  ExcelWithoutQty(ds);
-                //}
-
             }
         }
         if (sp != "")
         {
-            //string founderMinus1 = sp.Remove(sp.Length - 1, 1);
             string ss = "[Usp_DownloadExcel2] '" + sp + "'";
             ds = data.getDataSet(ss);
             if (ds.Tables[0].Rows.Count > 0)
             {
-
                 ExcelWithoutQty(ds);
             }
+            string url = HttpContext.Current.Request.Url.AbsoluteUri;
+            string name = "";
+            if (url.Contains("localhost"))
+            {
+                name = @"G:\GitHub\sniggle\ExcelDownload\MyEarthExcel.xlsx";
+            }
+            else
+                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyEarthExcel.xlsx";
 
-            string name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyEarthExcel.xlsx";
-            // string name = "D:\\sharing\\MyEarth\\ExcelDownload\\MyEarthExcel.xlsx";
             workbook.SaveToFile(name);
-            // MessageBox.Show("Invoice Export");
-            // ExcelDocViewer(workbook.FileName);
             string ff = "MyEarthExcel.xlsx";
             string filePath = "../ExcelDownload/MyEarthExcel.xlsx";
             Response.ContentType = "application/excel";
@@ -388,22 +382,20 @@ public partial class Backoffice_Products : System.Web.UI.Page
             Response.TransmitFile(Server.MapPath(filePath));
             Response.End();
         }
-
-        //Workbook workbook = new Workbook();
-        //workbook.LoadFromFile("F:\\Arvind\\MyEarthBackoffice\\Excel\\MyEarthExcel.xlsx");
-        //Worksheet sheet = workbook.Worksheets[0];
-        //sheet.SaveToFile("MyEarthExcel1.xlsx", ",", Encoding.UTF8);
-
-        //string name = "F:\\Arvind\\MyEarthBackoffice\\ExcelDownload\\MyEarthExcel.xlsx";
-
     }
+
     private void ExcelWithoutQty(DataSet dsexcel)
     {
         try
         {
-            //string name = "D:\\sharing\\MyEarth\\ExcelDownload\\MyEarthExcel.xlsx";
-            //  workbook.LoadFromFile("D:\\sharing\\MyEarth\\ExcelDownload\\MyEarthExcel.xlsx");
-            workbook.LoadFromFile("C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyEarthExcel.xlsx");
+            string url = HttpContext.Current.Request.Url.AbsoluteUri;
+            string name = "";
+            if (url.Contains("localhost"))
+                name = @"G:\GitHub\sniggle\Excel\MyEarthExcel.xlsx";
+            else
+                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyEarthExcel.xlsx";
+
+            workbook.LoadFromFile(name);
             Worksheet worksheet = workbook.Worksheets[0];
             #region FillGridDetails
             DataView dv = dsexcel.Tables[0].DefaultView;
@@ -413,91 +405,60 @@ public partial class Backoffice_Products : System.Web.UI.Page
             {
                 m = 2 + i;
                 worksheet.Range[m, 1].Style.Font.IsBold = true;
+
                 worksheet.Range[m, 1].Text = dr["ReferenceCode"].ToString();
                 worksheet.Range[m, 2].Text = dr["Name"].ToString();
-                worksheet.Range[m, 3].Text = dr["condition"].ToString();
+                worksheet.Range[m, 3].Text = dr["Condition"].ToString();
                 worksheet.Range[m, 4].Text = dr["RetailPrice"].ToString();
                 worksheet.Range[m, 5].Text = dr["PriceUnit"].ToString();
                 worksheet.Range[m, 6].Text = dr["DisountValue"].ToString();
-                worksheet.Range[m, 7].Text = dr["DiscountType"].ToString();
-                worksheet.Range[m, 8].Text = dr["DefaultCategory"].ToString();
-                worksheet.Range[m, 9].Text = dr["Category1"].ToString();
-                worksheet.Range[m, 10].Text = dr["Category2"].ToString();
-                worksheet.Range[m, 11].Text = dr["Category3"].ToString();
-                worksheet.Range[m, 12].Text = dr["Category4"].ToString();
-                worksheet.Range[m, 13].Text = dr["Category5"].ToString();
+                worksheet.Range[m, 7].Text = dr["DefaultCategory"].ToString();
+                worksheet.Range[m, 8].Text = dr["Category1"].ToString();
+                worksheet.Range[m, 9].Text = dr["Category2"].ToString();
+                worksheet.Range[m, 10].Text = dr["Category3"].ToString();
+                worksheet.Range[m, 11].Text = dr["Category4"].ToString();
+                worksheet.Range[m, 12].Text = dr["Category5"].ToString();
+                worksheet.Range[m, 13].Text = dr["Color"].ToString();
                 worksheet.Range[m, 14].Text = dr["IsParent"].ToString();
                 worksheet.Range[m, 15].Text = dr["DefaultCombination"].ToString();
                 worksheet.Range[m, 16].Text = dr["ChildSKU"].ToString();
-                worksheet.Range[m, 17].Text = dr["CStone"].ToString();
-                worksheet.Range[m, 18].Text = dr["Cshape"].ToString();
-                worksheet.Range[m, 19].Text = dr["Csize"].ToString();
-                worksheet.Range[m, 20].Text = dr["Ccutting"].ToString();
-                worksheet.Range[m, 21].Text = dr["Cquality"].ToString();
-                worksheet.Range[m, 22].Text = dr["Ccolor"].ToString();
-                worksheet.Range[m, 23].Text = dr["Cdrill"].ToString();
-                worksheet.Range[m, 24].Text = dr["Clot"].ToString();
-
-                worksheet.Range[m, 25].Text = dr["CGrooving"].ToString();
-                worksheet.Range[m, 26].Text = dr["16Att1"].ToString();
-                worksheet.Range[m, 27].Text = dr["17Att2"].ToString();
-                worksheet.Range[m, 28].Text = dr["18Att3"].ToString();
-
-                worksheet.Range[m, 29].Text = dr["DifferencePrice"].ToString();
-                worksheet.Range[m, 30].Text = dr["PriceImpact"].ToString();
-                worksheet.Range[m, 31].Text = dr["DifferenceWeight"].ToString();
-                worksheet.Range[m, 32].Text = dr["WeightImpact"].ToString();
-                worksheet.Range[m, 33].Text = dr["MinQty"].ToString();
-                worksheet.Range[m, 34].Text = dr["AvailabilityText"].ToString();
-                worksheet.Range[m, 35].Text = dr["StockQty"].ToString();
-                worksheet.Range[m, 36].Text = dr["AllowStocktOrder"].ToString();
-                worksheet.Range[m, 37].Text = dr["HotDealFromDate"].ToString();
-                worksheet.Range[m, 38].Text = dr["HotDealToDate"].ToString();
-                worksheet.Range[m, 39].Text = dr["HotDealFromTime"].ToString();
-                worksheet.Range[m, 40].Text = dr["HotDealToTime"].ToString();
-                worksheet.Range[m, 41].Text = dr["FStone"].ToString();
-                worksheet.Range[m, 42].Text = dr["FShape"].ToString();
-                worksheet.Range[m, 43].Text = dr["FSize"].ToString();
-                worksheet.Range[m, 44].Text = dr["FColor"].ToString();
-                worksheet.Range[m, 45].Text = dr["FCutting"].ToString();
-                worksheet.Range[m, 46].Text = dr["FWeight"].ToString();
-                worksheet.Range[m, 47].Text = dr["FCategory"].ToString();
-                worksheet.Range[m, 48].Text = dr["FQuality"].ToString();
-                worksheet.Range[m, 49].Text = dr["Ffeature"].ToString();
-                worksheet.Range[m, 50].Text = dr["FOrigin"].ToString();
-                worksheet.Range[m, 51].Text = dr["FTreatment"].ToString();
-                worksheet.Range[m, 52].Text = dr["FShipping"].ToString();
-                worksheet.Range[m, 53].Text = dr["FStockQuantity"].ToString();
-                worksheet.Range[m, 54].Text = dr["FSpecialNote"].ToString();
-
-                worksheet.Range[m, 55].Text = dr["30Features1"].ToString();
-                worksheet.Range[m, 56].Text = dr["31Features2"].ToString();
-                worksheet.Range[m, 57].Text = dr["32Features3"].ToString();
-                worksheet.Range[m, 58].Text = dr["VideoHeading"].ToString();
-                worksheet.Range[m, 59].Text = dr["VideoLink"].ToString();
-                worksheet.Range[m, 60].Text = dr["MetaTitle"].ToString();
-                worksheet.Range[m, 61].Text = dr["MetaDescription"].ToString();
-                worksheet.Range[m, 62].Text = dr["FriendlyURL"].ToString();
-                worksheet.Range[m, 63].Text = dr["Description"].ToString();
-                worksheet.Range[m, 64].Text = dr["Enabled"].ToString();
-                worksheet.Range[m, 66].Text = dr["id_product"].ToString();
-                worksheet.Range[m, 67].Text = dr["id_product_attribute"].ToString();
-                worksheet.Range[m, 68].Text = dr["IsDeleted"].ToString();
-
-                worksheet.Range[m, 12, m, 15].HorizontalAlignment = HorizontalAlignType.Right;
-                worksheet.Range[m, 7, m, 15].HorizontalAlignment = HorizontalAlignType.Center;
-                worksheet.Range[m, 7, m, 15].VerticalAlignment = VerticalAlignType.Center;
-
+                worksheet.Range[m, 17].Text = dr["DifferencePrice"].ToString();
+                worksheet.Range[m, 18].Text = dr["PriceImpact"].ToString();
+                worksheet.Range[m, 19].Text = dr["DifferenceWeight"].ToString();
+                worksheet.Range[m, 20].Text = dr["WeightImpact"].ToString();
+                worksheet.Range[m, 21].Text = dr["MinQty"].ToString();
+                worksheet.Range[m, 22].Text = dr["AvailabilityText"].ToString();
+                worksheet.Range[m, 23].Text = dr["StockQty"].ToString();
+                worksheet.Range[m, 24].Text = dr["AllowStocktOrder"].ToString();
+                worksheet.Range[m, 25].Text = dr["HotDealFromDate"].ToString();
+                worksheet.Range[m, 26].Text = dr["HotDealToDate"].ToString();
+                worksheet.Range[m, 27].Text = dr["HotDealFromTime"].ToString();
+                worksheet.Range[m, 28].Text = dr["HotDealToTime"].ToString();
+                worksheet.Range[m, 29].Text = dr["VideoHeading"].ToString();
+                worksheet.Range[m, 30].Text = dr["VideoLink"].ToString();
+                worksheet.Range[m, 31].Text = dr["MetaTitle"].ToString();
+                worksheet.Range[m, 32].Text = dr["MetaDescription"].ToString();
+                worksheet.Range[m, 33].Text = dr["FriendlyURL"].ToString();
+                worksheet.Range[m, 34].Text = dr["Description"].ToString();
+                worksheet.Range[m, 35].Text = dr["Enabled"].ToString();
+                worksheet.Range[m, 36].Text = dr["id_product"].ToString();
+                worksheet.Range[m, 37].Text = dr["id_product_attribute"].ToString();
+                worksheet.Range[m, 38].Text = dr["IsDeleted"].ToString();
+                worksheet.Range[m, 39].Text = dr["Size"].ToString();
+                worksheet.Range[m, 40].Text = dr["Weight"].ToString(); 
+         
+                worksheet.Range[m, 2, m, 40].HorizontalAlignment = HorizontalAlignType.Left;
+                worksheet.Range[m, 2, m, 40].VerticalAlignment = VerticalAlignType.Center;
                 i++;
             }
             #endregion
-
         }
         catch (Exception ex)
         {
             //Myclass.filewrite(ex.StackTrace);
         }
     }
+
     private void ExcelDocViewer(string fileName)
     {
         try
@@ -520,9 +481,9 @@ public partial class Backoffice_Products : System.Web.UI.Page
             this.FillData(pageNo);
         }
     }
+
     public void upload()
     {
-
         filename = "";
         string id = "";
         if (Request.QueryString["id"] != null)
@@ -531,13 +492,11 @@ public partial class Backoffice_Products : System.Web.UI.Page
         }
         try
         {
-
             if (FlpExcel.HasFile)
             {
                 filename = Path.GetFileName(FlpExcel.PostedFile.FileName);
                 fileExtention = Path.GetExtension(FlpExcel.PostedFile.FileName);
                 FlpExcel.PostedFile.SaveAs(Server.MapPath("../SaveUpload/" + filename));
-
 
                 OleDbCommand excelCommand = new OleDbCommand();
                 OleDbDataAdapter excelDataAdapter = new OleDbDataAdapter();
@@ -554,19 +513,15 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 excelConn.Open();
                 DataTable dtExcelSchema;
                 dtExcelSchema = excelConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                //string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();//Sheet1
                 string sheetName = "Sheet1$";//
                 string query = "SELECT  * From [" + sheetName + "] where [ReferenceCode]<>''";
                 excelCommand = new OleDbCommand(query, excelConn);
                 excelDataAdapter.SelectCommand = excelCommand;
                 DbDataReader dr = excelCommand.ExecuteReader();
-
                 dt.Load(dr);
 
                 string CS = data.conString;
                 SqlBulkCopy bulkInsert = new SqlBulkCopy(CS);
-
-
                 bulkInsert.DestinationTableName = "[dbo].[tbl_AllProduct]";
                 bulkInsert.ColumnMappings.Add("ReferenceCode", "[ReferenceCode]");
                 bulkInsert.ColumnMappings.Add("Name", "[Name]");
@@ -584,18 +539,8 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("IsParent", "[IsParent]");
                 bulkInsert.ColumnMappings.Add("DefaultCombination", "[DefaultCombination]");
                 bulkInsert.ColumnMappings.Add("ChildSKU", "[ChildSKU]");
-                bulkInsert.ColumnMappings.Add("CStone", "[CStone]");
-                bulkInsert.ColumnMappings.Add("CShape", "[CShape]");
-                bulkInsert.ColumnMappings.Add("CSize", "[CSize]");
-                bulkInsert.ColumnMappings.Add("CCutting", "[CCutting]");
-                bulkInsert.ColumnMappings.Add("CQuality", "[CQuality]");
-                bulkInsert.ColumnMappings.Add("Ccolor", "[Ccolor]");
-                bulkInsert.ColumnMappings.Add("CDrill", "[CDrill]");
-                bulkInsert.ColumnMappings.Add("CLot", "[CLot]");
-                bulkInsert.ColumnMappings.Add("CGrooving", "[CGrooving]");
-                bulkInsert.ColumnMappings.Add("16Att1", "[16Att1]");
-                bulkInsert.ColumnMappings.Add("17Att2", "[17Att2]");
-                bulkInsert.ColumnMappings.Add("18Att3", "[18Att3]");
+                bulkInsert.ColumnMappings.Add("CSize", "[Size]");
+                bulkInsert.ColumnMappings.Add("Ccolor", "[color]");
                 bulkInsert.ColumnMappings.Add("DifferencePrice", "[DifferencePrice]");
                 bulkInsert.ColumnMappings.Add("PriceImpact", "[PriceImpact]");
                 bulkInsert.ColumnMappings.Add("DifferenceWeight", "[DifferenceWeight]");
@@ -608,24 +553,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("HotDealToDate", "[HotDealToDate]");
                 bulkInsert.ColumnMappings.Add("HotDealFromTime", "[HotDealFromTime]");
                 bulkInsert.ColumnMappings.Add("HotDealToTime", "[HotDealToTime]");
-                bulkInsert.ColumnMappings.Add("FStone", "[FStone]");
-                bulkInsert.ColumnMappings.Add("FShape", "[FShape]");
-                bulkInsert.ColumnMappings.Add("FSize", "[FSize]");
-                bulkInsert.ColumnMappings.Add("FColor", "[FColor]");
-                bulkInsert.ColumnMappings.Add("FCutting", "[FCutting]");
-                bulkInsert.ColumnMappings.Add("FWeight", "[FWeight]");
-                bulkInsert.ColumnMappings.Add("FCategory", "[FCategory]");
-                bulkInsert.ColumnMappings.Add("FQuality", "[FQuality]");
-                bulkInsert.ColumnMappings.Add("FFeature", "[FFeature]");
-                bulkInsert.ColumnMappings.Add("FOrigin", "[FOrigin]");
-                bulkInsert.ColumnMappings.Add("FTreatment", "[FTreatment]");
-                bulkInsert.ColumnMappings.Add("FShipping", "[FShipping]");
-                bulkInsert.ColumnMappings.Add("FStockQuantity", "[FStockQuantity]");
-                bulkInsert.ColumnMappings.Add("FSpecialNote", "[FSpecialNote]");
-                bulkInsert.ColumnMappings.Add("30Features1", "[30Features1]");
-                bulkInsert.ColumnMappings.Add("31Features2", "[31Features2]");
-                bulkInsert.ColumnMappings.Add("32Features3", "[32Features3]");
-
                 bulkInsert.ColumnMappings.Add("VideoHeading", "[VideoHeading]");
                 bulkInsert.ColumnMappings.Add("VideoLink", "[VideoLink]");
                 bulkInsert.ColumnMappings.Add("MetaTitle", "[MetaTitle]");
@@ -633,16 +560,10 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("FriendlyURL", "[FriendlyURL]");
                 bulkInsert.ColumnMappings.Add("Description", "[Description]");
                 bulkInsert.ColumnMappings.Add("Enabled", "[Enabled]");
-                // bulkInsert.ColumnMappings.Add("IsDeleted", "[IsDeleted]");
                 bulkInsert.ColumnMappings.Add("id_product", "[id_product]");
                 bulkInsert.ColumnMappings.Add("id_product_attribute", "[id_product_attribute]");
                 bulkInsert.ColumnMappings.Add("IsDeleted", "[IsDeleted]");
-
                 int res = SaveProduct(dt);
-                //bulkInsert.WriteToServer(dt);
-                // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
-
-
                 excelConn.Close();
                 if (res == 0)
                 {
@@ -654,14 +575,10 @@ public partial class Backoffice_Products : System.Web.UI.Page
                         file.Delete();
                     }
                 }
-
-
             }
-
         }
         catch (Exception ex)
         {
-            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted UnSuccessful')", true);
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.StackTrace.ToString() + "')", true);
             gdate.LogError(ex.Message.ToLower(), "Save Sheet", "Product", ex.StackTrace.ToString());
             string path = Server.MapPath("../SaveUpload/" + filename);
@@ -671,12 +588,10 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 file.Delete();
             }
         }
-
     }
 
     public void uploadUpdate()
     {
-
         filename = "";
         string id = "";
         if (Request.QueryString["id"] != null)
@@ -685,13 +600,11 @@ public partial class Backoffice_Products : System.Web.UI.Page
         }
         try
         {
-
             if (FlpExcelUpdate.HasFile)
             {
                 filename = Path.GetFileName(FlpExcelUpdate.PostedFile.FileName);
                 fileExtention = Path.GetExtension(FlpExcelUpdate.PostedFile.FileName);
                 FlpExcelUpdate.PostedFile.SaveAs(Server.MapPath("../SaveUpload/" + filename));
-
 
                 OleDbCommand excelCommand = new OleDbCommand();
                 OleDbDataAdapter excelDataAdapter = new OleDbDataAdapter();
@@ -708,7 +621,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 excelConn.Open();
                 DataTable dtExcelSchema;
                 dtExcelSchema = excelConn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
-                //string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();//Sheet1
                 string sheetName = "Sheet1$";//
                 string query = "SELECT  * From [" + sheetName + "] where [Update]='Yes' ";
                 excelCommand = new OleDbCommand(query, excelConn);
@@ -719,8 +631,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
 
                 string CS = data.conString;
                 SqlBulkCopy bulkInsert = new SqlBulkCopy(CS);
-
-
                 bulkInsert.DestinationTableName = "[dbo].[tbl_AllProduct]";
                 bulkInsert.ColumnMappings.Add("ReferenceCode", "[ReferenceCode]");
                 bulkInsert.ColumnMappings.Add("Name", "[Name]");
@@ -738,18 +648,8 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("IsParent", "[IsParent]");
                 bulkInsert.ColumnMappings.Add("DefaultCombination", "[DefaultCombination]");
                 bulkInsert.ColumnMappings.Add("ChildSKU", "[ChildSKU]");
-                bulkInsert.ColumnMappings.Add("CStone", "[CStone]");
-                bulkInsert.ColumnMappings.Add("CShape", "[CShape]");
-                bulkInsert.ColumnMappings.Add("CSize", "[CSize]");
-                bulkInsert.ColumnMappings.Add("CCutting", "[CCutting]");
-                bulkInsert.ColumnMappings.Add("CQuality", "[CQuality]");
-                bulkInsert.ColumnMappings.Add("Ccolor", "[Ccolor]");
-                bulkInsert.ColumnMappings.Add("CDrill", "[CDrill]");
-                bulkInsert.ColumnMappings.Add("CLot", "[CLot]");
-                bulkInsert.ColumnMappings.Add("@CGrooving", "[CGrooving]");
-                bulkInsert.ColumnMappings.Add("16Att1", "[16Att1]");
-                bulkInsert.ColumnMappings.Add("17Att2", "[17Att2]");
-                bulkInsert.ColumnMappings.Add("18Att3", "[18Att3]");
+                bulkInsert.ColumnMappings.Add("CSize", "[Size]");
+                bulkInsert.ColumnMappings.Add("Ccolor", "[color]");
                 bulkInsert.ColumnMappings.Add("DifferencePrice", "[DifferencePrice]");
                 bulkInsert.ColumnMappings.Add("PriceImpact", "[PriceImpact]");
                 bulkInsert.ColumnMappings.Add("DifferenceWeight", "[DifferenceWeight]");
@@ -762,23 +662,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("HotDealToDate", "[HotDealToDate]");
                 bulkInsert.ColumnMappings.Add("HotDealFromTime", "[HotDealFromTime]");
                 bulkInsert.ColumnMappings.Add("HotDealToTime", "[HotDealToTime]");
-                bulkInsert.ColumnMappings.Add("FStone", "[FStone]");
-                bulkInsert.ColumnMappings.Add("FShape", "[FShape]");
-                bulkInsert.ColumnMappings.Add("FSize", "[FSize]");
-                bulkInsert.ColumnMappings.Add("FColor", "[FColor]");
-                bulkInsert.ColumnMappings.Add("FCutting", "[FCutting]");
-                bulkInsert.ColumnMappings.Add("FWeight", "[FWeight]");
-                bulkInsert.ColumnMappings.Add("FCategory", "[FCategory]");
-                bulkInsert.ColumnMappings.Add("FQuality", "[FQuality]");
-                bulkInsert.ColumnMappings.Add("FFeature", "[FFeature]");
-                bulkInsert.ColumnMappings.Add("FOrigin", "[FOrigin]");
-                bulkInsert.ColumnMappings.Add("FTreatment", "[FTreatment]");
-                bulkInsert.ColumnMappings.Add("FShipping", "[FShipping]");
-                bulkInsert.ColumnMappings.Add("FStockQuantity", "[FStockQuantity]");
-                bulkInsert.ColumnMappings.Add("FSpecialNote", "[FSpecialNote]");
-                bulkInsert.ColumnMappings.Add("30Features1", "[30Features1]");
-                bulkInsert.ColumnMappings.Add("31Features2", "[31Features2]");
-                bulkInsert.ColumnMappings.Add("32Features3", "[32Features3]");
                 bulkInsert.ColumnMappings.Add("VideoHeading", "[VideoHeading]");
                 bulkInsert.ColumnMappings.Add("VideoLink", "[VideoLink]");
                 bulkInsert.ColumnMappings.Add("MetaTitle", "[MetaTitle]");
@@ -791,10 +674,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("id_product_attribute", "[id_product_attribute]");
                 bulkInsert.ColumnMappings.Add("IsDeleted", "[IsDeleted]");
                 int res = UpdateProduct(dt);
-                //bulkInsert.WriteToServer(dt);
-                // ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted Successfully')", true);
-
-
                 excelConn.Close();
                 if (res == 0)
                 {
@@ -810,16 +689,12 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 {
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Error')", true);
                 }
-
             }
-
         }
         catch (Exception ex)
         {
-            //ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Record Inserted UnSuccessful')", true);
             ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('" + ex.StackTrace.ToString() + "')", true);
             gdate.LogError(ex.Message.ToLower(), "Update Sheet", "Product", ex.StackTrace.ToString());
-            //GD.LogError(ex.Message.ToLower(), "Upload Sheet", "Sheet", ex.StackTrace.ToString());
             string path = Server.MapPath("../SaveUpload/" + filename);
             FileInfo file = new FileInfo(path);
             if (file.Exists)//check file exsit or not  
@@ -848,7 +723,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@RetailPrice", drExcel["RetailPrice"]);
                 cmd.Parameters.AddWithValue("@PriceUnit", drExcel["PriceUnit"]);
                 cmd.Parameters.AddWithValue("@DisountValue", drExcel["DisountValue"]);
-                cmd.Parameters.AddWithValue("@DiscountType", drExcel["DiscountType"]);
+                cmd.Parameters.AddWithValue("@DiscountType", DBNull.Value);
                 cmd.Parameters.AddWithValue("@DefaultCategory", drExcel["DefaultCategory"]);
                 cmd.Parameters.AddWithValue("@Category1", drExcel["Category1"]);
                 cmd.Parameters.AddWithValue("@Category2", drExcel["Category2"]);
@@ -856,16 +731,10 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@Category4", drExcel["Category4"]);
                 cmd.Parameters.AddWithValue("@Category5", drExcel["Category5"]);
                 cmd.Parameters.AddWithValue("@IsParent", drExcel["IsParent"]);
-                cmd.Parameters.AddWithValue("@DefaultCombination", drExcel["DefaultCombination"]);
                 cmd.Parameters.AddWithValue("@ChildSKU", drExcel["ChildSKU"]);
-                cmd.Parameters.AddWithValue("@CStone", drExcel["CStone"]);
-                cmd.Parameters.AddWithValue("@CShape", drExcel["CShape"]);
-                cmd.Parameters.AddWithValue("@CSize", drExcel["CSize"]);
-                cmd.Parameters.AddWithValue("@CCutting", drExcel["CCutting"]);
-                cmd.Parameters.AddWithValue("@CQuality", drExcel["CQuality"]);
-                cmd.Parameters.AddWithValue("@Ccolour", drExcel["Ccolor"]);
-                cmd.Parameters.AddWithValue("@CDrill", drExcel["CDrill"]);
-                cmd.Parameters.AddWithValue("@CLot", drExcel["CLot"]);
+                cmd.Parameters.AddWithValue("@DefaultCombination", drExcel["DefaultCombination"]);
+                cmd.Parameters.AddWithValue("@Ccolour", drExcel["color"]);
+                cmd.Parameters.AddWithValue("@CSize", drExcel["Size"]);
                 cmd.Parameters.AddWithValue("@DifferencePrice", drExcel["DifferencePrice"]);
                 cmd.Parameters.AddWithValue("@PriceImpact", drExcel["PriceImpact"]);
                 cmd.Parameters.AddWithValue("@DifferenceWeight", drExcel["DifferenceWeight"]);
@@ -887,20 +756,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@HotDealToDate", DBNull.Value);
                 cmd.Parameters.AddWithValue("@HotDealFromTime", drExcel["HotDealFromTime"]);
                 cmd.Parameters.AddWithValue("@HotDealToTime", drExcel["HotDealToTime"]);
-                cmd.Parameters.AddWithValue("@FStone", drExcel["FStone"]);
-                cmd.Parameters.AddWithValue("@FShape", drExcel["FShape"]);
-                cmd.Parameters.AddWithValue("@FSize", drExcel["FSize"]);
-                cmd.Parameters.AddWithValue("@FColor", drExcel["FColor"]);
-                cmd.Parameters.AddWithValue("@FCutting", drExcel["FCutting"]);
-                cmd.Parameters.AddWithValue("@FWeight", drExcel["FWeight"]);
-                cmd.Parameters.AddWithValue("@FCategory", drExcel["FCategory"]);
-                cmd.Parameters.AddWithValue("@FQuality", drExcel["FQuality"]);
-                cmd.Parameters.AddWithValue("@FFeature", drExcel["FFeature"]);
-                cmd.Parameters.AddWithValue("@FOrigin", drExcel["FOrigin"]);
-                cmd.Parameters.AddWithValue("@FTreatment", drExcel["FTreatment"]);
-                cmd.Parameters.AddWithValue("@FShipping", drExcel["FShipping"]);
-                cmd.Parameters.AddWithValue("@FStockQuantity", drExcel["FStockQuantity"]);
-                cmd.Parameters.AddWithValue("@FSpecialNote", drExcel["FSpecialNote"]);
                 cmd.Parameters.AddWithValue("@VideoHeading", drExcel["VideoHeading"]);
                 cmd.Parameters.AddWithValue("@VideoLink", drExcel["VideoLink"]);
                 cmd.Parameters.AddWithValue("@MetaTitle", drExcel["MetaTitle"]);
@@ -912,14 +767,6 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@ID", "0");
                 cmd.Parameters.AddWithValue("@PrdID", drExcel["id_product"]);
                 cmd.Parameters.AddWithValue("@PrdAttID", drExcel["id_product_attribute"]);
-                cmd.Parameters.AddWithValue("@CGrooving", drExcel["CGrooving"]);
-
-                cmd.Parameters.AddWithValue("@16Att1", drExcel["16Att1"]);
-                cmd.Parameters.AddWithValue("@17Att2", drExcel["17Att2"]);
-                cmd.Parameters.AddWithValue("@18Att3", drExcel["18Att3"]);
-                cmd.Parameters.AddWithValue("@30Features1", drExcel["30Features1"]);
-                cmd.Parameters.AddWithValue("@31Features2", drExcel["31Features2"]);
-                cmd.Parameters.AddWithValue("@32Features3", drExcel["32Features3"]);
                 cmd.Parameters.AddWithValue("@IsDeleted", drExcel["IsDeleted"]);
                 ss = data.executeCommandP(cmd);
             }
@@ -930,6 +777,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
         }
         return ss;
     }
+
     private string ConvertToDateTime(string strDateTime)
     {
         if (strDateTime != "")
@@ -965,6 +813,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
             this.FillData(pageNo);
         }
     }
+
     public int UpdateProduct(DataTable dtOrder)
     {
         int ss = 1;
@@ -980,10 +829,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@ReferenceCode", drExcel["ReferenceCode"]);
                 cmd.Parameters.AddWithValue("@Name", drExcel["Name"]);
                 cmd.Parameters.AddWithValue("@Condition", drExcel["Condition"]);
-                if (drExcel["RetailPrice"].ToString() != "")
-                    cmd.Parameters.AddWithValue("@RetailPrice", drExcel["RetailPrice"]);
-                else
-                    cmd.Parameters.AddWithValue("@RetailPrice", "0");
+                cmd.Parameters.AddWithValue("@RetailPrice", (drExcel["RetailPrice"].ToString() != "") ? drExcel["RetailPrice"].ToString() : "0");
                 cmd.Parameters.AddWithValue("@PriceUnit", drExcel["PriceUnit"]);
                 cmd.Parameters.AddWithValue("@DisountValue", drExcel["DisountValue"]);
                 cmd.Parameters.AddWithValue("@DiscountType", drExcel["DiscountType"]);
@@ -996,24 +842,16 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@IsParent", drExcel["IsParent"]);
                 cmd.Parameters.AddWithValue("@DefaultCombination", drExcel["DefaultCombination"]);
                 cmd.Parameters.AddWithValue("@ChildSKU", drExcel["ChildSKU"]);
-                cmd.Parameters.AddWithValue("@CStone", drExcel["CStone"]);
-                cmd.Parameters.AddWithValue("@CShape", drExcel["CShape"]);
-                cmd.Parameters.AddWithValue("@CSize", drExcel["CSize"]);
-                cmd.Parameters.AddWithValue("@CCutting", drExcel["CCutting"]);
-                cmd.Parameters.AddWithValue("@CQuality", drExcel["CQuality"]);
-                cmd.Parameters.AddWithValue("@Ccolour", drExcel["Ccolor"]);
-                cmd.Parameters.AddWithValue("@CDrill", drExcel["CDrill"]);
-                cmd.Parameters.AddWithValue("@CLot", drExcel["CLot"]);
+                cmd.Parameters.AddWithValue("@CSize", drExcel["Size"]);
+                cmd.Parameters.AddWithValue("@Ccolour", drExcel["color"]);
                 cmd.Parameters.AddWithValue("@DifferencePrice", drExcel["DifferencePrice"]);
                 cmd.Parameters.AddWithValue("@PriceImpact", drExcel["PriceImpact"]);
                 cmd.Parameters.AddWithValue("@DifferenceWeight", drExcel["DifferenceWeight"]);
                 cmd.Parameters.AddWithValue("@WeightImpact", drExcel["WeightImpact"]);
                 cmd.Parameters.AddWithValue("@MinQty", drExcel["MinQty"]);
                 cmd.Parameters.AddWithValue("@AvailabilityText", drExcel["AvailabilityText"]);
-                if (drExcel["StockQty"].ToString() != "")
-                    cmd.Parameters.AddWithValue("@StockQty", drExcel["StockQty"]);
-                else
-                    cmd.Parameters.AddWithValue("@StockQty", "0");
+                cmd.Parameters.AddWithValue("@StockQty", (drExcel["StockQty"].ToString() != "") ? drExcel["StockQty"].ToString() : "0");
+
                 cmd.Parameters.AddWithValue("@AllowStockOrder", drExcel["AllowStockOrder"]);
                 if (drExcel["HotDealFromDate"].ToString() != "" || drExcel["HotDealFromDate"].ToString() != "NULL" || drExcel["HotDealFromDate"].ToString() != null)
                     cmd.Parameters.AddWithValue("@HotDealFromDate", ConvertToDateTime(drExcel["HotDealFromDate"].ToString()));
@@ -1023,22 +861,9 @@ public partial class Backoffice_Products : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("@HotDealToDate", ConvertToDateTime(drExcel["HotDealToDate"].ToString()));
                 else
                     cmd.Parameters.AddWithValue("@HotDealToDate", DBNull.Value);
+
                 cmd.Parameters.AddWithValue("@HotDealFromTime", drExcel["HotDealFromTime"]);
                 cmd.Parameters.AddWithValue("@HotDealToTime", drExcel["HotDealToTime"]);
-                cmd.Parameters.AddWithValue("@FStone", drExcel["FStone"]);
-                cmd.Parameters.AddWithValue("@FShape", drExcel["FShape"]);
-                cmd.Parameters.AddWithValue("@FSize", drExcel["FSize"]);
-                cmd.Parameters.AddWithValue("@FColor", drExcel["FColor"]);
-                cmd.Parameters.AddWithValue("@FCutting", drExcel["FCutting"]);
-                cmd.Parameters.AddWithValue("@FWeight", drExcel["FWeight"]);
-                cmd.Parameters.AddWithValue("@FCategory", drExcel["FCategory"]);
-                cmd.Parameters.AddWithValue("@FQuality", drExcel["FQuality"]);
-                cmd.Parameters.AddWithValue("@FFeature", drExcel["FFeature"]);
-                cmd.Parameters.AddWithValue("@FOrigin", drExcel["FOrigin"]);
-                cmd.Parameters.AddWithValue("@FTreatment", drExcel["FTreatment"]);
-                cmd.Parameters.AddWithValue("@FShipping", drExcel["FShipping"]);
-                cmd.Parameters.AddWithValue("@FStockQuantity", drExcel["FStockQuantity"]);
-                cmd.Parameters.AddWithValue("@FSpecialNote", drExcel["FSpecialNote"]);
                 cmd.Parameters.AddWithValue("@VideoHeading", drExcel["VideoHeading"]);
                 cmd.Parameters.AddWithValue("@VideoLink", drExcel["VideoLink"]);
                 cmd.Parameters.AddWithValue("@MetaTitle", drExcel["MetaTitle"]);
@@ -1049,14 +874,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@Action", "Update");
                 cmd.Parameters.AddWithValue("@ID", drExcel["Update"]);
                 cmd.Parameters.AddWithValue("@PrdID", drExcel["id_product"]);
-                cmd.Parameters.AddWithValue("@PrdAttID", drExcel["id_product_attribute"]);
-                cmd.Parameters.AddWithValue("@CGrooving", drExcel["CGrooving"]);
-                cmd.Parameters.AddWithValue("@16Att1", drExcel["16Att1"]);
-                cmd.Parameters.AddWithValue("@17Att2", drExcel["17Att2"]);
-                cmd.Parameters.AddWithValue("@18Att3", drExcel["18Att3"]);
-                cmd.Parameters.AddWithValue("@30Features1", drExcel["30Features1"]);
-                cmd.Parameters.AddWithValue("@31Features2", drExcel["31Features2"]);
-                cmd.Parameters.AddWithValue("@32Features3", drExcel["32Features3"]);
+                cmd.Parameters.AddWithValue("@PrdAttID", drExcel["id_product_attribute"]); 
                 cmd.Parameters.AddWithValue("@IsDeleted", drExcel["IsDeleted"]);
                 ss = data.executeCommandP(cmd);
             }
@@ -1115,6 +933,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
         Response.End();
 
     }
+
     private void ExcelTag(DataSet dsexcel)
     {
         try
@@ -1178,6 +997,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
             //Myclass.filewrite(ex.StackTrace);
         }
     }
+
     private void ExcelDocViewer1(string fileName)
     {
         try
@@ -1278,6 +1098,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
         }
 
     }
+
     public int SaveTag(DataTable dtOrder)
     {
 

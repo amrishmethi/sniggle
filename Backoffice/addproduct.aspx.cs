@@ -155,7 +155,7 @@ public partial class Backoffice_addproduct : System.Web.UI.Page
             chkOnSale.Checked = Convert.ToBoolean(ds.Tables[0].Rows[0]["on_sale"].ToString());
             txtavailable_now.Text = ds.Tables[0].Rows[0]["available_now"].ToString();
             txtavailable_later.Text = ds.Tables[0].Rows[0]["available_later"].ToString();
-            if(ds.Tables[0].Rows[0]["IsPersonalized"].ToString() == "True")
+            if (ds.Tables[0].Rows[0]["IsPersonalized"].ToString() == "True")
             {
                 drpPersonalized.SelectedValue = "1";
             }
@@ -419,8 +419,7 @@ public partial class Backoffice_addproduct : System.Web.UI.Page
 
         if (txtReferenceCode.Text != "")
         {
-            DataSet ds33 = gdata.AddProduct(Action, "0", online_only, "0", "0", "0", "", "0", Reference_code, "0", "0", "0", "0", "2", Enabled, Redirect, "1", Condition, "true", "1", Visibility, "0", "0"
-                   , Description, Short_description, "", "", Tags, "", name, id_product, GroupId, ColorCode);
+            DataSet ds33 = gdata.AddProduct(Action, "0", online_only, "0", "0", "0", "", "0", Reference_code, "0", "0", "0", "0", "2", Enabled, Redirect, "1", Condition, "true", "1", Visibility, "0", "0", Description, Short_description, "", "", Tags, "", name, id_product, GroupId, ColorCode);
             //string ss = txtTag.Value;
             if (ds33.Tables[0].Rows.Count > 0)
             {
@@ -456,10 +455,8 @@ public partial class Backoffice_addproduct : System.Web.UI.Page
                         Response.Redirect("Products.aspx?PageNo=" + PageNo + "&&PageSize=" + PageSize);
                     }
                 }
-
             }
         }
-
     }
 
     protected void btnAdddTag_Click(object sender, EventArgs e)

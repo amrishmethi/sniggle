@@ -48,9 +48,7 @@
                                         <h5 style="float: left; margin-left: 10px">Out of stock items</h5>
                                         <br />
                                         <h5 style="float: left; margin-left: 10px; color: #31a8e3">99%</h5>
-
                                     </li>
-
                                 </ul>
                             </div>
 
@@ -90,21 +88,17 @@
                                 <ul class="breadcome-menu alignright">
                                     <li>
                                         <h1 style="float: left;"><i class="fa fa-refresh " aria-hidden="true"></i></h1>
-
                                     </li>
                                 </ul>
-                            </div>
-
+                            </div> 
                         </div>
                     </div>
-
                 </div>
                 <div class="clearfix">&nbsp;</div>
-                <div class="col-lg-12 hide">
+                <div class="col-lg-12">
                     <div class="col-lg-6">
                         <div class="breadcome-list map-mg-t-40-gl shadow-reset">
                             <div class="row">
-
                                 <div class="col-lg-6">
                                     <div class=" alignleft">
                                         <asp:FileUpload ID="FlpExcel" runat="server" Width="200px" />
@@ -116,8 +110,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="clearfix">&nbsp;</div>
-                            <div class="row">
+                            <div class="clearfix hidden">&nbsp;</div>
+                            <div class="row hidden">
                                 <div class="col-lg-6">
                                     <div class=" alignleft">
                                         <asp:FileUpload ID="FlpExcelUpdate" runat="server" Width="200px" />
@@ -125,7 +119,6 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="alignleft">
-
                                         <asp:LinkButton ID="btnUpdate" runat="server" Text="Update Product Excel" OnClick="btnUpdate_Click" CssClass="btn btn-primary"></asp:LinkButton>
                                     </div>
                                 </div>
@@ -137,22 +130,16 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="alignleft">
-
                                         <asp:LinkButton ID="btnDownload" runat="server" Text="Download Excel" OnClick="btnDownload_Click" CssClass="btn btn-primary"></asp:LinkButton>
                                     </div>
                                 </div>
-                            </div>
-
-
-
-                            <%--<asp:Button ID="btnDownload" runat="server" Text="Download Excel" OnClick="btnDownload_Click" CssClass="btn btn-success" TabIndex="2" />--%>
+                            </div> 
                         </div>
                     </div>
-                      
-                        <div class="col-lg-6">
-                        <div class="breadcome-list map-mg-t-40-gl shadow-reset">
-                            <div class="row">
 
+                    <div class="col-lg-6">
+                        <div class="breadcome-list map-mg-t-40-gl shadow-reset hidden">
+                            <div class="row">
                                 <div class="col-lg-6">
                                     <div class=" alignleft">
                                         <asp:FileUpload ID="flapTagSave" runat="server" Width="200px" />
@@ -193,7 +180,7 @@
                             <%--<asp:Button ID="btnDownload" runat="server" Text="Download Excel" OnClick="btnDownload_Click" CssClass="btn btn-success" TabIndex="2" />--%>
                         </div>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -273,7 +260,7 @@
                                         <th data-field="Quantity">Quantity</th>
                                         <th data-field="Status">Status</th>
                                         <th>Home</th>
-                                           <th>Stock For Bar Code</th>
+                                        <th>Stock For Bar Code</th>
                                         <%-- <th data-field="Position">Position</th>--%>
                                         <th>GroupId</th>
                                         <th>Action</th>
@@ -313,7 +300,7 @@
                                                 <asp:ListItem Value="0">No</asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
-                                         <td>
+                                        <td>
                                             <asp:DropDownList ID="drpBarcode" runat="server" class="form-control">
                                                 <asp:ListItem Value="">-</asp:ListItem>
                                                 <asp:ListItem Value="1">Yes</asp:ListItem>
@@ -415,7 +402,7 @@
 
                                             </li>
 
-                                             <li>
+                                            <li>
                                                 <asp:LinkButton ID="btnEnableHome" runat="server" OnClick="btnEnableHome_Click" OnClientClick="javascript:return confirm('Are you sure you want to enable ?');"><i class="fa fa-power-off text-success"></i>&nbsp;Enable Home</asp:LinkButton>
 
                                             </li>
@@ -424,7 +411,7 @@
 
                                             </li>
 
-                                             <li>
+                                            <li>
                                                 <asp:LinkButton ID="btnEnableStock" runat="server" OnClick="btnEnableStock_Click" OnClientClick="javascript:return confirm('Are you sure you want to enable ?');"><i class="fa fa-power-off text-success"></i>&nbsp;Enable Stock</asp:LinkButton>
 
                                             </li>
