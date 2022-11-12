@@ -112,7 +112,7 @@ public partial class CODSuccess : System.Web.UI.Page
         }
 
         string qqq = ""; 
-        qqq = "select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/'+RTRIM(LTRIM(REPLACE(cat.name,'/','-')))+'/'+ cast((select top 1 id_image from ps_image where IsDeleted = 0 and Cover = 1 and id_product = cp.id_product) as nvarchar(50)) +'.jpg' as URL,prod.minimal_quantity, cart.gift, ";
+        qqq = "select  cp.*,pa.reference,pl.name,pa.price+prod.price as price, prod.ImgURL1 as URL,prod.minimal_quantity, cart.gift, ";
 
         qqq += " REPLACE(REPLACE(cat.link_rewrite,' ','-'),'/-','')+'/'+cast(prod.id_product as nvarchar(50))+'-'+  + ISNULL(REPLACE(pl.link_rewrite, ' ', '-'), '') + '.html' as DetailUrl,";
         //calculate discountprice

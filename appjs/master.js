@@ -63,17 +63,18 @@ function addToCartOnDetail() {
     }
     var imgProfilePhoto = '';
     var ImggProPhoto;
-    debugger
-    var fileProfilePhoto = $("#fluCustomize").get(0);
-    if (fileProfilePhoto != undefined) {
-        var filesProP = fileProfilePhoto.files;
-        ImggProPhoto = new FormData();
-        for (var i = 0; i < filesProP.length; i++) {
-            imgProfilePhoto = 'PP_' + filesProP[i].name;
-            ImggProPhoto.append(filesProP[i].name, filesProP[i]);
+    var IsFluCustomize = $("#IsFluCustomize").val();
+    if (IsFluCustomize == 'True') {
+        var fileProfilePhoto = $("#fluCustomize").get(0);
+        if (fileProfilePhoto != undefined) {
+            var filesProP = fileProfilePhoto.files;
+            ImggProPhoto = new FormData();
+            for (var i = 0; i < filesProP.length; i++) {
+                imgProfilePhoto = 'PP_' + filesProP[i].name;
+                ImggProPhoto.append(filesProP[i].name, filesProP[i]);
+            }
         }
-    }
-
+    } 
 
     $.ajax({
         method: 'POST',
@@ -128,13 +129,17 @@ function BuyNow() {
         return;
     };
     var imgProfilePhoto = '';
-    var fileProfilePhoto = $("#fluCustomize").get(0);
-    var filesProP = fileProfilePhoto.files;
-    var ImggProPhoto = new FormData();
-    for (var i = 0; i < filesProP.length; i++) {
-        imgProfilePhoto = 'PP_' + filesProP[i].name;
-        ImggProPhoto.append(filesProP[i].name, filesProP[i]);
-    };
+    var IsFluCustomize = $("#IsFluCustomize").val();
+    if (IsFluCustomize == 'True') {
+        var fileProfilePhoto = $("#fluCustomize").get(0);
+        var filesProP = fileProfilePhoto.files;
+        var ImggProPhoto = new FormData();
+        for (var i = 0; i < filesProP.length; i++) {
+            imgProfilePhoto = 'PP_' + filesProP[i].name;
+            ImggProPhoto.append(filesProP[i].name, filesProP[i]);
+        };
+    }
+    
     $.ajax({
         method: 'POST',
         url: '/FrontWeb.asmx/addToCart',

@@ -38,8 +38,14 @@
         lblProdId.Text = proIdd;
         lblProdIdDtailPage.Text = proIdd;
         ds = data.getItemImages(catid);
-        rptImgThumb.DataSource = ds;
+        rptImgThumb.DataSource = ds.Tables[4];
         rptImgThumb.DataBind();
+        if (ds.Tables[4].Rows.Count > 0)
+        {
+            rptImgThumb.DataSource = ds.Tables[4];
+            rptImgThumb.DataBind();
+        }
+
         if (ds.Tables[0].Rows.Count > 0)
         {
             productname = ds.Tables[0].Rows[0]["ProdName"].ToString();
@@ -50,9 +56,9 @@
             catnameb.InnerText = catname;
             prodlinkb.HRef = "/" + produrl;
             prodnameb.InnerText = productname;
-            lblImgDtailPage.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
-            //imgReview.Src = ds.Tables[0].Rows[0]["bigimg"].ToString();
-            lblBigImg.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            //lblImgDtailPage.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            ////imgReview.Src = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            //lblBigImg.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
 
             if (ds.Tables[0].Rows[0]["available_nowTag"].ToString().ToUpper() == "OUT OF STOCK")
             {
@@ -130,7 +136,7 @@
                         break;
                     case "og:image":
                         tag.Attributes.Add("property", "og:image");
-                        tag.Content = String.Format(ds.Tables[0].Rows[0]["bigimg"].ToString());
+                        tag.Content = String.Format(ds.Tables[4].Rows[0]["bigimg"].ToString());
                         Page.Header.Controls.Add(tag);
                         break;
                     case "og:type":
@@ -153,8 +159,14 @@
             szImg.Src = ds.Tables[3].Rows[0]["imgUrl"].ToString();
         }
 
-        rptImgBig.DataSource = ds;
-        rptImgBig.DataBind();
+        if (ds.Tables[4].Rows.Count > 0)
+        {
+            lblImgDtailPage.Text = ds.Tables[4].Rows[0]["bigimg"].ToString();
+            //imgReview.Src = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            lblBigImg.Text = ds.Tables[4].Rows[0]["bigimg"].ToString();
+            rptImgBig.DataSource = ds;
+            rptImgBig.DataBind();
+        }
 
         ds = dta.getDataSet("select * from  ps_product_attribute where id_product=" + catid + " and default_on=1");
         if (ds.Tables[0].Rows.Count > 0)
@@ -635,9 +647,9 @@
                 </div>
             </div>
         </div>
-         
+
         <!-- The Modal -->
-       <%-- <div id="myModal" class="modal">
+        <%-- <div id="myModal" class="modal">
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
@@ -659,32 +671,5 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="Server">
     <script src="/appjs/product.js?v=1"></script>
 
-    <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("sizeBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementById("close1");
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
 </asp:Content>
 

@@ -1146,7 +1146,7 @@ public class FrontWeb : System.Web.Services.WebService
         DataSet dsQty = data.getDataSet("update ps_cart_product set  quantity=(quantity+1) where  id_cart=" + cartID + " and id_product_attribute=" + AttriID + "");
 
 
-        DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/' + RTRIM(LTRIM(REPLACE(cat.name, '/', '-'))) + '/' + cast((select top 1 id_image from ps_image where id_product = cp.id_product ) as nvarchar(50)) + '.jpg' as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
+        DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price, prod.ImgURL1 as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
         tbl.Rows.Clear();
         for (int i = 0; i < dsn.Tables[0].Rows.Count; i++)
         {
@@ -1244,7 +1244,7 @@ public class FrontWeb : System.Web.Services.WebService
             DataSet dsQty = data.getDataSet("update ps_cart_product set  quantity=" + qty + " where  id_cart=" + cartID + " and id_product_attribute=" + AttriID + "");
 
 
-            DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/' + RTRIM(LTRIM(REPLACE(cat.name, '/', '-'))) + '/' + cast((select top 1 id_image from ps_image where id_product = cp.id_product ) as nvarchar(50)) + '.jpg' as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
+            DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,prod.ImgURL1 as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
             tbl.Rows.Clear();
             for (int i = 0; i < dsn.Tables[0].Rows.Count; i++)
             {
@@ -1338,7 +1338,7 @@ public class FrontWeb : System.Web.Services.WebService
         DataSet dsQty = data.getDataSet("update ps_cart_product set  quantity=(quantity-1) where  id_cart=" + cartID + " and id_product_attribute=" + AttriID + "");
 
 
-        DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/' + RTRIM(LTRIM(REPLACE(cat.name, '/', '-'))) + '/' + cast((select top 1 id_image from ps_image where id_product = cp.id_product ) as nvarchar(50)) + '.jpg' as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
+        DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price, prod.ImgURL1 as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
         tbl.Rows.Clear();
         for (int i = 0; i < dsn.Tables[0].Rows.Count; i++)
         {
@@ -1735,7 +1735,7 @@ public class FrontWeb : System.Web.Services.WebService
         qqq = "select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,";
 
         //qqq += "'/img/'+RTRIM(LTRIM(REPLACE(cat.name,'/','-')))+'/'+ cast((select top 1 id_image from ps_image where IsDeleted = 0 and Cover = 1 and id_product = cp.id_product) as nvarchar(50)) +'.jpg' as URL,";
-        qqq += "[dbo].[fn_GetImageForImgKit](cat.name) +'/'+ cast((select top 1 id_image from ps_image where IsDeleted = 0 and Cover = 1 and id_product=prod.id_product) as nvarchar(50)) +'.jpg?tr=w-100%2Ch-100' as URL, ";
+        qqq += " prod.ImgURL1  +'?tr=w-100%2Ch-100' as URL, ";
         qqq += " pa.minimal_quantity, cart.gift, ";
 
         qqq += " REPLACE(REPLACE(cat.link_rewrite,' ','-'),'/-','')+'/'+cast(prod.id_product as nvarchar(50))+'-'+  + ISNULL(REPLACE(pl.link_rewrite, ' ', '-'), '') + '.html' as DetailUrl,";
@@ -2008,7 +2008,7 @@ public class FrontWeb : System.Web.Services.WebService
 
         decimal Amount = 0;
 
-        DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/' + RTRIM(LTRIM(REPLACE(cat.name, '/', '-'))) + '/' + cast((select top 1 id_image from ps_image where id_product = cp.id_product ) as nvarchar(50)) + '.jpg' as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
+        DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,prod.ImgURL1 as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
         tbl.Rows.Clear();
         for (int i = 0; i < dsn.Tables[0].Rows.Count; i++)
         {
@@ -3394,7 +3394,7 @@ public class FrontWeb : System.Web.Services.WebService
             cartID = user.Values["cartID"].ToString();
         }
         DataSet dsn = new DataSet();
-        //DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/' + RTRIM(LTRIM(REPLACE(cat.name, '/', '-'))) + '/' + cast((select top 1 id_image from ps_image where id_product = cp.id_product ) as nvarchar(50)) + '.jpg' as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
+        //DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price, prod.ImgURL1 as URL from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
         dsn = gdat.GetAddToCartDetail(cartID);
         tbl.Rows.Clear();
         for (int i = 0; i < dsn.Tables[0].Rows.Count; i++)
@@ -3514,7 +3514,7 @@ public class FrontWeb : System.Web.Services.WebService
         }
         string qqq = "";
 
-        qqq = "select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/'+RTRIM(LTRIM(REPLACE(cat.name,'/','-')))+'/'+ cast((select top 1 id_image from ps_image where IsDeleted = 0 and Cover = 1 and id_product = cp.id_product) as nvarchar(50)) +'.jpg' as URL,prod.minimal_quantity, cart.gift, ";
+        qqq = "select  cp.*,pa.reference,pl.name,pa.price+prod.price as price, prod.ImgURL1 as URL,prod.minimal_quantity, cart.gift, ";
 
         qqq += " REPLACE(REPLACE(cat.link_rewrite,' ','-'),'/-','')+'/'+cast(prod.id_product as nvarchar(50))+'-'+  + ISNULL(REPLACE(pl.link_rewrite, ' ', '-'), '') + '.html' as DetailUrl,";
         //calculate discountprice
@@ -3533,7 +3533,7 @@ public class FrontWeb : System.Web.Services.WebService
 
         DataSet dsn = new DataSet();
         dsn = dat.getDataSet(qqq);
-        //DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price,'/img/' + RTRIM(LTRIM(REPLACE(cat.name, '/', '-'))) + '/' + cast((select top 1 id_image from ps_image where id_product = cp.id_product ) as nvarchar(50)) + '.jpg' as URL, pc.gift from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category left outer join ps_cart as pc on pc.id_cart = cp.id_cart where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
+        //DataSet dsn = dat.getDataSet("select  cp.*,pa.reference,pl.name,pa.price+prod.price as price, prod.ImgURL1 as URL, pc.gift from ps_cart_product cp inner join ps_product_lang pl on cp.id_product = pl.id_product inner join ps_product_attribute pa on cp.id_product_attribute = pa.id_product_attribute and cp.id_product = pa.id_product inner join ps_product prod on pl.id_product = prod.id_product inner join ps_category_lang cat on prod.id_category_default = cat.id_category left outer join ps_cart as pc on pc.id_cart = cp.id_cart where cp.id_cart = " + cartID + " and pl.id_lang = 1 and cat.id_lang = 1");
 
 
         if (dsn.Tables[0].Rows.Count > 0)

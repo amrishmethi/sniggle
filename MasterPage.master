@@ -147,9 +147,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#search">
+                                       <%-- <a href="#search">
                                             <i class="icon-magnifier"></i>
-                                        </a>
+                                        </a>--%>
                                     </li>
                                 </ul>
                                 <!-- End Header Action Link -->

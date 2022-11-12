@@ -29,7 +29,7 @@ public class GetData
 
     public DataSet getProducts(string CatID)
     {
-        query = "select cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, prod.id_product as ProdID, pl.name as ProdName,cast(prod.price as decimal(18,2)) as ProdPrice, cast((select top 1 id_image from ps_image where id_product=prod.id_product) as nvarchar(50))+'.jpg' as Image1,'/img/'+cat.name+'/'+ cast((select top 1 id_image from ps_image where id_product=prod.id_product) as nvarchar(50))+'.jpg' as URL from ps_product prod  inner  join ps_category_lang cat on prod.id_category_default = cat.id_category  inner  join ps_product_lang pl on prod.id_product = pl.id_product where cat.id_lang = 1 and cat.id_category = " + CatID + " and pl.id_lang = 1 and prod.active = 1 order by pl.name";
+        query = "select cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, prod.id_product as ProdID, pl.name as ProdName,cast(prod.price as decimal(18,2)) as ProdPrice,  prod.ImgURL1 as Image1,'/img/'+cat.name+'/'+ cast((select top 1 id_image from ps_image where id_product=prod.id_product) as nvarchar(50))+'.jpg' as URL from ps_product prod  inner  join ps_category_lang cat on prod.id_category_default = cat.id_category  inner  join ps_product_lang pl on prod.id_product = pl.id_product where cat.id_lang = 1 and cat.id_category = " + CatID + " and pl.id_lang = 1 and prod.active = 1 order by pl.name";
         ds = data.getDataSet(query);
 
         return ds;
@@ -402,11 +402,11 @@ public class GetData
 
         query += " cast((cast(prod.price as decimal(18,4))- (case when (select top(1) isnull(reduction,0) from ps_specific_price  as  sp where  sp.IsDeleted = 0 and id_product=prod.id_product) is null then 0 else  (((select top(1) isnull(sp.reduction,0) from ps_specific_price as  sp where  sp.IsDeleted = 0 and sp.id_product=prod.id_product))*cast(prod.price as decimal(18,4))) end) / 100) as decimal(18,2))  as DiscountPrice,";
 
-        query += " '/img/'+RTRIM(LTRIM(REPLACE(cat.name,'/','-')))+'/'+ cast((select top 1 id_image from ps_image where IsDeleted = 0 and Cover = 1 and id_product=prod.id_product) as nvarchar(50))+'.jpg' as URL,";
+        query += " prod.ImgURL1 as URL,";
 
         query += " REPLACE(REPLACE(cat.link_rewrite,' ','-'),'/-','')+'/'+cast(prod.id_product as nvarchar(50))+'-'+REPLACE(REPLACE(pl.link_rewrite,' ','-'),'/-','')+'.html' as DetailUrl, 32 as coun, ";
 
-        query += " cast((select top 1 id_image from ps_image where id_product=prod.id_product) as nvarchar(50))+'.jpg' as Image1,  ";
+        query += " prod.ImgURL1 as Image1,  ";
 
         query += " cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage,  cat.name as CatName, ";
 
@@ -1426,6 +1426,7 @@ public class GetData
         str += " </div>";
         str += "</div>";
         #region Customize Image 
+        str += "<input type=\"hidden\" name=\"IsFluCustomize\" value=\"" + IsPersonalized + "\" id=\"IsFluCustomize\">";
         if (IsPersonalized == "True")
         {
             str += "<div class=\"product-details-meta mb-20\">";
