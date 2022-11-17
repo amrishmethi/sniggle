@@ -446,6 +446,12 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 worksheet.Range[m, 38].Text = dr["IsDeleted"].ToString();
                 worksheet.Range[m, 39].Text = dr["Size"].ToString();
                 worksheet.Range[m, 40].Text = dr["Weight"].ToString(); 
+                worksheet.Range[m, 42].Text = dr["ImgURL1"].ToString(); 
+                worksheet.Range[m, 43].Text = dr["ImgURL2"].ToString(); 
+                worksheet.Range[m, 44].Text = dr["ImgURL3"].ToString(); 
+                worksheet.Range[m, 45].Text = dr["ImgURL4"].ToString(); 
+                worksheet.Range[m, 46].Text = dr["ImgURL5"].ToString(); 
+                worksheet.Range[m, 47].Text = dr["ImgURL6"].ToString(); 
          
                 worksheet.Range[m, 2, m, 40].HorizontalAlignment = HorizontalAlignType.Left;
                 worksheet.Range[m, 2, m, 40].VerticalAlignment = VerticalAlignType.Center;
@@ -673,6 +679,12 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("id_product", "[id_product]");
                 bulkInsert.ColumnMappings.Add("id_product_attribute", "[id_product_attribute]");
                 bulkInsert.ColumnMappings.Add("IsDeleted", "[IsDeleted]");
+                bulkInsert.ColumnMappings.Add("ImgURL1", "[ImgURL1]");
+                bulkInsert.ColumnMappings.Add("ImgURL2", "[ImgURL2]");
+                bulkInsert.ColumnMappings.Add("ImgURL3", "[ImgURL3]");
+                bulkInsert.ColumnMappings.Add("ImgURL4", "[ImgURL4]");
+                bulkInsert.ColumnMappings.Add("ImgURL5", "[ImgURL5]");
+                bulkInsert.ColumnMappings.Add("ImgURL6", "[ImgURL6]");
                 int res = UpdateProduct(dt);
                 excelConn.Close();
                 if (res == 0)
@@ -768,6 +780,12 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@PrdID", drExcel["id_product"]);
                 cmd.Parameters.AddWithValue("@PrdAttID", drExcel["id_product_attribute"]);
                 cmd.Parameters.AddWithValue("@IsDeleted", drExcel["IsDeleted"]);
+                cmd.Parameters.AddWithValue("@ImgURL1", drExcel["ImgURL1"]);
+                cmd.Parameters.AddWithValue("@ImgURL2", drExcel["ImgURL2"]);
+                cmd.Parameters.AddWithValue("@ImgURL3", drExcel["ImgURL3"]);
+                cmd.Parameters.AddWithValue("@ImgURL4", drExcel["ImgURL4"]);
+                cmd.Parameters.AddWithValue("@ImgURL5", drExcel["ImgURL5"]);
+                cmd.Parameters.AddWithValue("@ImgURL6", drExcel["ImgURL6"]);
                 ss = data.executeCommandP(cmd);
             }
             catch (Exception ee)
