@@ -143,6 +143,7 @@ public partial class Backoffice_addproduct : System.Web.UI.Page
             }
             // txtShortDes.Text = ds.Tables[0].Rows[0]["description_short"].ToString();
             txtDes.Text = ds.Tables[0].Rows[0]["description"].ToString();
+            txtTerms.Text = ds.Tables[0].Rows[0]["TermsCondition"].ToString();
             //Price
             txtProductPrice.Text = ds.Tables[0].Rows[0]["price"].ToString();
             txtRetailprice.Text = ds.Tables[0].Rows[0]["price"].ToString();
