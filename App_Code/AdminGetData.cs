@@ -348,7 +348,7 @@ public class AdminGetData
     public DataSet AddProduct(string action, string id_category_default, string online_only, string minimal_quantity, string price, string wholesale_price, string unity,
         string unit_price_ratio, string reference, string width, string height, string depth, string weight, string out_of_stock, string active, string redirect_type,
         string available_for_order, string condition, string show_price, string indexed, string visibility, string cache_default_attribute, string pack_stock_type,
-        string description, string description_short, string link_rewrite, string meta_description, string meta_keywords, string meta_title, string name, string id_product,string GroupId,string ColorCode)
+        string description, string description_short, string link_rewrite, string meta_description, string meta_keywords, string meta_title, string name, string id_product,string GroupId,string ColorCode, string TermsCondition="")
     {
         DataSet ds3 = new DataSet();
         DataSet ds2 = new DataSet();
@@ -401,6 +401,7 @@ public class AdminGetData
                 cmd1.Parameters.AddWithValue("@description_short", description_short);
                 cmd1.Parameters.AddWithValue("@meta_description", meta_description);
                 cmd1.Parameters.AddWithValue("@meta_keywords", meta_keywords);
+                cmd1.Parameters.AddWithValue("@TermsCondition", TermsCondition);
                 cmd1.Parameters.AddWithValue("@meta_title", meta_title);
                 cmd1.Parameters.AddWithValue("@available_now", "");
                 cmd1.Parameters.AddWithValue("@available_later", "");
@@ -2494,5 +2495,17 @@ public class AdminGetData
         drop.DataValueField = "id_category";
         drop.DataBind();
         drop.Items.Insert(0, new ListItem("Category", "0"));
+    }
+
+
+    public int AddImageLink(string legend, string id_product, string ImageLink)
+    {
+        cmd = new SqlCommand("ProductImageInsNew");
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.Clear();
+        cmd.Parameters.AddWithValue("@id_product", id_product);
+        cmd.Parameters.AddWithValue("@legend", legend);
+        cmd.Parameters.AddWithValue("@ImageLink", ImageLink);
+        return data.executeCommand(cmd);
     }
 }

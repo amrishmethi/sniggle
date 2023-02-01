@@ -384,7 +384,7 @@
                                             <asp:DropDownList ID="drpStatus" runat="server" class="form-control">
                                                 <asp:ListItem Value="1">Yes</asp:ListItem>
                                                 <asp:ListItem Value="0">No</asp:ListItem>
-                                            </asp:DropDownList> 
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -463,7 +463,7 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="login-input-area">
-                                                <br /> 
+                                                <br />
                                                 <asp:CheckBox ID="chkOnline" runat="server" Text="Online only (not sold in your retail store)" /><br />
                                             </div>
                                         </div>
@@ -523,6 +523,21 @@
                                                 <%--    <textarea id="txtDes" runat="server" class="myTextEditor" style="width: 100%"></textarea>--%>
                                             </div>
                                         </div>
+                                    </div>   <div class="clearfix">&nbsp;</div>
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            &nbsp;
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                <p>Terms & Condition</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="login-input-area">
+                                                <CKEditor:CKEditorControl ID="txtTerms" BasePath="../Admin/ckeditor/" runat="server"></CKEditor:CKEditorControl> 
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="clearfix">&nbsp;</div>
                                     <div class="row" runat="server" id="tag" visible="false">
@@ -550,7 +565,7 @@
                                     </div>
 
                                     <div class="clearfix">&nbsp;</div>
-                                    <div class="row"  >
+                                    <div class="row">
                                         <div class="col-lg-2">
                                             &nbsp;
                                         </div>
@@ -572,419 +587,187 @@
                                             </asp:DropDownList>
                                         </div>
                                     </div>
-                               
-                                <div class="clearfix">&nbsp;</div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class=" alignleft">
-                                            <asp:LinkButton ID="btnInfoCancel" runat="server" OnClick="btnInfoCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
-                                            <%-- <a href="User.aspx" class="btn btn-danger"></a>--%>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="alignright">
-                                            <asp:LinkButton ID="btnInfoSaveAnd" runat="server" OnClientClick="this.onclick=new Function('return false;');" ValidationGroup="addInfo" CssClass="btn btn-primary" OnClick="btnInfoSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                            <asp:LinkButton ID="btnSave" runat="server" OnClientClick="this.onclick=new Function('return false;');" ValidationGroup="addInfo" CssClass="btn btn-primary" OnClick="btnSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
-                                            <asp:LinkButton ID="btnAdddTag" runat="server" OnClientClick="this.onclick=new Function('return false;');" ValidationGroup="addInfo" CssClass="btn btn-primary" Visible="false" OnClick="btnAdddTag_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save Tag</i></asp:LinkButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%-- PRICES Tab --%>
-                        <div class="tabcontent" id="Prices" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">PRODUCT PRICE</span> </h1>
 
-                                    </div>
-                                </div>
-
-                                <div class="login-bg">
-                                    <div class="row hidden">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Wholesale price</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">₹</span>
-                                                    <asp:TextBox ID="txtWholesaleprice" runat="server" CssClass=" form-control" Text="0" Width="200px" MaxLength="27"></asp:TextBox>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Retail price</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">₹</span>
-                                                    <asp:TextBox ID="txtRetailprice" runat="server" Text="0" CssClass=" form-control" Width="200px" MaxLength="27" onchange="RPrice(this)"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row hidden">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Tax rule</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <asp:DropDownList ID="drpTaxrule" runat="server" CssClass="select2_demo_2 form-control RequiredV">
-                                            </asp:DropDownList>
-                                        </div>
-                                        <%--<div class="col-lg-4">
-                                                <a href="addcategory.aspx">
-                                                    <h4 style="text-align: center"><i class="fa fa-plus-square" aria-hidden="true">Create new tax </i></h4>
-                                                </a>
-                                            </div>--%>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="alert">
-                                                Taxes are currently disabled
-				<a href="index.php?controller=AdminTaxes&amp;token=78af193ea98942967482170353fa6048">Click here to open the Taxes configuration page.</a>
-                                                <input type="hidden" value="0" name="id_tax_rules_group">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Unit price (tax excl.)</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">₹</span>
-                                                <asp:TextBox ID="txtUnitPrice" runat="server" Text="0" Height="35px" Width="100px" MaxLength="27" onchange="unitPrice(this)"></asp:TextBox>
-                                                <span class="input-group-addon">Per</span>
-                                                <asp:TextBox ID="txtUnit" runat="server" Height="35px" Width="70px" MaxLength="27" onchange="unit(this)"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <%--<p>Meta title</p>--%>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <div class="Alert alert-warning">
-                                                    <ul style="padding: 10px">
-                                                        <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-exclamation-triangle " aria-hidden="true"></i>
-                                                            or ₹ <span id="unitPrice" runat="server"></span>per  <span id="unit" runat="server"></span></li>
-
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <%--<p>Meta title</p>--%>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <p>
-                                                    <asp:CheckBox ID="chkOnSale" runat="server" />
-                                                    Display the "on sale" icon on the product page, and in the text found within the product listing.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <%--<p>Meta title</p>--%>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <div class="Alert alert-warning">
-                                                    <ul style="padding: 10px">
-                                                        <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>Final retail price ₹ <span id="RPrice" runat="server"></span></li>
-
-                                                    </ul>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="clearfix">&nbsp;</div>
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class=" alignleft">
-
-                                                <asp:LinkButton ID="btnPriceCancel" runat="server" OnClick="btnPriceCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnInfoCancel" runat="server" OnClick="btnInfoCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                                <%-- <a href="User.aspx" class="btn btn-danger"></a>--%>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="alignright">
-                                                <asp:LinkButton ID="btnPriceSaveAnd" runat="server" ValidationGroup="addPrice" CssClass="btn btn-primary" OnClick="btnPriceSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnPriceSave" runat="server" ValidationGroup="addPrice" CssClass="btn btn-primary" OnClick="btnPriceSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
-
+                                                <asp:LinkButton ID="btnInfoSaveAnd" runat="server" OnClientClick="this.onclick=new Function('return false;');" ValidationGroup="addInfo" CssClass="btn btn-primary" OnClick="btnInfoSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnSave" runat="server" OnClientClick="this.onclick=new Function('return false;');" ValidationGroup="addInfo" CssClass="btn btn-primary" OnClick="btnSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+                                                <asp:LinkButton ID="btnAdddTag" runat="server" OnClientClick="this.onclick=new Function('return false;');" ValidationGroup="addInfo" CssClass="btn btn-primary" Visible="false" OnClick="btnAdddTag_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save Tag</i></asp:LinkButton>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <%-- PRICES Tab --%>
+                            <div class="tabcontent" id="Prices" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">PRODUCT PRICE</span> </h1>
 
-                            <%--SPECIFIC PRICES Tab --%>
-                            <div class="clearfix">&nbsp;</div>
-                            <div class="sparkline13-list shadow-reset ">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SPECIFIC PRICES</span> </h1>
-                                    </div>
-                                </div>
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <%--<p>Meta title</p>--%>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <div class="Alert alert-info">
-                                                    <ul style="padding: 10px">
-                                                        <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-question-circle fa-2x" aria-hidden="true"></i>You can set specific prices for clients belonging to different groups, different countries, etc.</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="login-input-area">
-                                                <div class="list-group">
-                                                    <ul>
-                                                        <li class="list-group-item" onclick="specific1()" id="lispecific1">
-                                                            <a class="btn btn-default" href="#" id="show_specific_price1" style="display: inline-block;">
-                                                                <i class="fa fa-plus fa-adjust"></i>Add a new specific price
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-group-item tablinks" id="liCancel2" onclick="Cancel1()" style="display: none">
-                                                            <a class="btn btn-default" href="#Cancel"><i class="fa fa-times fa-adjust"></i>Cancel new specific price
-                                                            </a></li>
-                                                    </ul>
+
+                                    <div class="login-bg">
+                                        <div class="row hidden">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Wholesale price</p>
                                                 </div>
-                                                <div id="specific1" style="display: none">
-                                                    <div class="sparkline13-list shadow-reset ">
-                                                        <div class="sparkline13-hd">
-                                                            <div class="main-sparkline13-hd">
-                                                                <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SPECIFIC PRICES</span> </h1>
-                                                            </div>
-                                                        </div>
-                                                        <div class="login-bg">
-                                                            <div class="row">
-                                                                <%--  <label class="control-label col-lg-2" for="spm_currency_0">For</label>--%>
-                                                                <div class="col-lg-3 hide" style="margin-right: 10px">
-                                                                    <asp:DropDownList ID="drpCurrency" runat="server" CssClass="form-control">
-                                                                        <asp:ListItem Value="0">All currencies</asp:ListItem>
-                                                                        <asp:ListItem Value="1">Dollar</asp:ListItem>
-                                                                        <asp:ListItem Value="2">Euro</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">₹</span>
+                                                        <asp:TextBox ID="txtWholesaleprice" runat="server" CssClass=" form-control" Text="0" Width="200px" MaxLength="27"></asp:TextBox>
 
-                                                                <div class="col-lg-3 hide" style="margin-right: 10px">
-                                                                    <asp:DropDownList ID="DrpGroup" runat="server" CssClass="form-control">
-                                                                        <asp:ListItem Value="0">All groups</asp:ListItem>
-                                                                        <asp:ListItem Value="1">Visitor</asp:ListItem>
-                                                                        <asp:ListItem Value="2">Guest</asp:ListItem>
-                                                                        <asp:ListItem Value="3">Customer</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-                                                            <div class="clearfix">&nbsp;</div>
-                                                            <div class="row">
-                                                                <%-- <label class="control-label col-lg-2" for="customer">Country</label>--%>
-                                                                <div class="col-lg-3 hide" style="margin-right: 10px">
-                                                                    <asp:DropDownList ID="drpCountry" runat="server" CssClass="form-control">
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                                <label class="control-label col-lg-2" for="customer">Customer</label>
-                                                                <div class="col-lg-4">
-                                                                    <asp:DropDownList ID="DrpCustomer" runat="server" CssClass="form-control">
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-                                                            <div class="clearfix">&nbsp;</div>
-                                                            <div class="row">
-                                                                <label class="control-label col-lg-2" for="sp_id_product_attribute">Combination</label>
-                                                                <div class="col-lg-4">
-                                                                    <asp:DropDownList ID="drpCombination" runat="server" CssClass="form-control">
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-                                                            <div class="clearfix">&nbsp;</div>
-                                                            <div class="row">
-                                                                <div class="col-lg-2">
-                                                                    <label class="control-label " for="sp_id_product_attribute" style="margin-top: 15px;">From</label>
-                                                                </div>
-                                                                <div class="col-lg-4" style="margin-right: 10px">
-                                                                    <asp:TextBox ID="txtFDate" CssClass="form-control datePicK" runat="server" placeholder="From"></asp:TextBox>
-                                                                </div>
-                                                                <div class="col-lg-1">
-                                                                    <label class="control-label " for="sp_id_product_attribute" style="margin-top: 15px;">To</label>
-                                                                </div>
-                                                                <div class="col-lg-4">
-                                                                    <asp:TextBox ID="txtTo" CssClass="form-control datePicK" runat="server" placeholder="To"></asp:TextBox>
-                                                                </div>
-                                                            </div>
-                                                            <div class="clearfix">&nbsp;</div>
-                                                            <div class="row">
-                                                                <label class="control-label col-lg-2" for="sp_from_quantity">Starting at(unit)</label>
-                                                                <div class="col-lg-4">
-
-                                                                    <asp:TextBox ID="txtStarunit" CssClass="form-control" runat="server" Text="1"></asp:TextBox>
-                                                                </div>
-                                                            </div>
-                                                            <div class="clearfix">&nbsp;</div>
-                                                            <div class="row">
-                                                                <label class="control-label col-lg-2" for="sp_price" style="margin-top: 15px;">
-                                                                    Product price
-											(tax excl in ₹)
-                                                                </label>
-                                                                <div class="col-lg-4">
-                                                                    <asp:TextBox ID="txtProductPrice" CssClass="form-control" runat="server"></asp:TextBox>
-                                                                    <p>
-                                                                        <label for="leave_bprice">Leave base price </label>
-                                                                        <input type="checkbox" runat="server" id="leave_bprice" name="leave_bprice" />
-                                                                    </p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="clearfix">&nbsp;</div>
-                                                            <div class="row">
-                                                                <label class="control-label col-lg-2" for="sp_reduction" style="margin-top: 15px;">Apply a discount of</label>
-                                                                <div class="col-lg-2" style="margin-right: 10px;">
-                                                                    <asp:TextBox ID="txtDescount" CssClass="form-control" runat="server" Text="0"></asp:TextBox>
-                                                                </div>
-                                                                <div class="col-lg-2" style="margin-right: 10px; margin-top: 10px">
-                                                                    <asp:DropDownList ID="drpDisType" runat="server" CssClass="form-control">
-                                                                        <asp:ListItem Value="percentage">%</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                                <div class="col-lg-3 hidden" style="margin-right: 10px; margin-top: 10px">
-                                                                    <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
-                                                                        <asp:ListItem Value="0">Tax excluded</asp:ListItem>
-                                                                        <asp:ListItem Value="1">Tax included</asp:ListItem>
-                                                                    </asp:DropDownList>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="table-responsive">
-                                                    <table id="specific_prices_list" class="table table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Rule</th>
-                                                                <th>Combination</th>
-                                                                <th>Currency</th>
-                                                                <th>Country</th>
-                                                                <th>Group</th>
-                                                                <th>Customer</th>
-                                                                <th>Fixed price (tax excl.)</th>
-                                                                <th>Impact</th>
-                                                                <th>Period</th>
-                                                                <th>From (quantity)</th>
-                                                                <th>Action</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <asp:Repeater ID="rptSpecificPrice" runat="server" OnItemCommand="rptSpecificPrice_ItemCommand">
-                                                                <ItemTemplate>
-                                                                    <tr>
-                                                                        <td>--
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("combinations") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("CurrencieName") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("CountryName") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("groupName") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("customersName") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("price1") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("reduction1") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("Period") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <%# Eval("from_quantity") %>
-                                                                        </td>
-                                                                        <td>
-                                                                            <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
-                                                                                CommandArgument='<%#Eval("id_specific_price") %>' Style="width: 25px; padding: 4px 3px;"><i class="fa fa-trash-o"></i></asp:LinkButton>
-                                                                        </td>
-                                                                    </tr>
-                                                                </ItemTemplate>
-                                                            </asp:Repeater>
-                                                            <tr id="trNoData" runat="server" visible="false">
-                                                                <td class="text-center" colspan="13"><i class="icon-warning-sign"></i>&nbsp;No specific prices.</td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Retail price</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">₹</span>
+                                                        <asp:TextBox ID="txtRetailprice" runat="server" Text="0" CssClass=" form-control" Width="200px" MaxLength="27" onchange="RPrice(this)"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row hidden">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Tax rule</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <asp:DropDownList ID="drpTaxrule" runat="server" CssClass="select2_demo_2 form-control RequiredV">
+                                                </asp:DropDownList>
+                                            </div>
+                                            <%--<div class="col-lg-4">
+                                                <a href="addcategory.aspx">
+                                                    <h4 style="text-align: center"><i class="fa fa-plus-square" aria-hidden="true">Create new tax </i></h4>
+                                                </a>
+                                            </div>--%>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="alert">
+                                                    Taxes are currently disabled
+				<a href="index.php?controller=AdminTaxes&amp;token=78af193ea98942967482170353fa6048">Click here to open the Taxes configuration page.</a>
+                                                    <input type="hidden" value="0" name="id_tax_rules_group">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Unit price (tax excl.)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">₹</span>
+                                                    <asp:TextBox ID="txtUnitPrice" runat="server" Text="0" Height="35px" Width="100px" MaxLength="27" onchange="unitPrice(this)"></asp:TextBox>
+                                                    <span class="input-group-addon">Per</span>
+                                                    <asp:TextBox ID="txtUnit" runat="server" Height="35px" Width="70px" MaxLength="27" onchange="unit(this)"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <%--<p>Meta title</p>--%>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <div class="Alert alert-warning">
+                                                        <ul style="padding: 10px">
+                                                            <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-exclamation-triangle " aria-hidden="true"></i>
+                                                                or ₹ <span id="unitPrice" runat="server"></span>per  <span id="unit" runat="server"></span></li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <%--<p>Meta title</p>--%>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <p>
+                                                        <asp:CheckBox ID="chkOnSale" runat="server" />
+                                                        Display the "on sale" icon on the product page, and in the text found within the product listing.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <%--<p>Meta title</p>--%>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <div class="Alert alert-warning">
+                                                        <ul style="padding: 10px">
+                                                            <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>Final retail price ₹ <span id="RPrice" runat="server"></span></li>
+
+                                                        </ul>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -993,310 +776,542 @@
                                             <div class="col-lg-6">
                                                 <div class=" alignleft">
 
-                                                    <asp:LinkButton ID="btnSpecificCancel" runat="server" OnClick="btnSpecificCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnPriceCancel" runat="server" OnClick="btnPriceCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div class="alignright">
-                                                    <asp:LinkButton ID="btnSpecificSaveAnd" runat="server" ValidationGroup="addSpec" CssClass="btn btn-primary" OnClick="btnSpecificSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                    <asp:LinkButton ID="btnSpecificSave" runat="server" ValidationGroup="addSpec" CssClass="btn btn-primary" OnClick="btnSpecificSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnPriceSaveAnd" runat="server" ValidationGroup="addPrice" CssClass="btn btn-primary" OnClick="btnPriceSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnPriceSave" runat="server" ValidationGroup="addPrice" CssClass="btn btn-primary" OnClick="btnPriceSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <%--PRIORITY MANAGEMENT Tab --%>
-                            <div class="clearfix">&nbsp;</div>
-                            <div class="sparkline13-list shadow-reset hide">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">PRIORITY MANAGEMENT</span> </h1>
-                                    </div>
-                                </div>
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <%--<p>Meta title</p>--%>
-                                            </div>
+                                <%--SPECIFIC PRICES Tab --%>
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="sparkline13-list shadow-reset ">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SPECIFIC PRICES</span> </h1>
                                         </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <div class="Alert alert-info">
-                                                    <ul style="padding: 10px">
-                                                        <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-question-circle fa-2x" aria-hidden="true"></i>Sometimes one customer can fit into multiple price rules. Priorities allow you to define which rule applies to the customer.</li>
-                                                    </ul>
+                                    </div>
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <%--<p>Meta title</p>--%>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <div class="Alert alert-info">
+                                                        <ul style="padding: 10px">
+                                                            <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-question-circle fa-2x" aria-hidden="true"></i>You can set specific prices for clients belonging to different groups, different countries, etc.</li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="login-input-area">
-                                                <div id="PriorityManagement">
-                                                    <div class="row">
-                                                        <label class="control-label col-lg-2 pad-l20" for="spm_currency_0">Priorities</label>
-                                                        <div class="col-lg-3" style="margin-right: 10px">
-                                                            <asp:DropDownList ID="drpPriority1" runat="server" CssClass="form-control">
-                                                                <asp:ListItem Value="id_shop" Selected="True">Shop</asp:ListItem>
-                                                                <asp:ListItem Value="id_currency">Currency</asp:ListItem>
-                                                                <asp:ListItem Value="id_country">Country</asp:ListItem>
-                                                                <asp:ListItem Value="id_group">Group</asp:ListItem>
-                                                            </asp:DropDownList>
-                                                        </div>
-                                                        <div class="col-lg-2" style="margin-right: 10px">
-                                                            <asp:DropDownList ID="drpPriority2" runat="server" CssClass="form-control">
-                                                                <asp:ListItem Value="id_shop">Shop</asp:ListItem>
-                                                                <asp:ListItem Value="id_currency" Selected="True">Currency</asp:ListItem>
-                                                                <asp:ListItem Value="id_country">Country</asp:ListItem>
-                                                                <asp:ListItem Value="id_group">Group</asp:ListItem>
-                                                            </asp:DropDownList>
-                                                        </div>
-                                                        <div class="col-lg-2" style="margin-right: 10px">
-                                                            <asp:DropDownList ID="drpPriority3" runat="server" CssClass="form-control">
-                                                                <asp:ListItem Value="id_shop">Shop</asp:ListItem>
-                                                                <asp:ListItem Value="id_currency">Currency</asp:ListItem>
-                                                                <asp:ListItem Value="id_country" Selected="True">Country</asp:ListItem>
-                                                                <asp:ListItem Value="id_group">Group</asp:ListItem>
-                                                            </asp:DropDownList>
-                                                        </div>
-                                                        <div class="col-lg-2" style="margin-right: 10px">
-                                                            <asp:DropDownList ID="drpPriority4" runat="server" CssClass="form-control">
-                                                                <asp:ListItem Value="id_shop">Shop</asp:ListItem>
-                                                                <asp:ListItem Value="id_currency">Currency</asp:ListItem>
-                                                                <asp:ListItem Value="id_country">Country</asp:ListItem>
-                                                                <asp:ListItem Value="id_group" Selected="True">Group</asp:ListItem>
-                                                            </asp:DropDownList>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="login-input-area">
+                                                    <div class="list-group">
+                                                        <ul>
+                                                            <li class="list-group-item" onclick="specific1()" id="lispecific1">
+                                                                <a class="btn btn-default" href="#" id="show_specific_price1" style="display: inline-block;">
+                                                                    <i class="fa fa-plus fa-adjust"></i>Add a new specific price
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-group-item tablinks" id="liCancel2" onclick="Cancel1()" style="display: none">
+                                                                <a class="btn btn-default" href="#Cancel"><i class="fa fa-times fa-adjust"></i>Cancel new specific price
+                                                                </a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div id="specific1" style="display: none">
+                                                        <div class="sparkline13-list shadow-reset ">
+                                                            <div class="sparkline13-hd">
+                                                                <div class="main-sparkline13-hd">
+                                                                    <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SPECIFIC PRICES</span> </h1>
+                                                                </div>
+                                                            </div>
+                                                            <div class="login-bg">
+                                                                <div class="row">
+                                                                    <%--  <label class="control-label col-lg-2" for="spm_currency_0">For</label>--%>
+                                                                    <div class="col-lg-3 hide" style="margin-right: 10px">
+                                                                        <asp:DropDownList ID="drpCurrency" runat="server" CssClass="form-control">
+                                                                            <asp:ListItem Value="0">All currencies</asp:ListItem>
+                                                                            <asp:ListItem Value="1">Dollar</asp:ListItem>
+                                                                            <asp:ListItem Value="2">Euro</asp:ListItem>
+                                                                        </asp:DropDownList>
+                                                                    </div>
+
+                                                                    <div class="col-lg-3 hide" style="margin-right: 10px">
+                                                                        <asp:DropDownList ID="DrpGroup" runat="server" CssClass="form-control">
+                                                                            <asp:ListItem Value="0">All groups</asp:ListItem>
+                                                                            <asp:ListItem Value="1">Visitor</asp:ListItem>
+                                                                            <asp:ListItem Value="2">Guest</asp:ListItem>
+                                                                            <asp:ListItem Value="3">Customer</asp:ListItem>
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix">&nbsp;</div>
+                                                                <div class="row">
+                                                                    <%-- <label class="control-label col-lg-2" for="customer">Country</label>--%>
+                                                                    <div class="col-lg-3 hide" style="margin-right: 10px">
+                                                                        <asp:DropDownList ID="drpCountry" runat="server" CssClass="form-control">
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                    <label class="control-label col-lg-2" for="customer">Customer</label>
+                                                                    <div class="col-lg-4">
+                                                                        <asp:DropDownList ID="DrpCustomer" runat="server" CssClass="form-control">
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix">&nbsp;</div>
+                                                                <div class="row">
+                                                                    <label class="control-label col-lg-2" for="sp_id_product_attribute">Combination</label>
+                                                                    <div class="col-lg-4">
+                                                                        <asp:DropDownList ID="drpCombination" runat="server" CssClass="form-control">
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix">&nbsp;</div>
+                                                                <div class="row">
+                                                                    <div class="col-lg-2">
+                                                                        <label class="control-label " for="sp_id_product_attribute" style="margin-top: 15px;">From</label>
+                                                                    </div>
+                                                                    <div class="col-lg-4" style="margin-right: 10px">
+                                                                        <asp:TextBox ID="txtFDate" CssClass="form-control datePicK" runat="server" placeholder="From"></asp:TextBox>
+                                                                    </div>
+                                                                    <div class="col-lg-1">
+                                                                        <label class="control-label " for="sp_id_product_attribute" style="margin-top: 15px;">To</label>
+                                                                    </div>
+                                                                    <div class="col-lg-4">
+                                                                        <asp:TextBox ID="txtTo" CssClass="form-control datePicK" runat="server" placeholder="To"></asp:TextBox>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix">&nbsp;</div>
+                                                                <div class="row">
+                                                                    <label class="control-label col-lg-2" for="sp_from_quantity">Starting at(unit)</label>
+                                                                    <div class="col-lg-4">
+
+                                                                        <asp:TextBox ID="txtStarunit" CssClass="form-control" runat="server" Text="1"></asp:TextBox>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix">&nbsp;</div>
+                                                                <div class="row">
+                                                                    <label class="control-label col-lg-2" for="sp_price" style="margin-top: 15px;">
+                                                                        Product price
+											(tax excl in ₹)
+                                                                    </label>
+                                                                    <div class="col-lg-4">
+                                                                        <asp:TextBox ID="txtProductPrice" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                        <p>
+                                                                            <label for="leave_bprice">Leave base price </label>
+                                                                            <input type="checkbox" runat="server" id="leave_bprice" name="leave_bprice" />
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clearfix">&nbsp;</div>
+                                                                <div class="row">
+                                                                    <label class="control-label col-lg-2" for="sp_reduction" style="margin-top: 15px;">Apply a discount of</label>
+                                                                    <div class="col-lg-2" style="margin-right: 10px;">
+                                                                        <asp:TextBox ID="txtDescount" CssClass="form-control" runat="server" Text="0"></asp:TextBox>
+                                                                    </div>
+                                                                    <div class="col-lg-2" style="margin-right: 10px; margin-top: 10px">
+                                                                        <asp:DropDownList ID="drpDisType" runat="server" CssClass="form-control">
+                                                                            <asp:ListItem Value="percentage">%</asp:ListItem>
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                    <div class="col-lg-3 hidden" style="margin-right: 10px; margin-top: 10px">
+                                                                        <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
+                                                                            <asp:ListItem Value="0">Tax excluded</asp:ListItem>
+                                                                            <asp:ListItem Value="1">Tax included</asp:ListItem>
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="clearfix">&nbsp;</div>
+                                                    <div class="table-responsive">
+                                                        <table id="specific_prices_list" class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Rule</th>
+                                                                    <th>Combination</th>
+                                                                    <th>Currency</th>
+                                                                    <th>Country</th>
+                                                                    <th>Group</th>
+                                                                    <th>Customer</th>
+                                                                    <th>Fixed price (tax excl.)</th>
+                                                                    <th>Impact</th>
+                                                                    <th>Period</th>
+                                                                    <th>From (quantity)</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <asp:Repeater ID="rptSpecificPrice" runat="server" OnItemCommand="rptSpecificPrice_ItemCommand">
+                                                                    <ItemTemplate>
+                                                                        <tr>
+                                                                            <td>--
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("combinations") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("CurrencieName") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("CountryName") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("groupName") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("customersName") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("price1") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("reduction1") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("Period") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <%# Eval("from_quantity") %>
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
+                                                                                    CommandArgument='<%#Eval("id_specific_price") %>' Style="width: 25px; padding: 4px 3px;"><i class="fa fa-trash-o"></i></asp:LinkButton>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </ItemTemplate>
+                                                                </asp:Repeater>
+                                                                <tr id="trNoData" runat="server" visible="false">
+                                                                    <td class="text-center" colspan="13"><i class="icon-warning-sign"></i>&nbsp;No specific prices.</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix">&nbsp;</div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class=" alignleft">
+
+                                                        <asp:LinkButton ID="btnSpecificCancel" runat="server" OnClick="btnSpecificCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="alignright">
+                                                        <asp:LinkButton ID="btnSpecificSaveAnd" runat="server" ValidationGroup="addSpec" CssClass="btn btn-primary" OnClick="btnSpecificSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                        <asp:LinkButton ID="btnSpecificSave" runat="server" ValidationGroup="addSpec" CssClass="btn btn-primary" OnClick="btnSpecificSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
+                                </div>
 
-                                                <asp:LinkButton ID="btnPriorityMngCancel" runat="server" OnClick="btnPriorityMngCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                <%--PRIORITY MANAGEMENT Tab --%>
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="sparkline13-list shadow-reset hide">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">PRIORITY MANAGEMENT</span> </h1>
+                                        </div>
+                                    </div>
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <%--<p>Meta title</p>--%>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <div class="Alert alert-info">
+                                                        <ul style="padding: 10px">
+                                                            <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class="fa fa-question-circle fa-2x" aria-hidden="true"></i>Sometimes one customer can fit into multiple price rules. Priorities allow you to define which rule applies to the customer.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <asp:LinkButton ID="btnPriorityMngSaveAdd" runat="server" CssClass="btn btn-primary" OnClick="btnPriorityMngSaveAdd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnPriorityMngSave" runat="server" CssClass="btn btn-primary" OnClick="btnPriorityMngSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="login-input-area">
+                                                    <div id="PriorityManagement">
+                                                        <div class="row">
+                                                            <label class="control-label col-lg-2 pad-l20" for="spm_currency_0">Priorities</label>
+                                                            <div class="col-lg-3" style="margin-right: 10px">
+                                                                <asp:DropDownList ID="drpPriority1" runat="server" CssClass="form-control">
+                                                                    <asp:ListItem Value="id_shop" Selected="True">Shop</asp:ListItem>
+                                                                    <asp:ListItem Value="id_currency">Currency</asp:ListItem>
+                                                                    <asp:ListItem Value="id_country">Country</asp:ListItem>
+                                                                    <asp:ListItem Value="id_group">Group</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                            <div class="col-lg-2" style="margin-right: 10px">
+                                                                <asp:DropDownList ID="drpPriority2" runat="server" CssClass="form-control">
+                                                                    <asp:ListItem Value="id_shop">Shop</asp:ListItem>
+                                                                    <asp:ListItem Value="id_currency" Selected="True">Currency</asp:ListItem>
+                                                                    <asp:ListItem Value="id_country">Country</asp:ListItem>
+                                                                    <asp:ListItem Value="id_group">Group</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                            <div class="col-lg-2" style="margin-right: 10px">
+                                                                <asp:DropDownList ID="drpPriority3" runat="server" CssClass="form-control">
+                                                                    <asp:ListItem Value="id_shop">Shop</asp:ListItem>
+                                                                    <asp:ListItem Value="id_currency">Currency</asp:ListItem>
+                                                                    <asp:ListItem Value="id_country" Selected="True">Country</asp:ListItem>
+                                                                    <asp:ListItem Value="id_group">Group</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                            <div class="col-lg-2" style="margin-right: 10px">
+                                                                <asp:DropDownList ID="drpPriority4" runat="server" CssClass="form-control">
+                                                                    <asp:ListItem Value="id_shop">Shop</asp:ListItem>
+                                                                    <asp:ListItem Value="id_currency">Currency</asp:ListItem>
+                                                                    <asp:ListItem Value="id_country">Country</asp:ListItem>
+                                                                    <asp:ListItem Value="id_group" Selected="True">Group</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                        </div>
+                                                        <div class="clearfix">&nbsp;</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
 
+                                                    <asp:LinkButton ID="btnPriorityMngCancel" runat="server" OnClick="btnPriorityMngCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <asp:LinkButton ID="btnPriorityMngSaveAdd" runat="server" CssClass="btn btn-primary" OnClick="btnPriorityMngSaveAdd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnPriorityMngSave" runat="server" CssClass="btn btn-primary" OnClick="btnPriorityMngSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <%-- SEO Tab --%>
-                        <div class="tabcontent" id="SEO" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SEO</span> </h1>
+                            <%-- SEO Tab --%>
+                            <div class="tabcontent" id="SEO" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SEO</span> </h1>
 
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                               <%-- <div class="compose-multiple-email">
                                                    <input type="email" name="recipient_email" id="recipient_email" class="form-control">
                                                </div>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Meta title</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span id="mtitle">70</span></span>
-                                                <asp:TextBox ID="txtMetatitle" runat="server" CssClass=" form-control"></asp:TextBox>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Meta title</p>
+                                                </div>
                                             </div>
+                                            <div class="col-lg-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span id="mtitle">70</span></span>
+                                                    <asp:TextBox ID="txtMetatitle" runat="server" CssClass=" form-control"></asp:TextBox>
+                                                </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Meta description</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-8">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><span id="mDes">160</span></span>
-                                                <asp:TextBox ID="txtMetadescription" runat="server" CssClass=" form-control" Height="200px" TextMode="MultiLine"></asp:TextBox>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Meta description</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span id="mDes">160</span></span>
+                                                    <asp:TextBox ID="txtMetadescription" runat="server" CssClass=" form-control" Height="200px" TextMode="MultiLine"></asp:TextBox>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                        
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Friendly URL</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="login-input-area">
-                                                <asp:TextBox ID="txtUrl" runat="server" CssClass=" form-control"></asp:TextBox>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Friendly URL</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <%--  <div class="col-lg-2">
+                                            <div class="col-lg-6">
+                                                <div class="login-input-area">
+                                                    <asp:TextBox ID="txtUrl" runat="server" CssClass=" form-control"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <%--  <div class="col-lg-2">
                                                 <a href="addcategory.aspx">
                                                     <asp:LinkButton ID="btnGenerate" runat="server" OnClientClick="Generate()"><i class="fa fa-random" aria-hidden="true"></i>Generate</asp:LinkButton>
                                                 </a>
                                             </div>--%>
-                                    </div>
-                                    <div class="row ">
-                                        <div class="col-lg-2">
-                                            &nbsp;
                                         </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                        <div class="row ">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <div class="Alert alert-warning">
+                                                        <ul style="padding: 10px">
+                                                            <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class=" fa fa-link" aria-hidden="true"></i>The product link will look like this</li>
+                                                            <li>
+                                                                <asp:Label ID="lblUrl" runat="server"></asp:Label></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <div class="Alert alert-warning">
-                                                    <ul style="padding: 10px">
-                                                        <li><i style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px;" class=" fa fa-link" aria-hidden="true"></i>The product link will look like this</li>
-                                                        <li>
-                                                            <asp:Label ID="lblUrl" runat="server"></asp:Label></li>
-                                                    </ul>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+                                                    <asp:LinkButton ID="btnSCOCancel" runat="server" OnClick="btnSCOCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <asp:LinkButton ID="btnSEOSaveAnd" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnSEOSave" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-                                                <asp:LinkButton ID="btnSCOCancel" runat="server" OnClick="btnSCOCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <asp:LinkButton ID="btnSEOSaveAnd" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnSEOSave" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
 
-                                            </div>
-                                        </div>
-                                    </div>
+
+
                                 </div>
-
-
-
                             </div>
-                        </div>
-                        <%-- Associations Tab --%>
-                        <div class="tabcontent" id="Associations" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ASSOCIATIONS</span> </h1>
+                            <%-- Associations Tab --%>
+                            <div class="tabcontent" id="Associations" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ASSOCIATIONS</span> </h1>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                               <%-- <div class="compose-multiple-email">
                                                    <input type="email" name="recipient_email" id="recipient_email" class="form-control">
                                                </div>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Associated Categories</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <ul class="list-group" id="myUL">
-                                                <li class="list-group-item ">
-                                                    <span class="box check-box">
-                                                        <span class="valueTwo hidden">2</span>
-                                                        <input type="checkbox" id="chkHome" class="shan box" />
-                                                        <span class="valueOne">Home</span>
-                                                    </span>
-                                                    <ul class="list-group nested active" id="myUL1">
-                                                        <asp:Repeater ID="repCat" runat="server" OnItemDataBound="repCat_ItemDataBound">
-                                                            <ItemTemplate>
-                                                                <li class="list-group-item">
-                                                                    <%-- <span class="valueTwo"><%#Eval("name") %></span>--%>
-                                                                    <asp:Label ID="lblID" runat="server" CssClass="bb valueOne" Text='<%#Eval("id_category") %>' Visible="false"></asp:Label>
-                                                                    <asp:Label ID="lblCarname" runat="server" Text='<%#Eval("name") %>' Visible="false"></asp:Label>
-                                                                    <span class="valueTwo hidden"><%#Eval("id_category") %></span>
-                                                                    <input id="chk1" runat="server" type="checkbox" class="shan" value='<%#Eval("name") %>' />
-                                                                    <span class="valueOne"><%#Eval("name") %></span>
-                                                                    <asp:Repeater ID="repSub" runat="server" OnItemDataBound="repSub_ItemDataBound">
-                                                                        <ItemTemplate>
-                                                                            <ul class="list-group nested active" id="myUL2">
-                                                                                <li class="list-group-item">
-                                                                                    <asp:Label ID="lblParentId" runat="server" Text='<%#Eval("id_parent") %>' Visible="false"></asp:Label>
-                                                                                    <asp:Label ID="lblID" runat="server" CssClass="bb valueOne" Text='<%#Eval("id_category") %>' Visible="false"></asp:Label>
-                                                                                    <asp:Label ID="lblSubCatName" runat="server" Text='<%#Eval("name") %>' Visible="false"></asp:Label>
-                                                                                    <span class="valueTwo hidden"><%#Eval("id_category") %></span>
-                                                                                    <input type="checkbox" id="chk1" runat="server" class="shan box" value='<%#Eval("name") %>' />
-                                                                                    <span class="valueOne"><%#Eval("name") %></span>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </ItemTemplate>
-                                                                    </asp:Repeater>
-                                                                    </span></li>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                            <br />
-                                            <asp:LinkButton ID="btnAddcat" runat="server" CssClass="btn btn-link bt-icon confirm_leave" OnClick="btnAddcat_Click"><i class=" fa fa-plus"></i> Create new category <i class=" fa fa-external-link"></i></asp:LinkButton>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Associated Categories</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <ul class="list-group" id="myUL">
+                                                    <li class="list-group-item ">
+                                                        <span class="box check-box">
+                                                            <span class="valueTwo hidden">2</span>
+                                                            <input type="checkbox" id="chkHome" class="shan box" />
+                                                            <span class="valueOne">Home</span>
+                                                        </span>
+                                                        <ul class="list-group nested active" id="myUL1">
+                                                            <asp:Repeater ID="repCat" runat="server" OnItemDataBound="repCat_ItemDataBound">
+                                                                <ItemTemplate>
+                                                                    <li class="list-group-item">
+                                                                        <%-- <span class="valueTwo"><%#Eval("name") %></span>--%>
+                                                                        <asp:Label ID="lblID" runat="server" CssClass="bb valueOne" Text='<%#Eval("id_category") %>' Visible="false"></asp:Label>
+                                                                        <asp:Label ID="lblCarname" runat="server" Text='<%#Eval("name") %>' Visible="false"></asp:Label>
+                                                                        <span class="valueTwo hidden"><%#Eval("id_category") %></span>
+                                                                        <input id="chk1" runat="server" type="checkbox" class="shan" value='<%#Eval("name") %>' />
+                                                                        <span class="valueOne"><%#Eval("name") %></span>
+                                                                        <asp:Repeater ID="repSub" runat="server" OnItemDataBound="repSub_ItemDataBound">
+                                                                            <ItemTemplate>
+                                                                                <ul class="list-group nested active" id="myUL2">
+                                                                                    <li class="list-group-item">
+                                                                                        <asp:Label ID="lblParentId" runat="server" Text='<%#Eval("id_parent") %>' Visible="false"></asp:Label>
+                                                                                        <asp:Label ID="lblID" runat="server" CssClass="bb valueOne" Text='<%#Eval("id_category") %>' Visible="false"></asp:Label>
+                                                                                        <asp:Label ID="lblSubCatName" runat="server" Text='<%#Eval("name") %>' Visible="false"></asp:Label>
+                                                                                        <span class="valueTwo hidden"><%#Eval("id_category") %></span>
+                                                                                        <input type="checkbox" id="chk1" runat="server" class="shan box" value='<%#Eval("name") %>' />
+                                                                                        <span class="valueOne"><%#Eval("name") %></span>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </ItemTemplate>
+                                                                        </asp:Repeater>
+                                                                        </span></li>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                                <br />
+                                                <asp:LinkButton ID="btnAddcat" runat="server" CssClass="btn btn-link bt-icon confirm_leave" OnClick="btnAddcat_Click"><i class=" fa fa-plus"></i> Create new category <i class=" fa fa-external-link"></i></asp:LinkButton>
+
+                                            </div>
 
                                         </div>
-
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                               <%-- <div class="compose-multiple-email">
                                                    <input type="email" name="recipient_email" id="recipient_email" class="form-control">
                                                </div>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Default category</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <asp:DropDownList ID="drpDefaultCat" runat="server" CssClass="form-control custom-select-value" Width="250px"></asp:DropDownList>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Default category</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <asp:DropDownList ID="drpDefaultCat" runat="server" CssClass="form-control custom-select-value" Width="250px"></asp:DropDownList>
+
+                                                </div>
+
 
                                             </div>
-											
-											
                                         </div>
-                                    </div>
-									
-									<div class="clearfix">&nbsp;</div>
+
+                                        <div class="clearfix">&nbsp;</div>
                                         <div class="row">
                                             <div class="col-lg-2">
                                                 &nbsp;
@@ -1327,637 +1342,637 @@
                                                 <div class="login-input-area">
                                                     <asp:DropDownList ID="drpPersonalized" runat="server" CssClass="form-control" Width="250px">
                                                         <asp:ListItem Text="No" Value="0"></asp:ListItem>
-														<asp:ListItem Text="Yes" Value="1"></asp:ListItem>
-                                                        
+                                                        <asp:ListItem Text="Yes" Value="1"></asp:ListItem>
+
                                                     </asp:DropDownList>
                                                 </div>
                                             </div>
                                         </div>
-									
-									
-									
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-                                                <asp:LinkButton ID="btnAssoCancel" runat="server" OnClick="btnAssoCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <asp:LinkButton ID="btnAssociateSaveAnd" runat="server" ValidationGroup="asso" CssClass="btn btn-primary" OnClick="btnAssociateSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnAssociateSave" runat="server" ValidationGroup="asso" CssClass="btn btn-primary" OnClick="btnAssociateSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
 
+
+
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+                                                    <asp:LinkButton ID="btnAssoCancel" runat="server" OnClick="btnAssoCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <asp:LinkButton ID="btnAssociateSaveAnd" runat="server" ValidationGroup="asso" CssClass="btn btn-primary" OnClick="btnAssociateSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnAssociateSave" runat="server" ValidationGroup="asso" CssClass="btn btn-primary" OnClick="btnAssociateSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                 </div>
-
-
-
                             </div>
-                        </div>
 
-                        <%-- Combinations Tab --%>
-                        <%--<asp:UpdatePanel ID="updateCombinations" runat="server">
+                            <%-- Combinations Tab --%>
+                            <%--<asp:UpdatePanel ID="updateCombinations" runat="server">
                                 <ContentTemplate>--%>
-                        <div class="tabcontent" id="Combinations" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ADD OR MODIFY COMBINATIONS FOR THIS PRODUCT</span> </h1>
+                            <div class="tabcontent" id="Combinations" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ADD OR MODIFY COMBINATIONS FOR THIS PRODUCT</span> </h1>
 
+                                        </div>
+                                    </div>
+
+                                    <div class="login-bg">
+                                        <div class="alert alert-info">
+                                            You can also use the 
+                                            <asp:LinkButton ID="btnGenerat" runat="server" CssClass="btn btn-link bt-icon confirm_leave" OnClick="btnGenerat_Click"><i class="icon-external-link-sign">Product Combinations Generator</i></asp:LinkButton>
+                                            in order to automatically create a set of combinations.
+                                        </div>
+                                        <div id="specific" style="display: none;">
+
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    &nbsp;
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <asp:Label ID="lblCombinationId" runat="server" Visible="false"></asp:Label>
+                                                    <asp:HiddenField runat="server" ID="hddCombinationId" />
+                                                    <div class="login-input-head alignright" style="margin-right: 10px">
+                                                        <p>Attribute</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="login-input-area">
+                                                        <asp:DropDownList ID="drpAttribute" runat="server" Style="width: 300px" CssClass="form-control custom-select-value select2_demo_2" OnSelectedIndexChanged="drpAttribute_SelectedIndexChanged" AutoPostBack="true">
+                                                        </asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
+                                                <ContentTemplate>
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Value</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="login-input-area">
+                                                                <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                                                                    <ContentTemplate>
+                                                                        <asp:DropDownList ID="drpValue" runat="server" Style="width: 400px" CssClass="form-control custom-select-value select2_demo_2">
+                                                                        </asp:DropDownList>
+                                                                    </ContentTemplate>
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="drpAttribute" EventName="SelectedIndexChanged" />
+
+                                                                    </Triggers>
+                                                                </asp:UpdatePanel>
+
+                                                                <br />
+                                                                <br />
+                                                                <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
+                                                                    <ContentTemplate>
+                                                                        <asp:ListBox runat="server" ID="listValue" Width="400px" Height="150px"></asp:ListBox>
+                                                                    </ContentTemplate>
+                                                                    <Triggers>
+                                                                        <asp:AsyncPostBackTrigger ControlID="btnAddAtr" EventName="Click" />
+                                                                        <asp:AsyncPostBackTrigger ControlID="btnDelete" EventName="Click" />
+                                                                    </Triggers>
+                                                                </asp:UpdatePanel>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <asp:Button ID="btnAddAtr" runat="server" Text="Add" CssClass="btn btn-default" OnClick="btnAddAtr_Click" /><br />
+                                                            <br />
+                                                            <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-default" OnClick="btnDelete_Click" />
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Reference code</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="login-input-area">
+                                                                <asp:TextBox ID="txtRefCode" runat="server" Width="400px" CssClass=" form-control"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Wholesale price</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="login-input-area">
+                                                                <asp:TextBox ID="txtHolsalePrice" runat="server" Text="0" Width="200px" CssClass=" form-control"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Impact on price</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="login-input-area">
+                                                                <asp:DropDownList ID="drpImpactPrice" runat="server" Style="width: 200px" CssClass="form-control custom-select-value select2_demo_2">
+                                                                    <asp:ListItem Value="0">None</asp:ListItem>
+                                                                    <asp:ListItem Value="1">Increase</asp:ListItem>
+                                                                    <asp:ListItem Value="-1">Decrease</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">of</span>&nbsp;&nbsp;&nbsp;
+                                                        <span class="input-group-addon">₹ (tax excl.)</span>
+                                                                <asp:TextBox ID="txtImpactPrice" runat="server" Text="0.00" CssClass="form-control" Width="190px" MaxLength="27"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row hidden">
+                                                        <div class="col-lg-7">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">or</span>&nbsp;&nbsp;&nbsp;
+                                                        <asp:TextBox ID="txtImpactOrPrice" runat="server" Text="0.00" CssClass="form-control" Width="190px" MaxLength="27"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix">&nbsp;</div>
+                                                    <div class="row">
+                                                        <div class="col-lg-1">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Impact on weight</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="login-input-area">
+                                                                <asp:DropDownList ID="drpImpactWeight" runat="server" Style="width: 230px" CssClass="form-control custom-select-value select2_demo_2">
+                                                                    <asp:ListItem Value="0">None</asp:ListItem>
+                                                                    <asp:ListItem Value="1">Increase</asp:ListItem>
+                                                                    <asp:ListItem Value="-1">Decrease</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">of</span>&nbsp;&nbsp;&nbsp;
+                                                        <span class="input-group-addon">Cts</span>
+                                                                <asp:TextBox ID="txtImpactW" runat="server" CssClass="form-control" Width="200px" MaxLength="27"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row hidden">
+                                                        <div class="col-lg-1">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Impact on unit price</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-3">
+                                                            <div class="login-input-area">
+                                                                <asp:DropDownList ID="drpImpactUnit" runat="server" Style="width: 230px" CssClass="form-control custom-select-value select2_demo_2">
+                                                                    <asp:ListItem Value="0">None</asp:ListItem>
+                                                                    <asp:ListItem Value="1">Increase</asp:ListItem>
+                                                                    <asp:ListItem Value="-1">Decrease</asp:ListItem>
+                                                                </asp:DropDownList>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">of</span>&nbsp;&nbsp;&nbsp;
+                                                        <span class="input-group-addon">₹ / pair</span>
+                                                                <asp:TextBox ID="txtImpactUnitP" runat="server" Text="0.00" CssClass="form-control" Width="190px" MaxLength="27"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Minimum quantity</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="input-group">
+                                                                <span class="input-group-addon">x</span>
+                                                                <asp:TextBox ID="txtMinumamQty" runat="server" Text="1" CssClass="form-control" Width="100px" MaxLength="27"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Availability date</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="input-group">
+                                                                <asp:TextBox ID="txtAvlDate" CssClass="form-control datePicK" runat="server" placeholder="dd/mm/yyyy"></asp:TextBox>
+                                                                <%--<input type="date" name="txtAvlDate" class="form-control" id="txtAvlDate" value="<%= txtAvlDate %>" style="width: 170px" />--%>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <hr />
+
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                Image :
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <asp:Repeater ID="repCombImage" runat="server">
+                                                                <ItemTemplate>
+
+                                                                    <div class="col-lg-3">
+                                                                        <asp:Label ID="lblImgId" runat="server" Text='<%#Eval("id_image") %>' Visible="false"></asp:Label>
+                                                                        <asp:CheckBox ID="chkCompImag" runat="server" />
+                                                                        <img src='<%#Eval("ImageUrl") %>' height="100px" width="100px" style="margin-bottom: 10px;" />
+                                                                    </div>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                Default :
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="login-input-area">
+                                                                <p>
+                                                                    <asp:CheckBox ID="chkDefaultComb" runat="server" />
+                                                                    Make this combination the default combination for this product.
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class=" alignleft">
+                                                                <ul>
+                                                                    <li class="tablinks" id="liCancel1" onclick="Cancel()">
+                                                                        <a class="btn btn-default" href="#Cancel"><i class="fa fa-undo fa-2x"></i>
+
+                                                                            Cancel combination
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="drpAttribute" EventName="SelectedIndexChanged" />
+
+                                                </Triggers>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+
+                                            <div class="col-lg-12">
+                                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                                    <table id="table" data-toggle="table" data-toolbar="#toolbar">
+                                                        <thead>
+                                                            <tr class="nodrag nodrop">
+                                                                <th class=" left">
+                                                                    <span class="title_box">Attribute - value pair
+                                                                    </span>
+                                                                </th>
+                                                                <th class=" left">
+                                                                    <span class="title_box">Impact on price
+                                                                    </span>
+                                                                </th>
+                                                                <th class=" left">
+                                                                    <span class="title_box">Impact on weight
+                                                                    </span>
+                                                                </th>
+                                                                <th class=" left">
+                                                                    <span class="title_box">Reference
+                                                                    </span>
+                                                                </th>
+                                                                <th class=" left">
+                                                                    <span class="title_box">Min. Qty
+                                                                    </span>
+                                                                </th>
+                                                                <th>&emsp;&emsp;&emsp;&emsp;&emsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <asp:Repeater ID="repComb" runat="server" OnItemCommand="repComb_ItemCommand" OnItemDataBound="repComb_ItemDataBound">
+                                                                <ItemTemplate>
+                                                                    <tr class="odd selected-line " id="trActive" runat="server">
+                                                                        <td class=" left">
+                                                                            <%#Eval("pair") %>
+                                                                            <asp:Label ID="lblCompId" runat="server" Text='<%#Eval("id_product_attribute") %>' Visible="false"></asp:Label>
+                                                                            <asp:Label ID="lblActiveID" runat="server" Text='<%#Eval("default_on") %>' Visible="false"></asp:Label>
+                                                                        </td>
+                                                                        <td class=" left"><%#Eval("price") %></td>
+                                                                        <td class=" left"><%#Eval("weight") %></td>
+                                                                        <td class=" left"><%#Eval("reference") %></td>
+                                                                        <td><span style="margin-left: 30%;"><%#Eval("minimal_quantity") %></span>
+                                                                        </td>
+                                                                        <td class="text-right">
+                                                                            <div class="row">
+                                                                                <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" OnClientClick="specific()" CssClass="btn btn-custon-rounded-three btn-primary"
+                                                                                    CommandArgument='<%#Eval("id_product_attribute") %>'><i class="fa fa-pencil-square-o fa-align-center" style="color: white;"></i></asp:LinkButton>
+                                                                                <asp:LinkButton ID="LinkButton9" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
+                                                                                    CommandArgument='<%#Eval("id_product_attribute") %>' Style="width: 25px; padding: 4px 3px;"><i class="fa fa-trash-o" style="color: white;"></i></asp:LinkButton>
+                                                                            </div>
+
+
+                                                                        </td>
+                                                                    </tr>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div class=" alignleft">
+                                                    <asp:LinkButton ID="btnCombCancel" runat="server" OnClick="btnCombCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9">
+                                                <div class="alignright">
+                                                    <ul>
+                                                        <li class="floatleft" onclick="specific()" id="lispecific">
+                                                            <a class="btn btn-default" href="#" id="show_specific_price" style="display: inline-block; margin-right: 10px">
+                                                                <i class="fa fa-plus fa-adjust "></i>
+                                                                New combination
+                                                            </a>
+                                                        </li>
+                                                        <li class="floatleft tablinks" id="liCancel" onclick="Cancel()" style="display: none; margin-right: 10px">
+                                                            <a class="btn btn-default" href="#Cancel"><i class="fa fa-minus-square-o "></i>
+                                                                Cancel combination
+                                                            </a></li>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnCombSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnCombSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnCombSave" runat="server" CssClass="btn btn-default" OnClick="btnCombSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <%-- </ContentTemplate>
+                            </asp:UpdatePanel>--%>
+                            <%-- Shipping Tab --%>
+                            <div class="tabcontent" id="Shipping" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SHIPPING</span> </h1>
 
-                                <div class="login-bg">
-                                    <div class="alert alert-info">
-                                        You can also use the 
-                                            <asp:LinkButton ID="btnGenerat" runat="server" CssClass="btn btn-link bt-icon confirm_leave" OnClick="btnGenerat_Click"><i class="icon-external-link-sign">Product Combinations Generator</i></asp:LinkButton>
-                                        in order to automatically create a set of combinations.
+                                        </div>
                                     </div>
-                                    <div id="specific" style="display: none;">
 
+                                    <div class="login-bg ">
                                         <div class="row">
                                             <div class="col-lg-2">
                                                 &nbsp;
+                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
+                                             ControlToValidate="txtName" ForeColor="Red"
+                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
+                                         </asp:RequiredFieldValidator>--%>
                                             </div>
                                             <div class="col-lg-2">
-                                                <asp:Label ID="lblCombinationId" runat="server" Visible="false"></asp:Label>
-                                                <asp:HiddenField runat="server" ID="hddCombinationId" />
                                                 <div class="login-input-head alignright" style="margin-right: 10px">
-                                                    <p>Attribute</p>
+                                                    <p>Package width</p>
                                                 </div>
                                             </div>
                                             <div class="col-lg-8">
-                                                <div class="login-input-area">
-                                                    <asp:DropDownList ID="drpAttribute" runat="server" Style="width: 300px" CssClass="form-control custom-select-value select2_demo_2" OnSelectedIndexChanged="drpAttribute_SelectedIndexChanged" AutoPostBack="true">
-                                                    </asp:DropDownList>
+                                                <div class="">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">CM</span>
+                                                        <asp:TextBox ID="txtPackegW" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <asp:UpdatePanel ID="UpdatePanel5" runat="server" UpdateMode="Conditional">
-                                            <ContentTemplate>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Value</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="login-input-area">
-                                                            <asp:UpdatePanel ID="UpdatePanel4" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
-                                                                <ContentTemplate>
-                                                                    <asp:DropDownList ID="drpValue" runat="server" Style="width: 400px" CssClass="form-control custom-select-value select2_demo_2">
-                                                                    </asp:DropDownList>
-                                                                </ContentTemplate>
-                                                                <Triggers>
-                                                                    <asp:AsyncPostBackTrigger ControlID="drpAttribute" EventName="SelectedIndexChanged" />
-
-                                                                </Triggers>
-                                                            </asp:UpdatePanel>
-
-                                                            <br />
-                                                            <br />
-                                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="false">
-                                                                <ContentTemplate>
-                                                                    <asp:ListBox runat="server" ID="listValue" Width="400px" Height="150px"></asp:ListBox>
-                                                                </ContentTemplate>
-                                                                <Triggers>
-                                                                    <asp:AsyncPostBackTrigger ControlID="btnAddAtr" EventName="Click" />
-                                                                    <asp:AsyncPostBackTrigger ControlID="btnDelete" EventName="Click" />
-                                                                </Triggers>
-                                                            </asp:UpdatePanel>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <asp:Button ID="btnAddAtr" runat="server" Text="Add" CssClass="btn btn-default" OnClick="btnAddAtr_Click" /><br />
-                                                        <br />
-                                                        <asp:Button ID="btnDelete" runat="server" Text="Delete" CssClass="btn btn-default" OnClick="btnDelete_Click" />
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
+                                             ControlToValidate="txtName" ForeColor="Red"
+                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
+                                         </asp:RequiredFieldValidator>--%>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Package height</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">CM</span>
+                                                        <asp:TextBox ID="txtPackageH" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
                                                     </div>
                                                 </div>
-                                                <hr />
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Reference code</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="login-input-area">
-                                                            <asp:TextBox ID="txtRefCode" runat="server" Width="400px" CssClass=" form-control"></asp:TextBox>
-                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
+                                             ControlToValidate="txtName" ForeColor="Red"
+                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
+                                         </asp:RequiredFieldValidator>--%>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Package depth</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">CM</span>
+                                                        <asp:TextBox ID="txtPackagD" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
                                                     </div>
                                                 </div>
-                                                <hr />
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Wholesale price</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="login-input-area">
-                                                            <asp:TextBox ID="txtHolsalePrice" runat="server" Text="0" Width="200px" CssClass=" form-control"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
+                                             ControlToValidate="txtName" ForeColor="Red"
+                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
+                                         </asp:RequiredFieldValidator>--%>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Package weight</p>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">CM</span>
+                                                        <asp:TextBox ID="txtPackageweight" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
                                                     </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Impact on price</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <div class="login-input-area">
-                                                            <asp:DropDownList ID="drpImpactPrice" runat="server" Style="width: 200px" CssClass="form-control custom-select-value select2_demo_2">
-                                                                <asp:ListItem Value="0">None</asp:ListItem>
-                                                                <asp:ListItem Value="1">Increase</asp:ListItem>
-                                                                <asp:ListItem Value="-1">Decrease</asp:ListItem>
-                                                            </asp:DropDownList>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">of</span>&nbsp;&nbsp;&nbsp;
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
+                                             ControlToValidate="txtName" ForeColor="Red"
+                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
+                                         </asp:RequiredFieldValidator>--%>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Additional shipping fees (for a single item)</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="">
+                                                    <div class="input-group">
                                                         <span class="input-group-addon">₹ (tax excl.)</span>
-                                                            <asp:TextBox ID="txtImpactPrice" runat="server" Text="0.00" CssClass="form-control" Width="190px" MaxLength="27"></asp:TextBox>
-                                                        </div>
+                                                        <asp:TextBox ID="txtAddFee" runat="server" placeholder="0.00" CssClass=" form-control" Width="100px" MaxLength="27"></asp:TextBox>
                                                     </div>
-                                                </div>
-                                                <div class="row hidden">
-                                                    <div class="col-lg-7">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">or</span>&nbsp;&nbsp;&nbsp;
-                                                        <asp:TextBox ID="txtImpactOrPrice" runat="server" Text="0.00" CssClass="form-control" Width="190px" MaxLength="27"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix">&nbsp;</div>
-                                                <div class="row">
-                                                    <div class="col-lg-1">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Impact on weight</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <div class="login-input-area">
-                                                            <asp:DropDownList ID="drpImpactWeight" runat="server" Style="width: 230px" CssClass="form-control custom-select-value select2_demo_2">
-                                                                <asp:ListItem Value="0">None</asp:ListItem>
-                                                                <asp:ListItem Value="1">Increase</asp:ListItem>
-                                                                <asp:ListItem Value="-1">Decrease</asp:ListItem>
-                                                            </asp:DropDownList>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">of</span>&nbsp;&nbsp;&nbsp;
-                                                        <span class="input-group-addon">Cts</span>
-                                                            <asp:TextBox ID="txtImpactW" runat="server" CssClass="form-control" Width="200px" MaxLength="27"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row hidden">
-                                                    <div class="col-lg-1">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Impact on unit price</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-3">
-                                                        <div class="login-input-area">
-                                                            <asp:DropDownList ID="drpImpactUnit" runat="server" Style="width: 230px" CssClass="form-control custom-select-value select2_demo_2">
-                                                                <asp:ListItem Value="0">None</asp:ListItem>
-                                                                <asp:ListItem Value="1">Increase</asp:ListItem>
-                                                                <asp:ListItem Value="-1">Decrease</asp:ListItem>
-                                                            </asp:DropDownList>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">of</span>&nbsp;&nbsp;&nbsp;
-                                                        <span class="input-group-addon">₹ / pair</span>
-                                                            <asp:TextBox ID="txtImpactUnitP" runat="server" Text="0.00" CssClass="form-control" Width="190px" MaxLength="27"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Minimum quantity</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="input-group">
-                                                            <span class="input-group-addon">x</span>
-                                                            <asp:TextBox ID="txtMinumamQty" runat="server" Text="1" CssClass="form-control" Width="100px" MaxLength="27"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Availability date</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="input-group">
-                                                            <asp:TextBox ID="txtAvlDate" CssClass="form-control datePicK" runat="server" placeholder="dd/mm/yyyy"></asp:TextBox>
-                                                            <%--<input type="date" name="txtAvlDate" class="form-control" id="txtAvlDate" value="<%= txtAvlDate %>" style="width: 170px" />--%>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                                <hr />
-
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            Image :
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <asp:Repeater ID="repCombImage" runat="server">
-                                                            <ItemTemplate>
-
-                                                                <div class="col-lg-3">
-                                                                    <asp:Label ID="lblImgId" runat="server" Text='<%#Eval("id_image") %>' Visible="false"></asp:Label>
-                                                                    <asp:CheckBox ID="chkCompImag" runat="server" />
-                                                                    <img src='<%#Eval("ImageUrl") %>' height="100px" width="100px" style="margin-bottom: 10px;" />
-                                                                </div>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </div>
-
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            Default :
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="login-input-area">
-                                                            <p>
-                                                                <asp:CheckBox ID="chkDefaultComb" runat="server" />
-                                                                Make this combination the default combination for this product.
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class=" alignleft">
-                                                            <ul>
-                                                                <li class="tablinks" id="liCancel1" onclick="Cancel()">
-                                                                    <a class="btn btn-default" href="#Cancel"><i class="fa fa-undo fa-2x"></i>
-
-                                                                        Cancel combination
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </ContentTemplate>
-                                            <Triggers>
-                                                <asp:AsyncPostBackTrigger ControlID="drpAttribute" EventName="SelectedIndexChanged" />
-
-                                            </Triggers>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-
-                                        <div class="col-lg-12">
-                                            <div class="datatable-dashv1-list custom-datatable-overright">
-                                                <table id="table" data-toggle="table" data-toolbar="#toolbar">
-                                                    <thead>
-                                                        <tr class="nodrag nodrop">
-                                                            <th class=" left">
-                                                                <span class="title_box">Attribute - value pair
-                                                                </span>
-                                                            </th>
-                                                            <th class=" left">
-                                                                <span class="title_box">Impact on price
-                                                                </span>
-                                                            </th>
-                                                            <th class=" left">
-                                                                <span class="title_box">Impact on weight
-                                                                </span>
-                                                            </th>
-                                                            <th class=" left">
-                                                                <span class="title_box">Reference
-                                                                </span>
-                                                            </th>
-                                                            <th class=" left">
-                                                                <span class="title_box">Min. Qty
-                                                                </span>
-                                                            </th>
-                                                            <th>&emsp;&emsp;&emsp;&emsp;&emsp;</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <asp:Repeater ID="repComb" runat="server" OnItemCommand="repComb_ItemCommand" OnItemDataBound="repComb_ItemDataBound">
-                                                            <ItemTemplate>
-                                                                <tr class="odd selected-line " id="trActive" runat="server">
-                                                                    <td class=" left">
-                                                                        <%#Eval("pair") %>
-                                                                        <asp:Label ID="lblCompId" runat="server" Text='<%#Eval("id_product_attribute") %>' Visible="false"></asp:Label>
-                                                                        <asp:Label ID="lblActiveID" runat="server" Text='<%#Eval("default_on") %>' Visible="false"></asp:Label>
-                                                                    </td>
-                                                                    <td class=" left"><%#Eval("price") %></td>
-                                                                    <td class=" left"><%#Eval("weight") %></td>
-                                                                    <td class=" left"><%#Eval("reference") %></td>
-                                                                    <td><span style="margin-left: 30%;"><%#Eval("minimal_quantity") %></span>
-                                                                    </td>
-                                                                    <td class="text-right">
-                                                                        <div class="row">
-                                                                            <asp:LinkButton ID="lnkEdit" runat="server" CommandName="Edit" OnClientClick="specific()" CssClass="btn btn-custon-rounded-three btn-primary"
-                                                                                CommandArgument='<%#Eval("id_product_attribute") %>'><i class="fa fa-pencil-square-o fa-align-center" style="color: white;"></i></asp:LinkButton>
-                                                                            <asp:LinkButton ID="LinkButton9" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
-                                                                                CommandArgument='<%#Eval("id_product_attribute") %>' Style="width: 25px; padding: 4px 3px;"><i class="fa fa-trash-o" style="color: white;"></i></asp:LinkButton>
-                                                                        </div>
-
-
-                                                                    </td>
-                                                                </tr>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
                                                 </div>
                                             </div>
+                                        </div>
 
+                                        <div class="row hidden">
+                                            <div class="col-lg-2">
+                                                &nbsp;
 
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>
+                                                        Carriers Available carriers
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="dual-list-box-inner">
+                                                    <div id="form" action="#" class="wizard-big">
+                                                        <select class="form-control dual_select" multiple>
+                                                            <option value="United States">United States</option>
+                                                            <option value="United Kingdom">United Kingdom</option>
+                                                            <option value="Australia">Australia</option>
+                                                            <option selected value="Austria">Austria</option>
+                                                            <option selected value="Bahamas">Bahamas</option>
+                                                            <option value="Barbados">Barbados</option>
+                                                            <option value="Belgium">Belgium</option>
+                                                            <option value="Bermuda">Bermuda</option>
+                                                            <option value="Brazil">Brazil</option>
+                                                            <option value="Bulgaria">Bulgaria</option>
+                                                            <option value="Cameroon">Cameroon</option>
+                                                            <option value="Canada">Canada</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+
+                                                    <asp:LinkButton ID="btnShippingCancel" runat="server" OnClick="btnShippingCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <asp:LinkButton ID="btnSpSaveAnd" runat="server" ValidationGroup="addSP" CssClass="btn btn-primary" OnClick="btnSpSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="btnSpSave" runat="server" ValidationGroup="addSP" CssClass="btn btn-primary" OnClick="btnSpSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
 
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <div class=" alignleft">
-                                                <asp:LinkButton ID="btnCombCancel" runat="server" OnClick="btnCombCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="alignright">
-                                                <ul>
-                                                    <li class="floatleft" onclick="specific()" id="lispecific">
-                                                        <a class="btn btn-default" href="#" id="show_specific_price" style="display: inline-block; margin-right: 10px">
-                                                            <i class="fa fa-plus fa-adjust "></i>
-                                                            New combination
-                                                        </a>
-                                                    </li>
-                                                    <li class="floatleft tablinks" id="liCancel" onclick="Cancel()" style="display: none; margin-right: 10px">
-                                                        <a class="btn btn-default" href="#Cancel"><i class="fa fa-minus-square-o "></i>
-                                                            Cancel combination
-                                                        </a></li>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnCombSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnCombSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnCombSave" runat="server" CssClass="btn btn-default" OnClick="btnCombSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
-                                                </ul>
 
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <%-- </ContentTemplate>
-                            </asp:UpdatePanel>--%>
-                        <%-- Shipping Tab --%>
-                        <div class="tabcontent" id="Shipping" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">SHIPPING</span> </h1>
 
-                                    </div>
-                                </div>
+                            <%-- AVAILABLE QUANTITIES FOR SALE Tab --%>
+                            <div class="tabcontent" id="Quantities" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">AVAILABLE QUANTITIES FOR SALE</span> </h1>
 
-                                <div class="login-bg ">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
-                                             ControlToValidate="txtName" ForeColor="Red"
-                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
-                                         </asp:RequiredFieldValidator>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Package width</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">CM</span>
-                                                    <asp:TextBox ID="txtPackegW" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
-                                             ControlToValidate="txtName" ForeColor="Red"
-                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
-                                         </asp:RequiredFieldValidator>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Package height</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">CM</span>
-                                                    <asp:TextBox ID="txtPackageH" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
-                                             ControlToValidate="txtName" ForeColor="Red"
-                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
-                                         </asp:RequiredFieldValidator>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Package depth</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">CM</span>
-                                                    <asp:TextBox ID="txtPackagD" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
-                                             ControlToValidate="txtName" ForeColor="Red"
-                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
-                                         </asp:RequiredFieldValidator>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Package weight</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">CM</span>
-                                                    <asp:TextBox ID="txtPackageweight" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        <%-- <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
-                                             ControlToValidate="txtName" ForeColor="Red"
-                                             Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
-                                         </asp:RequiredFieldValidator>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Additional shipping fees (for a single item)</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">₹ (tax excl.)</span>
-                                                    <asp:TextBox ID="txtAddFee" runat="server" placeholder="0.00" CssClass=" form-control" Width="100px" MaxLength="27"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row hidden">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>
-                                                    Carriers Available carriers
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="dual-list-box-inner">
-                                                <div id="form" action="#" class="wizard-big">
-                                                    <select class="form-control dual_select" multiple>
-                                                        <option value="United States">United States</option>
-                                                        <option value="United Kingdom">United Kingdom</option>
-                                                        <option value="Australia">Australia</option>
-                                                        <option selected value="Austria">Austria</option>
-                                                        <option selected value="Bahamas">Bahamas</option>
-                                                        <option value="Barbados">Barbados</option>
-                                                        <option value="Belgium">Belgium</option>
-                                                        <option value="Bermuda">Bermuda</option>
-                                                        <option value="Brazil">Brazil</option>
-                                                        <option value="Bulgaria">Bulgaria</option>
-                                                        <option value="Cameroon">Cameroon</option>
-                                                        <option value="Canada">Canada</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-
-                                                <asp:LinkButton ID="btnShippingCancel" runat="server" OnClick="btnShippingCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <asp:LinkButton ID="btnSpSaveAnd" runat="server" ValidationGroup="addSP" CssClass="btn btn-primary" OnClick="btnSpSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                <asp:LinkButton ID="btnSpSave" runat="server" ValidationGroup="addSP" CssClass="btn btn-primary" OnClick="btnSpSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-                        </div>
-
-                        <%-- AVAILABLE QUANTITIES FOR SALE Tab --%>
-                        <div class="tabcontent" id="Quantities" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">AVAILABLE QUANTITIES FOR SALE</span> </h1>
-
-                                    </div>
-                                </div>
-                                <div class="login-bg">
-                                    <%--<div class="row">
+                                    <div class="login-bg">
+                                        <%--<div class="row">
                                             <div class="col-lg-12">
                                                 <div class="alert alert-info">
                                                     <p style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px; font: normal normal normal 13px/2 FontAwesome;">
@@ -1971,908 +1986,925 @@
                                                 </div>
                                             </div>
                                         </div>--%>
-                                    <div class="row hidden">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                        <div class="row hidden">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                             </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
 
-                                                <p class="checkbox">
-                                                    <label for="advanced_stock_management">
-                                                        <input type="checkbox" id="advanced_stock_management" name="advanced_stock_management" class="advanced_stock_management">
-                                                        I want to use the advanced stock management system for this product.
-                                                    </label>
-                                                </p>
-                                                <p class="help-block"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;This requires you to enable advanced stock management.</p>
+                                                    <p class="checkbox">
+                                                        <label for="advanced_stock_management">
+                                                            <input type="checkbox" id="advanced_stock_management" name="advanced_stock_management" class="advanced_stock_management">
+                                                            I want to use the advanced stock management system for this product.
+                                                        </label>
+                                                    </p>
+                                                    <p class="help-block"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>&nbsp;This requires you to enable advanced stock management.</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row hide">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row hide">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                        
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <%--<p>Friendly URL</p>--%>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <p class="radio">
-                                                    <label for="depends_on_stock_1">
-                                                        <input type="radio" id="depends_on_stock_1" runat="server" name="depends_on_stock" class="depends_on_stock" value="1" />
-                                                        The available quantities for the current product and its combinations are based on the stock in your warehouse (using the advanced stock management system). 
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <%--<p>Friendly URL</p>--%>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <p class="radio">
+                                                        <label for="depends_on_stock_1">
+                                                            <input type="radio" id="depends_on_stock_1" runat="server" name="depends_on_stock" class="depends_on_stock" value="1" />
+                                                            The available quantities for the current product and its combinations are based on the stock in your warehouse (using the advanced stock management system). 
 								 &nbsp;-&nbsp;This requires you to enable advanced stock management globally or for this product.
-                                                    </label>
-                                                </p>
-                                                <p class="radio">
-                                                    <label for="depends_on_stock_0">
-                                                        <input type="radio" id="depends_on_stock_0" runat="server" name="depends_on_stock" class="depends_on_stock" value="0" />
-                                                        I want to specify available quantities manually.
-                                                    </label>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row     ">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="datatable-dashv1-list custom-datatable-overright">
-                                                <table id="table" data-toggle="table" data-toolbar="#toolbar">
-                                                    <thead>
-                                                        <tr class="nodrag nodrop">
-                                                            <th class=" left">
-                                                                <span class="title_box">Quantity
-                                                                </span>
-                                                            </th>
-                                                            <th class=" left">
-                                                                <span class="title_box">Designation
-                                                                </span>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <asp:Repeater ID="repQuantity" runat="server">
-                                                            <ItemTemplate>
-                                                                <tr class="highlighted odd selected-line">
-                                                                    <td class=" left">
-                                                                        <asp:Label ID="lblQuantityid" runat="server" Visible="false" Text='<%#Eval("id_product_attribute") %>'></asp:Label>
-                                                                        <asp:TextBox ID="txtQQty" runat="server" Width="70px" Text='<%#Eval("qty") %>'></asp:TextBox>
-                                                                    </td>
-                                                                    <td class=" left"><%#Eval("pair") %>
-                                                                    </td>
-
-                                                                </tr>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-
-                                                    </tbody>
-
-                                                </table>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
+                                                        </label>
+                                                    </p>
+                                                    <p class="radio">
+                                                        <label for="depends_on_stock_0">
+                                                            <input type="radio" id="depends_on_stock_0" runat="server" name="depends_on_stock" class="depends_on_stock" value="0" />
+                                                            I want to specify available quantities manually.
+                                                        </label>
+                                                    </p>
                                                 </div>
                                             </div>
 
+                                        </div>
+                                        <div class="row     ">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                                    <table id="table" data-toggle="table" data-toolbar="#toolbar">
+                                                        <thead>
+                                                            <tr class="nodrag nodrop">
+                                                                <th class=" left">
+                                                                    <span class="title_box">Quantity
+                                                                    </span>
+                                                                </th>
+                                                                <th class=" left">
+                                                                    <span class="title_box">Designation
+                                                                    </span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <asp:Repeater ID="repQuantity" runat="server">
+                                                                <ItemTemplate>
+                                                                    <tr class="highlighted odd selected-line">
+                                                                        <td class=" left">
+                                                                            <asp:Label ID="lblQuantityid" runat="server" Visible="false" Text='<%#Eval("id_product_attribute") %>'></asp:Label>
+                                                                            <asp:TextBox ID="txtQQty" runat="server" Width="70px" Text='<%#Eval("qty") %>'></asp:TextBox>
+                                                                        </td>
+                                                                        <td class=" left"><%#Eval("pair") %>
+                                                                        </td>
 
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>When out of stock</p>
+                                                                    </tr>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                    </div>
+                                                </div>
+
+
                                             </div>
                                         </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <p class="radio">
-                                                    <label id="label_out_of_stock_1" for="out_of_stock_1">
-                                                        <input type="radio" id="out_of_stock" runat="server" name="out_of_stock" value="0" class="out_of_stock" />
-                                                        Deny orders
-                                                    </label>
-                                                </p>
-                                                <p class="radio">
-                                                    <label id="label_out_of_stock_2" for="out_of_stock_2">
-                                                        <input type="radio" id="out_of_stock_2" runat="server" name="out_of_stock" value="1" class="out_of_stock" />
-                                                        Allow orders
-                                                    </label>
-                                                </p>
-                                                <p class="radio hidden">
-                                                    <label id="label_out_of_stock_3" for="out_of_stock_3">
-                                                        <input type="radio" id="out_of_stock_3" runat="server" name="out_of_stock" value="2" class="out_of_stock" />
-                                                        Default:
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>When out of stock</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <p class="radio">
+                                                        <label id="label_out_of_stock_1" for="out_of_stock_1">
+                                                            <input type="radio" id="out_of_stock" runat="server" name="out_of_stock" value="0" class="out_of_stock" />
+                                                            Deny orders
+                                                        </label>
+                                                    </p>
+                                                    <p class="radio">
+                                                        <label id="label_out_of_stock_2" for="out_of_stock_2">
+                                                            <input type="radio" id="out_of_stock_2" runat="server" name="out_of_stock" value="1" class="out_of_stock" />
+                                                            Allow orders
+                                                        </label>
+                                                    </p>
+                                                    <p class="radio hidden">
+                                                        <label id="label_out_of_stock_3" for="out_of_stock_3">
+                                                            <input type="radio" id="out_of_stock_3" runat="server" name="out_of_stock" value="2" class="out_of_stock" />
+                                                            Default:
 																Allow orders
 																<%--<a class="link" href="#">as set in the Products Preferences page
                                                                 </a>--%>
-                                                    </label>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-                                                <asp:LinkButton ID="btnQueCancel" runat="server" OnClick="btnQueCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <ul>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnQSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnQSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnQSave" runat="server" CssClass="btn btn-default" OnClick="btnQSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix">&nbsp;</div>
-                            <div class="sparkline13-list shadow-reset ">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">AVAILABILITY SETTINGS</span> </h1>
-                                    </div>
-                                </div>
-                                <div class="login-bg">
-                                    <div class="row" runat="server" id="minimum" visible="false">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Minimum quantity</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <asp:TextBox ID="txtStockMinQty" runat="server" CssClass="form-control" Text="In Stock"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Displayed text when in-stock</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <asp:TextBox ID="txtavailable_now" runat="server" CssClass="form-control" Text="In Stock"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Displayed text when backordering is allowed</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <asp:TextBox ID="txtavailable_later" runat="server" Text="In Stock" CssClass="form-control"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-
-                                                <asp:LinkButton ID="btnAvalCancel" runat="server" OnClick="btnAvalCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <ul>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnQASaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnQASaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnQASave" runat="server" CssClass="btn btn-default" OnClick="btnQASave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <%-- Image Tab --%>
-                        <div class="tabcontent" id="Images" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">IMAGES </span></h1>
-
-                                    </div>
-                                </div>
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                              <%-- <div class="compose-multiple-email">
-                                                   <input type="email" name="recipient_email" id="recipient_email" class="form-control">
-                                               </div>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Upload image </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area" style="margin-top: 10px;">
-                                                <asp:FileUpload ID="flpCover" runat="server" multiple="multiple" />
-                                                <%--<asp:FileUpload ID="flpCover" runat="server" class="multi" AllowMultiple="true" />--%>
-                                                <hr />
-                                                <div id="dvPreview">
+                                                        </label>
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Caption</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="login-input-area ">
-                                                <asp:TextBox ID="txtCaption" runat="server" CssClass=" form-control" Width="400px"></asp:TextBox>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+                                                    <asp:LinkButton ID="btnQueCancel" runat="server" OnClick="btnQueCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                                </div>
                                             </div>
                                             <div class="col-lg-6">
-                                                <asp:DropDownList ID="drpPosition" runat="server" CssClass=" form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <asp:Button ID="btnAddFile" runat="server" OnClick="btnAddFile_Click" Text="Add" CssClass="btn btn-default" />
-                                            <asp:Button ID="btnCaptionUpdate" runat="server" OnClick="btnCaptionUpdate_Click" Text="Update" CssClass="btn btn-default" />
-                                            <asp:Button ID="btnPosition" runat="server" OnClick="btnPosition_Click" Text="Set Position" CssClass="btn btn-default" />
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-
-                                        <div class="sparkline13-graph">
-                                            <div class="datatable-dashv1-list custom-datatable-overright">
-                                                <div id="sss">
-                                                    <table class="table">
-                                                        <tr>
-                                                            <th style="text-align: left; width: 15%;">Image</th>
-                                                            <th style="text-align: left; width: 30%;">Caption</th>
-                                                            <th style="text-align: left; width: 15%;">Position</th>
-                                                            <th style="text-align: left; width: 15%;">Cover</th>
-                                                            <th style="text-align: left; width: 15%;">Delete</th>
-                                                        </tr>
-                                                    </table>
-                                                    <ul id="sortable">
-                                                        <asp:ListView ID="ItemsListView" runat="server" ItemPlaceholderID="myItemPlaceHolder" OnItemCommand="ItemsListView_ItemCommand" OnItemDeleting="ItemsListView_ItemDeleting">
-                                                            <ItemTemplate>
-                                                                <li id='id_<%# Eval("id_image") %>'>
-                                                                    <table class="table">
-                                                                        <%--  <asp:UpdatePanel ID="pn1" runat="server" UpdateMode="Conditional">
-                                                                                <ContentTemplate>--%>
-                                                                        <%-- <asp:Timer ID="tm1" runat="server" Interval="3000" OnTick="tm1_Tick">
-                                                                                    </asp:Timer>--%>
-                                                                        <tr>
-                                                                            <td style="text-align: left; width: 15%;">
-                                                                                <img src='<%#Eval("imgg") %>' height="50px" width="50px" /></td>
-                                                                            <td style="text-align: left; width: 30%;"><%#Eval("legend") %> </td>
-                                                                            <td class="pointer dragHandle fixed-width-xs center" style="text-align: left; width: 15%;">
-                                                                                <div class="dragGroup">
-                                                                                    <div class="positions">
-                                                                                        <%#Eval("position") %>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </td>
-                                                                            <td style="text-align: left; width: 15%;">
-                                                                                <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Cov" CommandArgument='<%#Eval("id_image") %>'>
-                                        <%# bool.Parse(Eval("cover").ToString())==true ? "<img src='../img/show.gif' title='Make Show' border='0'/>":"<img src='../img/hide.gif' title='Make Hide' border='0'/>" %>
-                                                                                </asp:LinkButton>
-                                                                            </td>
-                                                                            <td style="text-align: left; width: 15%;">
-                                                                                <asp:Label ID="lblId" runat="server" Text='<%#Eval("id_image") %>' Visible="false"></asp:Label>
-                                                                                <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
-                                                                                    CommandArgument='<%#Eval("id_image") %>' Style="width: 25px; padding: 4px 3px;"><i class="fa fa-trash-o"></i></asp:LinkButton>
-                                                                            </td>
-                                                                        </tr>
-                                                                        <%--</ContentTemplate>
-                                                                                <Triggers>
-                                                                                    <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
-                                                                                </Triggers>
-                                                                            </asp:UpdatePanel>--%>
-                                                                    </table>
-                                                                </li>
-                                                            </ItemTemplate>
-                                                        </asp:ListView>
-
-
+                                                <div class="alignright">
+                                                    <ul>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnQSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnQSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnQSave" runat="server" CssClass="btn btn-default" OnClick="btnQSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-                                                <asp:LinkButton ID="btnImagCancel" runat="server" OnClick="btnImagCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <asp:LinkButton ID="LinkButton11" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                <asp:LinkButton ID="LinkButton12" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
-
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <%-- ASSIGN FEATURES TO THIS PRODUCT--%>
-                        <div class="tabcontent" id="Features" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ASSIGN FEATURES TO THIS PRODUCT</span> </h1>
-                                    </div>
-                                </div>
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="alert alert-info">
-                                                <p style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px; font: normal normal normal 13px/2 FontAwesome;">
-                                                    <i class="fa fa-exclamation-triangle " aria-hidden="true"></i>You can specify a value for each relevant feature regarding this product. Empty fields will not be displayed.
-You can either create a specific value, or select among the existing pre-defined values you've previously added.
-                                                </p>
-                                            </div>
+                                <div class="clearfix">&nbsp;</div>
+                                <div class="sparkline13-list shadow-reset ">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">AVAILABILITY SETTINGS</span> </h1>
                                         </div>
                                     </div>
-                                    <div class="row">
-
-                                        <div class="col-lg-12">
-                                            <div class="table-responsive-row clearfix">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr class="nodrag nodrop">
-                                                            <th class=" left">
-                                                                <span class="title_box">Feature
-                                                                </span>
-                                                            </th>
-                                                            <th class=" left">
-                                                                <span class="title_box">Pre-defined value
-                                                                </span>
-                                                            </th>
-                                                            <th class=" left">
-                                                                <span class="title_box">or Customized value
-                                                                </span>
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <asp:Repeater ID="repFeature" runat="server" OnItemDataBound="repFeature_ItemDataBound">
-                                                            <ItemTemplate>
-                                                                <tr class="highlighted odd selected-line">
-                                                                    <td>
-                                                                        <%#Eval("name") %>
-                                                                        <asp:Label ID="lblid_feature" runat="server" Text='<%#Eval("id_feature") %>' Visible="false"></asp:Label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%--  <input type="hidden" name="feature_8_value" value="0">--%>
-                                                                        <span runat="server" id="AddPre_defined">N/A -
-						<a href="addfeature_value.aspx?fid=<%#Eval("id_feature") %>" class="confirm_leave btn btn-link"><i class="icon-plus-sign"></i>Add pre-defined values first <i class="icon-external-link-sign"></i></a>
-                                                                        </span>
-                                                                        <asp:DropDownList ID="drpPreValue" runat="server" Style="width: 400px">
-                                                                        </asp:DropDownList>
-                                                                        <asp:Label ID="lblPreValue" runat="server" Text='<%#Eval("value") %>' Visible="false"></asp:Label>
-                                                                        <asp:Label ID="lblIsCustom" runat="server" Text='<%#Eval("custom") %>' Visible="false"></asp:Label>
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:TextBox ID="txtCustomeValue" runat="server" CssClass="form-control" TextMode="MultiLine" Text='<%#Eval("Custmvalue") %>'></asp:TextBox></td>
-                                                                </tr>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </tbody>
-                                                </table>
+                                    <div class="login-bg">
+                                        <div class="row" runat="server" id="minimum" visible="false">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-6">
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Minimum quantity</p>
                                                 </div>
                                             </div>
-                                            <asp:LinkButton ID="btnFeature" runat="server" CssClass="btn btn-link bt-icon confirm_leave" OnClick="btnFeature_Click"><i class=" fa fa-plus"></i> Create new Feature <i class=" fa fa-external-link"></i></asp:LinkButton>
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-
-                                                <asp:LinkButton ID="btnFeatureCancel" runat="server" OnClick="btnFeatureCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <asp:TextBox ID="txtStockMinQty" runat="server" CssClass="form-control" Text="In Stock"></asp:TextBox>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <ul>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnFeatureSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnFeatureSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnFeatureSave" runat="server" CssClass="btn btn-default" OnClick="btnFeatureSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
-                                                </ul>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Displayed text when in-stock</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <asp:TextBox ID="txtavailable_now" runat="server" CssClass="form-control" Text="In Stock"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Displayed text when backordering is allowed</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <asp:TextBox ID="txtavailable_later" runat="server" Text="In Stock" CssClass="form-control"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
 
+                                                    <asp:LinkButton ID="btnAvalCancel" runat="server" OnClick="btnAvalCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <ul>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnQASaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnQASaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnQASave" runat="server" CssClass="btn btn-default" OnClick="btnQASave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <%-- Image Tab --%>
+                            <div class="tabcontent" id="Images" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">IMAGES </span></h1>
+
+                                        </div>
+                                    </div>
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                              <%-- <div class="compose-multiple-email">
+                                                   <input type="email" name="recipient_email" id="recipient_email" class="form-control">
+                                               </div>--%>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Upload image </p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area" style="margin-top: 10px;">
+                                                    <asp:FileUpload ID="flpCover" runat="server" multiple="multiple" />
+                                                    <%--<asp:FileUpload ID="flpCover" runat="server" class="multi" AllowMultiple="true" />--%>
+                                                    <hr />
+                                                    <div id="dvPreview">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Image Link</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="login-input-area ">
+                                                    <asp:TextBox ID="txtImageLink" runat="server" CssClass=" form-control" Width="400px"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Caption</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="login-input-area ">
+                                                    <asp:TextBox ID="txtCaption" runat="server" CssClass=" form-control" Width="400px"></asp:TextBox>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <asp:DropDownList ID="drpPosition" runat="server" CssClass=" form-control"></asp:DropDownList>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <asp:Button ID="btnAddFile" runat="server" OnClick="btnAddFile_Click" Text="Add" CssClass="btn btn-default" />
+                                                <asp:Button ID="btnCaptionUpdate" runat="server" OnClick="btnCaptionUpdate_Click" Text="Update" CssClass="btn btn-default" />
+                                                <asp:Button ID="btnPosition" runat="server" OnClick="btnPosition_Click" Text="Set Position" CssClass="btn btn-default" />
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+
+                                            <div class="sparkline13-graph">
+                                                <div class="datatable-dashv1-list custom-datatable-overright">
+                                                    <div id="sss">
+                                                        <table class="table">
+                                                            <tr>
+                                                                <th style="text-align: left; width: 15%;">Image</th>
+                                                                <th style="text-align: left; width: 30%;">Caption</th>
+                                                                <th style="text-align: left; width: 15%;">Position</th>
+                                                                <th style="text-align: left; width: 15%;">Cover</th>
+                                                                <th style="text-align: left; width: 15%;">Delete</th>
+                                                            </tr>
+                                                        </table>
+                                                        <ul id="sortable">
+                                                            <asp:ListView ID="ItemsListView" runat="server" ItemPlaceholderID="myItemPlaceHolder" OnItemCommand="ItemsListView_ItemCommand" OnItemDeleting="ItemsListView_ItemDeleting">
+                                                                <ItemTemplate>
+                                                                    <li id='id_<%# Eval("id_image") %>'>
+                                                                        <table class="table">
+                                                                            <%--  <asp:UpdatePanel ID="pn1" runat="server" UpdateMode="Conditional">
+                                                                                <ContentTemplate>--%>
+                                                                            <%-- <asp:Timer ID="tm1" runat="server" Interval="3000" OnTick="tm1_Tick">
+                                                                                    </asp:Timer>--%>
+                                                                            <tr>
+                                                                                <td style="text-align: left; width: 15%;">
+                                                                                    <img src='<%#Eval("imgg") %>' height="50px" width="50px" /></td>
+                                                                                <td style="text-align: left; width: 30%;"><%#Eval("legend") %> </td>
+                                                                                <td class="pointer dragHandle fixed-width-xs center" style="text-align: left; width: 15%;">
+                                                                                    <div class="dragGroup">
+                                                                                        <div class="positions">
+                                                                                            <%#Eval("position") %>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </td>
+                                                                                <td style="text-align: left; width: 15%;">
+                                                                                    <asp:LinkButton ID="LinkButton2" runat="server" CommandName="Cov" CommandArgument='<%#Eval("id_image") %>'>
+                                        <%# bool.Parse(Eval("cover").ToString())==true ? "<img src='../img/show.gif' title='Make Show' border='0'/>":"<img src='../img/hide.gif' title='Make Hide' border='0'/>" %>
+                                                                                    </asp:LinkButton>
+                                                                                </td>
+                                                                                <td style="text-align: left; width: 15%;">
+                                                                                    <asp:Label ID="lblId" runat="server" Text='<%#Eval("id_image") %>' Visible="false"></asp:Label>
+                                                                                    <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
+                                                                                        CommandArgument='<%#Eval("id_image") %>' Style="width: 25px; padding: 4px 3px;"><i class="fa fa-trash-o"></i></asp:LinkButton>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <%--</ContentTemplate>
+                                                                                <Triggers>
+                                                                                    <asp:AsyncPostBackTrigger ControlID="tm1" EventName="Tick" />
+                                                                                </Triggers>
+                                                                            </asp:UpdatePanel>--%>
+                                                                        </table>
+                                                                    </li>
+                                                                </ItemTemplate>
+                                                            </asp:ListView>
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+                                                    <asp:LinkButton ID="btnImagCancel" runat="server" OnClick="btnImagCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <asp:LinkButton ID="LinkButton11" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                    <asp:LinkButton ID="LinkButton12" runat="server" ValidationGroup="addSEO" CssClass="btn btn-primary" OnClick="btnSEOSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <%-- ATTACHMENT Tab --%>
-                        <div class="tabcontent" id="Attachments" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ATTACHMENT</span> </h1>
 
+                            <%-- ASSIGN FEATURES TO THIS PRODUCT--%>
+                            <div class="tabcontent" id="Features" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ASSIGN FEATURES TO THIS PRODUCT</span> </h1>
+                                        </div>
+                                    </div>
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="alert alert-info">
+                                                    <p style="margin-left: 5px; margin-right: 10px; margin-top: 10px; margin-bottom: 5px; font: normal normal normal 13px/2 FontAwesome;">
+                                                        <i class="fa fa-exclamation-triangle " aria-hidden="true"></i>You can specify a value for each relevant feature regarding this product. Empty fields will not be displayed.
+You can either create a specific value, or select among the existing pre-defined values you've previously added.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-lg-12">
+                                                <div class="table-responsive-row clearfix">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr class="nodrag nodrop">
+                                                                <th class=" left">
+                                                                    <span class="title_box">Feature
+                                                                    </span>
+                                                                </th>
+                                                                <th class=" left">
+                                                                    <span class="title_box">Pre-defined value
+                                                                    </span>
+                                                                </th>
+                                                                <th class=" left">
+                                                                    <span class="title_box">or Customized value
+                                                                    </span>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <asp:Repeater ID="repFeature" runat="server" OnItemDataBound="repFeature_ItemDataBound">
+                                                                <ItemTemplate>
+                                                                    <tr class="highlighted odd selected-line">
+                                                                        <td>
+                                                                            <%#Eval("name") %>
+                                                                            <asp:Label ID="lblid_feature" runat="server" Text='<%#Eval("id_feature") %>' Visible="false"></asp:Label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%--  <input type="hidden" name="feature_8_value" value="0">--%>
+                                                                            <span runat="server" id="AddPre_defined">N/A -
+						<a href="addfeature_value.aspx?fid=<%#Eval("id_feature") %>" class="confirm_leave btn btn-link"><i class="icon-plus-sign"></i>Add pre-defined values first <i class="icon-external-link-sign"></i></a>
+                                                                            </span>
+                                                                            <asp:DropDownList ID="drpPreValue" runat="server" Style="width: 400px">
+                                                                            </asp:DropDownList>
+                                                                            <asp:Label ID="lblPreValue" runat="server" Text='<%#Eval("value") %>' Visible="false"></asp:Label>
+                                                                            <asp:Label ID="lblIsCustom" runat="server" Text='<%#Eval("custom") %>' Visible="false"></asp:Label>
+                                                                        </td>
+                                                                        <td>
+                                                                            <asp:TextBox ID="txtCustomeValue" runat="server" CssClass="form-control" TextMode="MultiLine" Text='<%#Eval("Custmvalue") %>'></asp:TextBox></td>
+                                                                    </tr>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                    </div>
+                                                </div>
+                                                <asp:LinkButton ID="btnFeature" runat="server" CssClass="btn btn-link bt-icon confirm_leave" OnClick="btnFeature_Click"><i class=" fa fa-plus"></i> Create new Feature <i class=" fa fa-external-link"></i></asp:LinkButton>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+
+                                                    <asp:LinkButton ID="btnFeatureCancel" runat="server" OnClick="btnFeatureCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <ul>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnFeatureSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnFeatureSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnFeatureSave" runat="server" CssClass="btn btn-default" OnClick="btnFeatureSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
+                            <%-- ATTACHMENT Tab --%>
+                            <div class="tabcontent" id="Attachments" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">ATTACHMENT</span> </h1>
 
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                        </div>
+                                    </div>
+
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Field Required"
                                                 ControlToValidate="txtFileName" ForeColor="Red"
                                                 Display="Dynamic" SetFocusOnError="true" ValidationGroup="add">
                                             </asp:RequiredFieldValidator>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Filename</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <asp:TextBox ID="txtFileName" runat="server" CssClass=" form-control"></asp:TextBox>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Filename</p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Description</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <div class="login-input-area">
-                                                <asp:TextBox ID="txtAttDescription" runat="server" CssClass=" form-control"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>File</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="login-input-area">
-                                                <input id="attachment_file" type="file" name="attachment_file" class="hide">
-                                                <button class="btn btn-default" data-style="expand-right" data-size="s" type="button" id="attachment_file-add-button" onclick="document.getElementById('attachment_file').click();">
-                                                    <span class="ladda-label">
-                                                        <i class="fa fa-plus"></i>Add file
-                                                    </span><span class="ladda-spinner"></span>
-                                                </button>
-                                                <p class="help-block">Upload a file from your computer (64.00 MB max.)</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="dual-list-box-inner">
-                                                <div class="wizard-big">
-                                                    <select class="form-control dual_select" multiple>
-                                                        <option value="United States">United States</option>
-                                                        <option value="United Kingdom">United Kingdom</option>
-                                                        <option value="Australia">Australia</option>
-                                                        <option selected value="Austria">Austria</option>
-                                                        <option selected value="Bahamas">Bahamas</option>
-                                                        <option value="Barbados">Barbados</option>
-                                                        <option value="Belgium">Belgium</option>
-                                                        <option value="Bermuda">Bermuda</option>
-                                                        <option value="Brazil">Brazil</option>
-                                                        <option value="Bulgaria">Bulgaria</option>
-                                                        <option value="Cameroon">Cameroon</option>
-                                                        <option value="Canada">Canada</option>
-                                                    </select>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <asp:TextBox ID="txtFileName" runat="server" CssClass=" form-control"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="button-style-four btn-mg-b-10">
-                                                <a href="User.aspx" class="btn btn-danger"><i class="fa fa-times fa-2x" aria-hidden="true">Cancel</i></a>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Description</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <div class="login-input-area">
+                                                    <asp:TextBox ID="txtAttDescription" runat="server" CssClass=" form-control"></asp:TextBox>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="login-button-pro alignright">
-                                                <asp:LinkButton ID="LinkButton8" runat="server" ValidationGroup="add" CssClass=" btn btn-primary"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>File</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="login-input-area">
+                                                    <input id="attachment_file" type="file" name="attachment_file" class="hide">
+                                                    <button class="btn btn-default" data-style="expand-right" data-size="s" type="button" id="attachment_file-add-button" onclick="document.getElementById('attachment_file').click();">
+                                                        <span class="ladda-label">
+                                                            <i class="fa fa-plus"></i>Add file
+                                                        </span><span class="ladda-spinner"></span>
+                                                    </button>
+                                                    <p class="help-block">Upload a file from your computer (64.00 MB max.)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                &nbsp;
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="dual-list-box-inner">
+                                                    <div class="wizard-big">
+                                                        <select class="form-control dual_select" multiple>
+                                                            <option value="United States">United States</option>
+                                                            <option value="United Kingdom">United Kingdom</option>
+                                                            <option value="Australia">Australia</option>
+                                                            <option selected value="Austria">Austria</option>
+                                                            <option selected value="Bahamas">Bahamas</option>
+                                                            <option value="Barbados">Barbados</option>
+                                                            <option value="Belgium">Belgium</option>
+                                                            <option value="Bermuda">Bermuda</option>
+                                                            <option value="Brazil">Brazil</option>
+                                                            <option value="Bulgaria">Bulgaria</option>
+                                                            <option value="Cameroon">Cameroon</option>
+                                                            <option value="Canada">Canada</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                &nbsp;
+                                            </div>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="button-style-four btn-mg-b-10">
+                                                    <a href="User.aspx" class="btn btn-danger"><i class="fa fa-times fa-2x" aria-hidden="true">Cancel</i></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="login-button-pro alignright">
+                                                    <asp:LinkButton ID="LinkButton8" runat="server" ValidationGroup="add" CssClass=" btn btn-primary"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
 
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
+
                                 </div>
-
-
-
                             </div>
-                        </div>
 
-                        <%-- TMProductVideos Tab --%>
-                        <div class="tabcontent" id="TMProductVideos" style="display: none">
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server" ValidateRequest="false">
-                                <ContentTemplate>
-                                    <div role="form">
-                                        <div class="sparkline13-list shadow-reset">
-                                            <div class="sparkline13-hd">
-                                                <div class="main-sparkline13-hd">
-                                                    <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">PRODUCT VIDEOS</span> </h1>
+                            <%-- TMProductVideos Tab --%>
+                            <div class="tabcontent" id="TMProductVideos" style="display: none">
+                                <asp:UpdatePanel ID="UpdatePanel2" runat="server" ValidateRequest="false">
+                                    <ContentTemplate>
+                                        <div role="form">
+                                            <div class="sparkline13-list shadow-reset">
+                                                <div class="sparkline13-hd">
+                                                    <div class="main-sparkline13-hd">
+                                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">PRODUCT VIDEOS</span> </h1>
 
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="login-bg">
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
+                                                <div class="login-bg">
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
                                               <%-- <div class="compose-multiple-email">
                                                    <input type="email" name="recipient_email" id="recipient_email" class="form-control">
                                                </div>--%>
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Video Link/Path</p>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Video Link/Path</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">
+                                                            <div class="login-input-area">
+                                                                <asp:TextBox ID="txtVideoLink" runat="server" CssClass=" form-control" Text="https://www.youtube.com/embed/"></asp:TextBox>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="login-input-area">
-                                                            <asp:TextBox ID="txtVideoLink" runat="server" CssClass=" form-control" Text="https://www.youtube.com/embed/"></asp:TextBox>
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
                                                         </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Cover image</p>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Cover image</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-8">
-                                                        <div class="login-input-area" style="margin-top: 10px">
-                                                            <div class="file-upload-inner file-upload-inner-right ts-forms">
-                                                                <div class="input append-small-btn">
-                                                                    <div class="file-button">
-                                                                        Browse
+                                                        <div class="col-lg-8">
+                                                            <div class="login-input-area" style="margin-top: 10px">
+                                                                <div class="file-upload-inner file-upload-inner-right ts-forms">
+                                                                    <div class="input append-small-btn">
+                                                                        <div class="file-button">
+                                                                            Browse
                                                          <asp:FileUpload runat="server" ID="FileUpload1" onchange="document.getElementById('append').value = this.value;" />
 
+                                                                        </div>
+                                                                        <input runat="server" type="text" id="append" placeholder="no file selected" />
                                                                     </div>
-                                                                    <input runat="server" type="text" id="append" placeholder="no file selected" />
                                                                 </div>
+
                                                             </div>
-
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
                                        
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Video Heading</p>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Video Heading</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="login-input-area">
+                                                                <asp:TextBox ID="txtVideHeading" runat="server" CssClass=" form-control"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="login-input-area">
-                                                            <asp:TextBox ID="txtVideHeading" runat="server" CssClass=" form-control"></asp:TextBox>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-2">
-                                                        &nbsp;
+                                                    <div class="row">
+                                                        <div class="col-lg-2">
+                                                            &nbsp;
                                        
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                        <div class="login-input-head alignright" style="margin-right: 10px">
-                                                            <p>Videos Description</p>
+                                                        </div>
+                                                        <div class="col-lg-2">
+                                                            <div class="login-input-head alignright" style="margin-right: 10px">
+                                                                <p>Videos Description</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                            <div class="login-input-area">
+                                                                <CKEditor:CKEditorControl ID="txtVideoDescription" BasePath="../Admin/ckeditor/" runat="server"></CKEditor:CKEditorControl>
+                                                                <%--<textarea id="txtVideoDescription" runat="server" style="width: 100%; height: 100px;"></textarea>--%>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-2">
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="login-input-area">
-                                                            <CKEditor:CKEditorControl ID="txtVideoDescription" BasePath="../Admin/ckeditor/" runat="server"></CKEditor:CKEditorControl>
-                                                            <%--<textarea id="txtVideoDescription" runat="server" style="width: 100%; height: 100px;"></textarea>--%>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-2">
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix">&nbsp;</div>
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <div class=" alignleft">
+                                                    <div class="clearfix">&nbsp;</div>
+                                                    <div class="row">
+                                                        <div class="col-lg-6">
+                                                            <div class=" alignleft">
 
-                                                            <asp:LinkButton ID="btnVideoCancel" runat="server" OnClick="btnVideoCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                                <asp:LinkButton ID="btnVideoCancel" runat="server" OnClick="btnVideoCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true"> Cancel</i></asp:LinkButton>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <div class="alignright">
-                                                            <asp:LinkButton ID="btnVideoSaveAnd" runat="server" ValidationGroup="addVideo" CssClass="btn btn-primary" OnClick="btnVideoSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
-                                                            <asp:LinkButton ID="btnVideoSave" runat="server" ValidationGroup="addVideo" CssClass="btn btn-primary" OnClick="btnVideoSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
+                                                        <div class="col-lg-6">
+                                                            <div class="alignright">
+                                                                <asp:LinkButton ID="btnVideoSaveAnd" runat="server" ValidationGroup="addVideo" CssClass="btn btn-primary" OnClick="btnVideoSaveAnd_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save and Stay</i></asp:LinkButton>
+                                                                <asp:LinkButton ID="btnVideoSave" runat="server" ValidationGroup="addVideo" CssClass="btn btn-primary" OnClick="btnVideoSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true"> Save</i></asp:LinkButton>
 
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row" runat="server" id="video">
-                                                    <div class="sparkline13-graph">
-                                                        <div class="datatable-dashv1-list custom-datatable-overright">
-                                                            <table id="table" data-toggle="table" data-toolbar="#toolbar">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th>Video</th>
-                                                                        <th>Heading</th>
-                                                                        <th>Description</th>
-                                                                        <th></th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <asp:Repeater ID="repVideo" runat="server" OnItemCommand="repVideo_ItemCommand">
-                                                                        <ItemTemplate>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <%--<object width="427" height="258">
+                                                    <div class="row" runat="server" id="video">
+                                                        <div class="sparkline13-graph">
+                                                            <div class="datatable-dashv1-list custom-datatable-overright">
+                                                                <table id="table" data-toggle="table" data-toolbar="#toolbar">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Video</th>
+                                                                            <th>Heading</th>
+                                                                            <th>Description</th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <asp:Repeater ID="repVideo" runat="server" OnItemCommand="repVideo_ItemCommand">
+                                                                            <ItemTemplate>
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <%--<object width="427" height="258">
                                                                                             <param name="movie" value="<%#Eval("link") %>"></param>
                                                                                             <param name="allowFullScreen" value="true"></param>
                                                                                             <param name="allowscriptaccess" value="always"></param>
                                                                                             <param name="wmode" value="opaque"></param>
                                                                                             <embed src="<%#Eval("link") %>?" type="application/x-shockwave-flash" width="427" height="258" allowscriptaccess="always" allowfullscreen="true" wmode="opaque"></embed>
                                                                                         </object>--%>
-                                                                                    <iframe width="480" height="360" src="<%#Eval("link") %>" frameborder="0" allowfullscreen></iframe>
-                                                                                    <%--  <iframe width="420" height="315" style="width: 200px; height: 200px;" id="irm1" src='<%#Eval("link") %>' runat="server" frameborder="0" allowfullscreen></iframe>--%>
-                                                                                </td>
-                                                                                <td><%#Eval("name") %> </td>
-                                                                                <td><%#Eval("description") %> </td>
+                                                                                        <iframe width="480" height="360" src="<%#Eval("link") %>" frameborder="0" allowfullscreen></iframe>
+                                                                                        <%--  <iframe width="420" height="315" style="width: 200px; height: 200px;" id="irm1" src='<%#Eval("link") %>' runat="server" frameborder="0" allowfullscreen></iframe>--%>
+                                                                                    </td>
+                                                                                    <td><%#Eval("name") %> </td>
+                                                                                    <td><%#Eval("description") %> </td>
 
-                                                                                <td>
-                                                                                    <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
-                                                                                        CommandArgument='<%#Eval("id_video") %>'><i class="fa fa-trash-o fa-lg"></i></asp:LinkButton>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </ItemTemplate>
-                                                                    </asp:Repeater>
-                                                                </tbody>
-                                                            </table>
+                                                                                    <td>
+                                                                                        <asp:LinkButton ID="lnkDelete" runat="server" CommandName="Delete" OnClientClick="javascript:return confirm('Are you sure you want to delete ?');" CssClass="btn btn-small btn-danger"
+                                                                                            CommandArgument='<%#Eval("id_video") %>'><i class="fa fa-trash-o fa-lg"></i></asp:LinkButton>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </ItemTemplate>
+                                                                        </asp:Repeater>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                        <%-- RELATED PRODUCTS--%>
-                        <div class="tabcontent" id="TemplateMonster" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">RELATED PRODUCTS</span> </h1>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <%-- RELATED PRODUCTS--%>
+                            <div class="tabcontent" id="TemplateMonster" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">RELATED PRODUCTS</span> </h1>
 
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                               <%-- <div class="compose-multiple-email">
                                                    <input type="email" name="recipient_email" id="recipient_email" class="form-control">
                                                </div>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>Related products</p>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>Related products</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <asp:TextBox ID="TextBox1" runat="server" CssClass=" form-control"></asp:TextBox>
+                                                    <span class="input-group-addon"><i class="icon-search"></i></span>
+                                                </div>
+
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <asp:TextBox ID="TextBox1" runat="server" CssClass=" form-control"></asp:TextBox>
-                                                <span class="input-group-addon"><i class="icon-search"></i></span>
+
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+
+                                                    <asp:LinkButton ID="LinkButton20" runat="server" PostBackUrl="~/Backoffice/Products.aspx" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                                </div>
                                             </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-
-                                                <asp:LinkButton ID="LinkButton20" runat="server" PostBackUrl="~/Backoffice/Products.aspx" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <ul>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnRelatedSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnRelatedSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnRelatedSave" runat="server" CssClass="btn btn-default" OnClick="btnRelatedSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
-                                                </ul>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <ul>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnRelatedSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnRelatedSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnRelatedSave" runat="server" CssClass="btn btn-default" OnClick="btnRelatedSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <%-- HOT DEALS--%>
-                        <div class="tabcontent" id="Hot" style="display: none">
-                            <div class="sparkline13-list shadow-reset">
-                                <div class="sparkline13-hd">
-                                    <div class="main-sparkline13-hd">
-                                        <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">HOT DEALS</span> </h1>
+                            <%-- HOT DEALS--%>
+                            <div class="tabcontent" id="Hot" style="display: none">
+                                <div class="sparkline13-list shadow-reset">
+                                    <div class="sparkline13-hd">
+                                        <div class="main-sparkline13-hd">
+                                            <h1><i class="fa fa-tag btn btn-button-success-ct"></i><span class="table-project-n">HOT DEALS</span> </h1>
 
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="login-bg">
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                    <div class="login-bg">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                               <%-- <div class="compose-multiple-email">
                                                    <input type="email" name="recipient_email" id="recipient_email" class="form-control">
                                                </div>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>From Date</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <asp:TextBox ID="txtDealFromdate" CssClass="form-control datePicK" runat="server" placeholder="DD/MM/YYYY"></asp:TextBox>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>From Date</p>
+                                                </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <asp:TextBox ID="txtDealFromdate" CssClass="form-control datePicK" runat="server" placeholder="DD/MM/YYYY"></asp:TextBox>
+                                                </div>
 
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                               <%-- <div class="compose-multiple-email">
                                                    <input type="email" name="recipient_email" id="recipient_email" class="form-control">
                                                </div>--%>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>To Date</p>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <asp:TextBox ID="txtDealToDate" CssClass="form-control datePicK" runat="server" placeholder="DD/MM/YYYY"></asp:TextBox>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>To Date</p>
+                                                </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <asp:TextBox ID="txtDealToDate" CssClass="form-control datePicK" runat="server" placeholder="DD/MM/YYYY"></asp:TextBox>
+                                                </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>From Time</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <asp:TextBox ID="txtDealFromTime" CssClass="form-control" runat="server"></asp:TextBox>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                             </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>From Time</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <asp:TextBox ID="txtDealFromTime" CssClass="form-control" runat="server"></asp:TextBox>
+                                                </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-2">
-                                            &nbsp;
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="login-input-head alignright" style="margin-right: 10px">
-                                                <p>To Time</p>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="input-group">
-                                                <asp:TextBox ID="txtDealToTime" CssClass="form-control" runat="server"></asp:TextBox>
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                &nbsp;
                                             </div>
+                                            <div class="col-lg-2">
+                                                <div class="login-input-head alignright" style="margin-right: 10px">
+                                                    <p>To Time</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="input-group">
+                                                    <asp:TextBox ID="txtDealToTime" CssClass="form-control" runat="server"></asp:TextBox>
+                                                </div>
 
-                                        </div>
-                                    </div>
-                                    <div class="clearfix">&nbsp;</div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class=" alignleft">
-
-                                                <asp:LinkButton ID="btnHotCancel" runat="server" OnClick="btnHotCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="alignright">
-                                                <ul>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnHotSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnHotSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
-                                                    <li class="floatleft">
-                                                        <asp:LinkButton ID="btnHotSave" runat="server" CssClass="btn btn-default" OnClick="btnHotSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
-                                                </ul>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class=" alignleft">
+
+                                                    <asp:LinkButton ID="btnHotCancel" runat="server" OnClick="btnHotCancel_Click" CssClass="btn btn-danger"><i class="fa fa-times " aria-hidden="true">Cancel</i></asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="alignright">
+                                                    <ul>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnHotSaveAnd" runat="server" CssClass="btn btn-default" OnClick="btnHotSaveAnd_Click" Style="margin-right: 10px"><i  class="fa fa-floppy-o " aria-hidden="true">Save and Stay</i></asp:LinkButton></li>
+                                                        <li class="floatleft">
+                                                            <asp:LinkButton ID="btnHotSave" runat="server" CssClass="btn btn-default" OnClick="btnHotSave_Click"><i  class="fa fa-floppy-o " aria-hidden="true">Save</i></asp:LinkButton></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -2881,10 +2913,9 @@ You can either create a specific value, or select among the existing pre-defined
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 
     <asp:HiddenField ID="hddProduct" runat="server" Value="test" />

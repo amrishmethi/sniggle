@@ -1154,11 +1154,12 @@ public class GetData
         string imgurlM = "";
         string descriptionM = "";
         string detailUrlM = ""; string dispriceM = "";
-        string prodNameM = ""; string skuM = ""; string IsPersonalized = "";
+        string prodNameM = ""; string skuM = ""; string IsPersonalized = ""; string TermsCondition = "";
 
         //getDetail and Description detail DIV
         IsPersonalized = ds.Tables[0].Rows[0]["IsPersonalized"].ToString();
         descriptionM = ds.Tables[0].Rows[0]["description"].ToString();
+        TermsCondition = ds.Tables[0].Rows[0]["TermsCondition"].ToString();
         detailUrlM = ds.Tables[0].Rows[0]["DetailUrl"].ToString();
         dispriceM = ds.Tables[0].Rows[0]["DiscountPrice"].ToString();
         prodNameM = ds.Tables[0].Rows[0]["prodFullName"].ToString();
@@ -1436,7 +1437,7 @@ public class GetData
         #endregion
         #region Notes
         str += "<div class=\"product-details-meta mb-20\">";
-        str += " <br/>100% Original Products. <br/> Easy 7 days returns and exchanges (T&C apply). <br/> No return/exchanges on customized and bakery products. <br/> Price of customized goods may vary as per design.<br/>";
+        str += "" + TermsCondition + "";
         str += "</div>";
         #endregion
         str += "<div class=\"product-details-meta mb-20\">";

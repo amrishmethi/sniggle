@@ -411,7 +411,7 @@ public partial class Backoffice_addproduct : System.Web.UI.Page
         string Visibility = drpVisibility.SelectedValue; string Options = "true"; string Condition = drpCondition.SelectedValue;
         string Short_description = txtDes.Text; string Description = txtDes.Text; string Tags = ""; string online_only; string GroupId = txtGroupID.Text;
         string ColorCode = drpColor.SelectedValue;
-
+        string TermsCondition = txtTerms.Text;
         if (chkOnline.Checked == true)
             online_only = "true";
         else
@@ -419,7 +419,7 @@ public partial class Backoffice_addproduct : System.Web.UI.Page
 
         if (txtReferenceCode.Text != "")
         {
-            DataSet ds33 = gdata.AddProduct(Action, "0", online_only, "0", "0", "0", "", "0", Reference_code, "0", "0", "0", "0", "2", Enabled, Redirect, "1", Condition, "true", "1", Visibility, "0", "0", Description, Short_description, "", "", Tags, "", name, id_product, GroupId, ColorCode);
+            DataSet ds33 = gdata.AddProduct(Action, "0", online_only, "0", "0", "0", "", "0", Reference_code, "0", "0", "0", "0", "2", Enabled, Redirect, "1", Condition, "true", "1", Visibility, "0", "0", Description, Short_description, "", "", Tags, "", name, id_product, GroupId, ColorCode, TermsCondition);
             //string ss = txtTag.Value;
             if (ds33.Tables[0].Rows.Count > 0)
             {
@@ -847,42 +847,52 @@ reduction_tax, reduction_type, from, to);
 
         if (id_product != "")
         {
-            string sq = "select distinct top(1) replace(cat.name,'/','-') as name from ps_product prod inner join ps_category_lang cat on prod.id_category_default = cat.id_category";
-            sq += " where cat.id_lang = 1 and prod.id_product = " + id_product + "";
-            DataSet dsCat = data.getDataSet(sq);
-            if (dsCat.Tables[0].Rows.Count > 0)
+            if (flpCover.HasFile)
             {
-                HttpFileCollection hfc = Request.Files;
-
-                for (int i = 1; i < Request.Files.Count - 1; i++)
+                string sq = "select distinct top(1) replace(cat.name,'/','-') as name from ps_product prod inner join ps_category_lang cat on prod.id_category_default = cat.id_category";
+                sq += " where cat.id_lang = 1 and prod.id_product = " + id_product + "";
+                DataSet dsCat = data.getDataSet(sq);
+                if (dsCat.Tables[0].Rows.Count > 0)
                 {
-                    HttpPostedFile postedFile = Request.Files[i];
-                    //if (postedFile.ContentLength > 0)
-                    //{
-                    //string fileName = System.IO.Path.GetFileName(postedFile.FileName);
-                    //postedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
-                    DataSet dsImg = gdata.AddImage(txtCaption.Text, i.ToString(), id_product);
-                    if (dsImg.Tables[0].Rows.Count > 0)
+                    HttpFileCollection hfc = Request.Files;
+
+                    for (int i = 1; i < Request.Files.Count - 1; i++)
                     {
-                        ResizeImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
-                        ResizeThumbImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
+                        HttpPostedFile postedFile = Request.Files[i];
+                        //if (postedFile.ContentLength > 0)
+                        //{
+                        //string fileName = System.IO.Path.GetFileName(postedFile.FileName);
+                        //postedFile.SaveAs(Server.MapPath("~/Uploads/") + fileName);
+                        DataSet dsImg = gdata.AddImage(txtCaption.Text, i.ToString(), id_product);
+                        if (dsImg.Tables[0].Rows.Count > 0)
+                        {
+                            ResizeImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
+                            ResizeThumbImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
+                        }
+                        //}
                     }
+                    //for (int i = 1; i < hfc.Count - 1; i++)
+                    //{
+                    //    HttpPostedFile hpf = hfc[i];
+                    //    DataSet dsImg = gdata.AddImage(txtCaption.Text, i.ToString(), id_product);
+                    //    if (dsImg.Tables[0].Rows.Count > 0)
+                    //    {
+                    //        ResizeImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
+                    //        ResizeThumbImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
+                    //    }
+
                     //}
+                    flpCover.Dispose();
                 }
-                //for (int i = 1; i < hfc.Count - 1; i++)
-                //{
-                //    HttpPostedFile hpf = hfc[i];
-                //    DataSet dsImg = gdata.AddImage(txtCaption.Text, i.ToString(), id_product);
-                //    if (dsImg.Tables[0].Rows.Count > 0)
-                //    {
-                //        ResizeImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
-                //        ResizeThumbImages(dsImg.Tables[0].Rows[0][0].ToString(), flpCover, dsCat.Tables[0].Rows[0]["name"].ToString(), i - 1);
-                //    }
-
-                //}
-                flpCover.Dispose();
             }
+            else
+            {
+                if (txtImageLink.Text != "")
+                {
+                    gdata.AddImageLink(txtCaption.Text, id_product, txtImageLink.Text);
+                }
 
+            }
         }
         Session["tab"] = "Images";
         fillImage();
