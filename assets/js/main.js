@@ -137,7 +137,7 @@
         slidesPerView: 4,
         spaceBetween: 30,
         speed: 1500,
-        slidesPerColumn: 2,
+        slidesPerColumn: 1,
         slidesPerColumnFill: 'row',
 
         navigation: {

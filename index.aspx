@@ -323,7 +323,7 @@
     <!-- End Banner Section -->
 
     <!-- Start Product Default Tab Slider Section -->
-    <div class="product-default-tab-slider-section section-top-gap-100 section-fluid">
+    <div class="product-default-tab-slider-section section-top-gap-100 section-fluid" style="display:none;">
         <!-- Start Section Content Text Area -->
         <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
             <div class="container">

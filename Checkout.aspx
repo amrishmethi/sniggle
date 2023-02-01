@@ -108,7 +108,7 @@
                                             </td>
                                             <td class="float-right">
                                                 <h4 class="value">₹ {{carts[0]["NetAmount"] | number : 2}}</h4>
-                                                &nbsp;
+                                                &nbsp;&nbsp;
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -135,6 +135,7 @@
         //var ddd = ₹ ('#ContentPlaceHolder1_hddPaymentAmt').text();
         //var amount = $('#ContentPlaceHolder1_lblPaymentAmt').text();
         //amount = parseFloat(amount) * 100;
+		 function payNow() { 
         var descc = "SNIGGLE";
         var oid = $('#content_hddOrderId').val();
         var options = {
@@ -150,6 +151,7 @@
             },
             "notes": {
                 "address": "Razorpay Corporate Office"
+				
             },
             "theme": {
                 "color": "#6A59CE"

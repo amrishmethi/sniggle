@@ -39,48 +39,50 @@ public partial class Checkout : System.Web.UI.Page
                 keywords1.Content = dss;
                 Page.Header.Controls.Add(new LiteralControl("\n"));
                 this.Page.Header.Controls.Add(keywords1);
-            } 
-            if (HttpContext.Current.Request.Cookies["custSniggle"] != null)
+            }
+            if (HttpContext.Current.Request.Cookies["custQC"] != null)
             {
-                HttpCookie user = HttpContext.Current.Request.Cookies["custSniggle"];
+                HttpCookie user = HttpContext.Current.Request.Cookies["custQC"];
                 UserID = user.Values["id_customer"].ToString();
             }
+            else { 
+                    return;
+            }
             string cartID = "";
-            if (HttpContext.Current.Request.Cookies["cartSG"] != null)
+             
+            if (HttpContext.Current.Request.Cookies["cartQC"] != null)//cartSG
             {
                 if (Session["TotalProdAmt"] != null)
                 {
                     totProdAmt = Session["TotalProdAmt"].ToString();
                     double totproamt = Convert.ToDouble(totProdAmt);
-                    HttpCookie user = HttpContext.Current.Request.Cookies["cartSG"];
+                    HttpCookie user = HttpContext.Current.Request.Cookies["cartQC"];//cartSG
                     cartID = user.Values["cartID"].ToString();
-                    FillRazorPayDetail(totproamt, UserID, cartID);
+                    
+                string orderid=    FillRazorPayDetail(totproamt, UserID, cartID);
                 }
                 //hrefBwSuccess.HRef = "BwSuccess.aspx?orderid=" + cartID + "";
             }
         }
     }
-    public void FillRazorPayDetail(double finalAmt, string userID, string cartId)
+    public string FillRazorPayDetail(double finalAmt, string userID, string cartId)
     {
         ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
         //finalAmt = 1;
         finalAmt = finalAmt * 100;
         //finalAmt = 100;
-        string key = "rzp_live_o2BnycHhBbZNJP";
-        string secret = "9kH5EZ5ppyA8wxetqq9HUT8c";
+        string key = "rzp_live_CKZjY1qtRhmWTY"; //"rzp_test_twsa8aBi32GAwi"; //
+        string secret = "1eAex0Di2TerfPjfCYkblfDq";//"JyRjxp73uqP2kINFKcqC3vLm";
         RazorpayClient client = new RazorpayClient(key, secret);
         Dictionary<string, object> options = new Dictionary<string, object>();
         options.Add("amount", finalAmt);
         options.Add("payment_capture", 1);
         options.Add("currency", "INR");
         Order order = client.Order.Create(options);
-        hddOrderId.Value = order.Attributes.id;
-        string ddd = "Update ps_cart set secure_key = '" + order.Attributes.id + "' where id_cart = " + cartId + " and id_customer = '" + userID + "'";
-        dat.executeCommand(ddd);
-    }
-
-    protected void btnCOD_Click(object sender, EventArgs e)
-    {
-
-    }
+        hddOrderId.Value = order["id"].ToString();// order.Attributes.id;
+        return order["id"].ToString();// order.Attributes.id;
+         
+        //  string ddd = "Update ps_cart set secure_key = '" + order.Attributes.id + "' where id_cart = " + cartId + " and id_customer = '" + userID + "'";
+        // dat.executeCommand(ddd);
+    } 
 }
