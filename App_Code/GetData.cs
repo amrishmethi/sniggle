@@ -1437,6 +1437,7 @@ public class GetData
         #endregion
         #region Notes
         str += "<div class=\"product-details-meta mb-20\">";
+        //str += " <br/>100% Original Products. <br/> Easy 7 days returns and exchanges (T&C apply). <br/> No return/exchanges on customized and bakery products. <br/> Price of customized goods may vary as per design.<br/>";
         str += "" + TermsCondition + "";
         str += "</div>";
         #endregion
