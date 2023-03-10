@@ -1877,7 +1877,7 @@
                                             <div class="col-lg-8">
                                                 <div class="">
                                                     <div class="input-group">
-                                                        <span class="input-group-addon">CM</span>
+                                                        <span class="input-group-addon">KG</span>
                                                         <asp:TextBox ID="txtPackageweight" runat="server" placeholder="0.000000" CssClass=" form-control" Width="200px" MaxLength="27"></asp:TextBox>
                                                     </div>
                                                 </div>

@@ -89,7 +89,7 @@
                                             <td class="float-right"><b class="value">₹ {{carts[0]["TotalAmount"] | number : 2}}</b>&nbsp;</td>
                                         </tr>
                                         <tr data-ng-show="carts[0].Shipping!=0.00">
-                                            <td colspan="3">&nbsp;</td>
+                                            <td colspan="2">&nbsp;</td>
                                             <th><b>Shipping Cost</b></th>
                                             <td class="float-right"><b class="value">₹ {{carts[0]["Shipping"] | number : 2}}</b>&nbsp;</td>
                                         </tr>

@@ -1888,8 +1888,8 @@ public class FrontWeb : System.Web.Services.WebService
             tbl.Rows[0]["TotalCount"] = Convert.ToDouble(tbl.Compute("SUM(Qty)", "").ToString());
             if (TttolAmt > FreeShippingAmt)
             {
-                tbl.Rows[0]["Shipping"] = 0;
-                netAmount = Convert.ToDouble(tbl.Compute("SUM(Amount)", ""));
+                tbl.Rows[0]["Shipping"] = FreeShippingAmt;
+                netAmount = Convert.ToDouble(tbl.Compute("SUM(Amount)", "")) + Convert.ToDouble(FreeShippingAmt);
             }
             else
             {

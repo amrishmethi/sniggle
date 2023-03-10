@@ -369,7 +369,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
             string name = "";
             if (url.Contains("localhost"))
             {
-                name = @"G:\GitHub\sniggle\ExcelDownload\MyEarthExcel.xlsx";
+                name = @"D:\GitHub\sniggle\ExcelDownload\MyEarthExcel.xlsx";
             }
             else
                 name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyEarthExcel.xlsx";
@@ -391,7 +391,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
             string url = HttpContext.Current.Request.Url.AbsoluteUri;
             string name = "";
             if (url.Contains("localhost"))
-                name = @"G:\GitHub\sniggle\Excel\MyEarthExcel.xlsx";
+                name = @"D:\GitHub\sniggle\Excel\MyEarthExcel.xlsx";
             else
                 name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyEarthExcel.xlsx";
 
