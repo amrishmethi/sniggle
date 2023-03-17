@@ -1190,11 +1190,16 @@ public class GetData
             str += " <ul>";
             for (int i = 0; i < ds.Tables[2].Rows.Count; i++)
             {
-                str += "<a href=\"/" + ds.Tables[2].Rows[i]["DetailUrl"].ToString() + "\" >";
-                str += " <li class=\"" + ds.Tables[2].Rows[i]["actCalss"].ToString() + "\" style=\"background-color:" + ds.Tables[2].Rows[i]["ColorCode"].ToString() + "\">";
-                str += " &nbsp;";
-                str += "</li>";
-                str += "</a>";
+                str += " <li class=\"" + ds.Tables[2].Rows[i]["actCalss"].ToString() + "\"><a href=\"/" + ds.Tables[2].Rows[i]["DetailUrl"].ToString() + "\">";
+                str += " <img class=\"img-fluid\" src=\"" + ds.Tables[2].Rows[i]["img"].ToString() + "\" />";
+                str += "</a></li>";
+
+
+                //str += "<a href=\"/" + ds.Tables[2].Rows[i]["DetailUrl"].ToString() + "\" >";
+                //str += " <li class=\"" + ds.Tables[2].Rows[i]["actCalss"].ToString() + "\" style=\"background-color:" + ds.Tables[2].Rows[i]["ColorCode"].ToString() + "\">";
+                //str += " &nbsp;";
+                //str += "</li>";
+                //str += "</a>";
             }
             str += "</ul>";
             str += " </div>";

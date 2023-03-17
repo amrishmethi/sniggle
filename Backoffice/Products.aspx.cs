@@ -452,6 +452,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 worksheet.Range[m, 45].Text = dr["ImgURL4"].ToString(); 
                 worksheet.Range[m, 46].Text = dr["ImgURL5"].ToString(); 
                 worksheet.Range[m, 47].Text = dr["ImgURL6"].ToString(); 
+                worksheet.Range[m, 48].Text = dr["GroupId"].ToString(); 
          
                 worksheet.Range[m, 2, m, 40].HorizontalAlignment = HorizontalAlignType.Left;
                 worksheet.Range[m, 2, m, 40].VerticalAlignment = VerticalAlignType.Center;
@@ -569,6 +570,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 bulkInsert.ColumnMappings.Add("id_product", "[id_product]");
                 bulkInsert.ColumnMappings.Add("id_product_attribute", "[id_product_attribute]");
                 bulkInsert.ColumnMappings.Add("IsDeleted", "[IsDeleted]");
+                bulkInsert.ColumnMappings.Add("GroupID", "[GroupID]");
                 int res = SaveProduct(dt);
                 excelConn.Close();
                 if (res == 0)
@@ -786,6 +788,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@ImgURL4", drExcel["ImgURL4"]);
                 cmd.Parameters.AddWithValue("@ImgURL5", drExcel["ImgURL5"]);
                 cmd.Parameters.AddWithValue("@ImgURL6", drExcel["ImgURL6"]);
+                cmd.Parameters.AddWithValue("@GroupId", drExcel["GroupId"].ToString().Trim());
                 ss = data.executeCommandP(cmd);
             }
             catch (Exception ee)
