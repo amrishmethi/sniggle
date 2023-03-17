@@ -1179,7 +1179,7 @@ public class GetData
         str += "<div class=\"price\"><del class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">₹<span id=\"prodwithoutdiscountprice\">" + ds.Tables[0].Rows[0]["ProdPrice"].ToString() + "</span></del> ₹<span id=\"sppricenewquik\">" + ds.Tables[0].Rows[0]["DiscountPrice"].ToString() + "</span> <span  class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">(" + ds.Tables[0].Rows[0]["Discount"].ToString() + "% Off)</span></div>";
         str += "</div>";
         str += " <hr/>";
-        str += "  <h4 class=\"title pb-2 pt-2\">Available Options</h4>";
+        str += "  <h4 class=\"title pb-2 pt-2\">Available Options</h4>"; 
         #endregion
         #region Product According to Group Id
         if (ds.Tables[2].Rows.Count > 0)
