@@ -398,7 +398,17 @@
                                     <asp:Repeater ID="rptImgThumb" runat="server">
                                         <ItemTemplate>
                                             <div id='<%#Eval("id_image") %>' class="product-image-thumb-single swiper-slide">
-                                                <img class="img-fluid" src='<%#Eval("smallimg").ToString().TrimEnd() %>' title='<%#Eval("ProdName").ToString().TrimEnd() %>' alt='<%#Eval("Caption") %>' />
+                                                <img onclick="image(this)" class="img-fluid" src='<%#Eval("smallimg").ToString().TrimEnd() %>' title='<%#Eval("ProdName").ToString().TrimEnd() %>' alt='<%#Eval("Caption") %>' />
+                                                 <script>
+                                                     function image(img) {
+                                                         $('#bigimg').attr('src', img.src);
+                                                         $('.zoomImg').attr('src', img.src);
+                                                         $('.zoomImg').attr('url', img.src);
+                                                         $('.zoom-image-hover').trigger('zoom.destroy');
+                                                         $('.zoom-image-hover').zoom({ url: img.src });
+                                                     }
+
+                                                 </script>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
