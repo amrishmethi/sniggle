@@ -137,7 +137,7 @@
         slidesPerView: 4,
         spaceBetween: 30,
         speed: 1500,
-        slidesPerColumn: 2,
+        slidesPerColumn: 1,
         slidesPerColumnFill: 'row',
 
         navigation: {
@@ -300,7 +300,7 @@
      *  Product Gallery - Horizontal View
      **********************************/
     var galleryThumbsHorizontal = new Swiper('.product-image-thumb-horizontal.swiper-container', {
-       /* loop: true,*/
+        /*loop: true,*/
         speed: 1000,
         spaceBetween: 25,
         slidesPerView: 4,
