@@ -393,7 +393,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
             if (url.Contains("localhost"))
                 name = @"D:\GitHub\sniggle\Excel\MyExcel.xls";
             else
-                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyExcel.xlsx";
+                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyExcel.xls";
 
             workbook.LoadFromFile(name);
             Worksheet worksheet = workbook.Worksheets[0];
