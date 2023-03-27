@@ -133,7 +133,22 @@
                                         <asp:LinkButton ID="btnDownload" runat="server" Text="Download Excel" OnClick="btnDownload_Click" CssClass="btn btn-primary"></asp:LinkButton>
                                     </div>
                                 </div>
-                            </div> 
+                            </div>
+                            
+                            <div class="clearfix">&nbsp;</div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class=" alignleft">
+                                        <asp:FileUpload ID="flpFormate" runat="server" Width="200px" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="alignleft">
+
+                                        <asp:LinkButton ID="btnFormate" runat="server" Text="Update Excel Format" OnClick="btnFormate_Click" CssClass="btn btn-primary"></asp:LinkButton>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

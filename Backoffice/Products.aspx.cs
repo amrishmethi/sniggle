@@ -478,7 +478,14 @@ public partial class Backoffice_Products : System.Web.UI.Page
         }
 
     }
-
+    protected void btnFormate_Click(object sender, EventArgs e)
+    {
+        if (flpFormate.HasFile)
+        {
+            flpFormate.SaveAs(Server.MapPath("ExcelDownload/" + flpFormate.FileName));
+            flpFormate.SaveAs(Server.MapPath("Excel/" + flpFormate.FileName));
+        }
+    }
     protected void btnSaveP_Click(object sender, EventArgs e)
     {
         if (FlpExcel.HasFile)
