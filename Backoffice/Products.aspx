@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Backoffice/AdminMasterPage.master" AutoEventWireup="true" CodeFile="Products.aspx.cs" Inherits="Backoffice_Products" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-</asp:Content>
+</asp:Content> 
 <asp:Content ID="Content2" ContentPlaceHolderID="Body" runat="Server">
     <div class="admin-dashone-data-table-area mg-b-15">
         <div class="container-fluid">

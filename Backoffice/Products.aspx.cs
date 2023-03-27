@@ -349,7 +349,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
         string sp = "";
         Label lblid; 
         for (int i = 0; i < rep.Items.Count; i++)
-        {
+        { 
             HtmlInputCheckBox chk = (HtmlInputCheckBox)rep.Items[i].FindControl("chk");
             lblid = (Label)rep.Items[i].FindControl("lblid");
             if (chk.Checked == true)
