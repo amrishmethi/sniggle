@@ -372,7 +372,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 name = @"D:\GitHub\sniggle\ExcelDownload\MyExcel.xls";
             }
             else
-                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyExcel.xlsx";
+                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyExcel.xls";
 
             workbook.SaveToFile(name);
             string ff = "MyExcel.xls";
