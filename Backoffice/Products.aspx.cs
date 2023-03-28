@@ -369,14 +369,14 @@ public partial class Backoffice_Products : System.Web.UI.Page
             string name = "";
             if (url.Contains("localhost"))
             {
-                name = @"D:\GitHub\sniggle\ExcelDownload\MyExcel.xls";
+                name = @"D:\GitHub\sniggle\ExcelDownload\MyExcel.xlsx";
             }
             else
-                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyExcel.xls";
+                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyExcel.xlsx";
 
             workbook.SaveToFile(name);
-            string ff = "MyExcel.xls";
-            string filePath = "../ExcelDownload/MyExcel.xls";
+            string ff = "MyExcel.xlsx";
+            string filePath = "../ExcelDownload/MyExcel.xlsx";
             Response.ContentType = "application/excel";
             Response.AddHeader("Content-Disposition", "attachment;filename=\"" + ff + "\"");
             Response.TransmitFile(Server.MapPath(filePath));
@@ -391,9 +391,9 @@ public partial class Backoffice_Products : System.Web.UI.Page
             string url = HttpContext.Current.Request.Url.AbsoluteUri;
             string name = "";
             if (url.Contains("localhost"))
-                name = @"D:\GitHub\sniggle\Excel\MyExcel.xls";
+                name = @"D:\GitHub\sniggle\Excel\MyExcel.xlsx";
             else
-                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyExcel.xls";
+                name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyExcel.xlsx";
 
             workbook.LoadFromFile(name);
             Worksheet worksheet = workbook.Worksheets[0];
