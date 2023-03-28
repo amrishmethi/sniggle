@@ -376,7 +376,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
 
             workbook.SaveToFile(name);
             string ff = "MyExcel.xlsx";
-            string filePath = "ExcelDownload/MyExcel.xlsx";
+            string filePath = "../ExcelDownload/MyExcel.xlsx";
             Response.ContentType = "application/excel";
             Response.AddHeader("Content-Disposition", "attachment;filename=\"" + ff + "\"");
             Response.TransmitFile(Server.MapPath(filePath));
@@ -455,8 +455,8 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 worksheet.Range[m, 47].Text = dr["ImgURL6"].ToString(); 
                 worksheet.Range[m, 48].Text = dr["GroupId"].ToString(); 
          
-                worksheet.Range[m, 2, m, 40].HorizontalAlignment = HorizontalAlignType.Left;
-                worksheet.Range[m, 2, m, 40].VerticalAlignment = VerticalAlignType.Center;
+                worksheet.Range[m, 2, m, 48].HorizontalAlignment = HorizontalAlignType.Left;
+                worksheet.Range[m, 2, m, 48].VerticalAlignment = VerticalAlignType.Center;
                 i++;
             }
             #endregion
@@ -482,7 +482,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
     protected void btnFormate_Click(object sender, EventArgs e)
     {
         if (flpFormate.HasFile)
-        {
+        { 
             flpFormate.SaveAs(Server.MapPath("../ExcelDownload/" + flpFormate.FileName));
             flpFormate.SaveAs(Server.MapPath("../Excel/" + flpFormate.FileName));
         }
