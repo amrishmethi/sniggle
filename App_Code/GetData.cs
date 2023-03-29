@@ -37,7 +37,7 @@ public class GetData
 
     public DataSet getCategory(string CatID)
     {
-        query = "select '/img/c/'+cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, cat.description,  cat.meta_title, cat.meta_keywords, cat.meta_description, ISNULL(cast( cat.id_category as nvarchar(500)),'') + '-' +  ISNULL(REPLACE(cat.link_rewrite ,' ','-'),'')  as Url   from ps_category_lang cat  where cat.id_lang = 1 and cat.link_rewrite = '" + CatID.ToString() + "'";
+        query = "select '/img/c/'+cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, cat.description,  cat.meta_title, cat.meta_keywords, cat.meta_description, ISNULL(cast( cat.id_category as nvarchar(500)),'') + '-' +  ISNULL(REPLACE(cat.link_rewrite ,' ','-'),'')  as Url   from ps_category_lang cat  where cat.id_lang = 1 and cat.link_rewrite = '" + CatID.Split('-')[1].ToString() + "'";
         ds = data.getDataSet(query);
         return ds;
     }
@@ -959,7 +959,7 @@ public class GetData
         }
         return str;
     }
-    public string getTopMenuM()
+    public string getTopMenuM2()
     {
         bool flag = false;
         bool flag2 = false;
@@ -1115,7 +1115,7 @@ public class GetData
         return text;
     }
 
-    public string getTopMenuM11()
+    public string getTopMenuM()
     {
         bool IsCMSPage = false;
         DataSet dsT = new DataSet();

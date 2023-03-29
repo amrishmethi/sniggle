@@ -81,7 +81,7 @@ public class AdminGetData
         status = Convert.ToInt32(result.ToString());
         return status;
     }
-    public DataSet InsMenu(string Action, string MenuName, string DisplayIndex, string id, string IsCMS, string id_parent, string Link, string IsCategory,string ColorCode,string TextBold)
+    public DataSet InsMenu(string Action, string MenuName, string DisplayIndex, string id, string IsCMS, string id_parent, string Link, string IsCategory,string ColorCode,string TextBold, string IsMegamenu)
     {
         status = 0;
         cmd = new SqlCommand("Sp_InsMenu");
@@ -97,6 +97,7 @@ public class AdminGetData
         cmd.Parameters.AddWithValue("@DisplayIndex", DisplayIndex != "" ? DisplayIndex : "0");
         cmd.Parameters.AddWithValue("@ColorCode", ColorCode);
         cmd.Parameters.AddWithValue("@TextBold", TextBold);
+        cmd.Parameters.AddWithValue("@IsMegamenu", IsMegamenu);
         //status = data.executeCommand(cmd);
         ds = data.getDataSet(cmd);
         return ds;

@@ -63,6 +63,10 @@ public partial class Backoffice_addMenu : System.Web.UI.Page
             radIsCat.Checked = false;
         txtBold.Text= ds.Tables[0].Rows[0]["TextBold"].ToString();
         txtColor.Text= ds.Tables[0].Rows[0]["ColorCode"].ToString();
+        if (ds.Tables[0].Rows[0]["IsMegaMenu"].ToString() == "True")
+            IsMegaMenu.Checked = true;
+        else
+            IsMegaMenu.Checked = false;
     }
     public void BindMenu()
     {
@@ -80,6 +84,9 @@ public partial class Backoffice_addMenu : System.Web.UI.Page
         string action = "Add"; string ID = "0";
         string name = txtName.Text.Trim(); string DisIndex = txtDis.Text;
         string cms = "true"; string IsCat = "false";
+        string IsMegamenu = "false";
+        if (IsMegaMenu.Checked == true)
+            IsMegamenu = "true";
         if (radIsCat.Checked == true)
             IsCat = "true";
         if (radcms.Checked == true)
@@ -93,7 +100,7 @@ public partial class Backoffice_addMenu : System.Web.UI.Page
         }
         if (gdate.chkMenu(txtName.Text) == 0)
         {
-            ds = gdate.InsMenu(action, name, DisIndex, ID, cms, drpMenu.SelectedValue, txtLink.Text, IsCat,txtColor.Text,txtBold.Text);
+            ds = gdate.InsMenu(action, name, DisIndex, ID, cms, drpMenu.SelectedValue, txtLink.Text, IsCat,txtColor.Text,txtBold.Text, IsMegamenu);
             if (ds.Tables[0].Rows.Count > 0)
             {
                 if (radcat.Checked == true)
@@ -145,6 +152,9 @@ public partial class Backoffice_addMenu : System.Web.UI.Page
         string action = "Add"; string ID = "0";
         string name = txtName.Text.Trim(); string DisIndex = txtDis.Text;
         string cms = "true"; string IsCat = "false";
+        string IsMegamenu = "false";
+        if (IsMegaMenu.Checked == true)
+            IsMegamenu = "true";
         if (radIsCat.Checked == true)
             IsCat = "true";
         if (radcms.Checked == true)
@@ -162,7 +172,7 @@ public partial class Backoffice_addMenu : System.Web.UI.Page
             ID = Request.QueryString["id"].ToString();
         }
 
-        ds = gdate.InsMenu(action, name, DisIndex, ID, cms, drpMenu.SelectedValue, txtLink.Text, IsCat,txtColor.Text,txtBold.Text);
+        ds = gdate.InsMenu(action, name, DisIndex, ID, cms, drpMenu.SelectedValue, txtLink.Text, IsCat,txtColor.Text,txtBold.Text, IsMegamenu);
         if (ds.Tables[0].Rows.Count > 0)
         {
             if (radcat.Checked == true)

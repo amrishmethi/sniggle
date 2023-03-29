@@ -63,13 +63,21 @@
                                             <p>Menu </p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-8">
+                                    <div class="col-lg-6">
                                         <div class="login-input-area">
-                                            <asp:TextBox ID="txtName" runat="server" Width="550px"></asp:TextBox>
+                                            <asp:TextBox ID="txtName" runat="server" Width="400px"></asp:TextBox>
                                             <input type="radio" id="radIsCat" runat="server"   />
                                                     Is Main Category
                                         </div>
                                         
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="login-input-area" style="margin-top:16px;">
+                                            <asp:RadioButton ID="IsMegaMenu" runat="server"  />
+                                            <%--<input type="radio" id="IsMegaMenu" runat="server" style="margin-top:20px;" />--%>
+                                            Is Mega Menu
+                                        </div>
+
                                     </div>
 
                                 </div>
