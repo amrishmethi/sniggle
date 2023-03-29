@@ -186,6 +186,15 @@ public class AdminGetData
         ds = data.getDataSet("select * from tbl_Menu where IsDeleted=0 and IsCMS=1");
         return ds;
     }
+    public DataSet GetCategory()
+    {
+
+        cmd = new SqlCommand("Select * from ps_category_lang where isdeleted=0");
+        cmd.CommandType = CommandType.Text;
+        cmd.Parameters.Clear();
+        ds = data.getDataSet(cmd);
+        return ds;
+    }
     public DataSet GetCategory(string ID, string name, string description, string position, string active)
     {
 

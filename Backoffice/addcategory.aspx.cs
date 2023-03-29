@@ -68,7 +68,7 @@ public partial class Backoffice_addcategory : System.Web.UI.Page
     {
         // Category
 
-        ds = gdate.GetCategory("", "", "", "", "");
+        ds = gdate.GetCategory();
         drpCategory.DataSource = ds;
         drpCategory.DataTextField = "name";
         drpCategory.DataValueField = "id_category";

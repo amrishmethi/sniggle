@@ -959,8 +959,163 @@ public class GetData
         }
         return str;
     }
-
     public string getTopMenuM()
+    {
+        bool flag = false;
+        bool flag2 = false;
+        DataSet dataSet = new DataSet();
+        string text = "";
+        query = "    Select * From tbl_Menu where IsDeleted = 0 and Active = 1 order by DisplayIndex ";
+        dataSet = data.getDataSet(query);
+        if (dataSet.Tables[0].Rows.Count > 0)
+        {
+            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            {
+                flag = false;
+                flag2 = Convert.ToBoolean(dataSet.Tables[0].Rows[i]["IsMegaMenu"].ToString());
+                if (dataSet.Tables[0].Rows[i]["IsCMS"].ToString() == "True")
+                {
+                    flag = true;
+                }
+
+                DataSet dataSet2 = new DataSet();
+                DataSet dataSet3 = new DataSet();
+                dataSet2 = getSearchCategory("0", dataSet.Tables[0].Rows[i]["id_Menu"].ToString());
+                if (dataSet2.Tables[0].Rows.Count > 0)
+                {
+                    if (flag2)
+                    {
+                        if (dataSet.Tables[0].Rows[i]["Link"].ToString() != null && dataSet.Tables[0].Rows[i]["Link"].ToString() != "")
+                        {
+                            string text2 = dataSet.Tables[0].Rows[i]["Link"].ToString();
+                            if (text2 != "" && text2 != "#")
+                            {
+                                string text3 = text;
+                                text = text3 + " <li><a href='/" + dataSet.Tables[0].Rows[i]["Link"].ToString() + "'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                            }
+                            else
+                            {
+                                text = text + "<li><a href='#'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                            }
+                        }
+                        else
+                        {
+                            text = text + "<li><a href='#'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                        }
+
+                        text += " <ul class=\"mobile-sub-menu\">";
+                        for (int j = 0; j < dataSet2.Tables[0].Rows.Count; j++)
+                        {
+                            dataSet3 = getSearchCategory(dataSet2.Tables[0].Rows[j]["id_category"].ToString(), dataSet.Tables[0].Rows[i]["id_Menu"].ToString(), "Mega");
+                            string text3 = text;
+                            text = text3 + "<li><a href='/" + dataSet2.Tables[0].Rows[j]["Url"].ToString() + "'>" + dataSet2.Tables[0].Rows[j]["name"].ToString() + "</a> ";
+                            if (dataSet3.Tables[0].Rows.Count > 0)
+                            {
+                                text += " <ul class=\"mobile-sub-menu\">";
+                                for (int k = 0; k < dataSet3.Tables[0].Rows.Count; k++)
+                                {
+                                    text3 = text;
+                                    text = text3 + "<li><a href='/" + dataSet3.Tables[0].Rows[k]["url"].ToString() + "'>" + dataSet3.Tables[0].Rows[k]["name"].ToString() + "</a></li>";
+                                }
+
+                                text += " </ul> ";
+                            }
+
+                            text += "</li>";
+                        }
+
+                        text += " </ul> ";
+                        text += " </li> ";
+                        continue;
+                    }
+
+                    if (dataSet.Tables[0].Rows[i]["Link"].ToString() != null && dataSet.Tables[0].Rows[i]["Link"].ToString() != "")
+                    {
+                        string text2 = dataSet.Tables[0].Rows[i]["Link"].ToString();
+                        if (text2 != "" && text2 != "#")
+                        {
+                            string text3 = text;
+                            text = text3 + " <li><a href='/" + dataSet.Tables[0].Rows[i]["Link"].ToString() + "'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                        }
+                        else
+                        {
+                            text = text + "<li><a href='#'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                        }
+
+                        text += " <ul class=\"sub-menu\" >";
+                    }
+                    else
+                    {
+                        text = text + "<li><a href='#'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                        text += " <ul class=\"mobile-sub-menu\" >";
+                    }
+
+                    for (int j = 0; j < dataSet2.Tables[0].Rows.Count; j++)
+                    {
+                        string text3 = text;
+                        text = text3 + "<li><a href='/" + dataSet2.Tables[0].Rows[j]["Url"].ToString() + "'>" + dataSet2.Tables[0].Rows[j]["name"].ToString() + "</a></li> ";
+                    }
+
+                    text += " </ul> ";
+                    text += " </li> ";
+                }
+                else if (flag)
+                {
+                    DataSet dataSet4 = new DataSet();
+                    dataSet4 = getCMSpage(dataSet.Tables[0].Rows[i]["id_Menu"].ToString(), "List");
+                    if (dataSet4.Tables[0].Rows.Count > 0)
+                    {
+                        string text2 = dataSet.Tables[0].Rows[i]["Link"].ToString();
+                        if (text2 != "" && text2 != "#")
+                        {
+                            string text3 = text;
+                            text = text3 + "<li><a href='/" + dataSet.Tables[0].Rows[i]["Link"].ToString() + "'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                        }
+                        else
+                        {
+                            text = text + "<li><a href='#'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                        }
+
+                        text += " <ul class=\"mobile-sub-menu\" >";
+                        for (int l = 0; l < dataSet4.Tables[0].Rows.Count; l++)
+                        {
+                            if (dataSet4.Tables[0].Rows[l]["IsCategory"].ToString() == "True")
+                            {
+                                string text3 = text;
+                                text = text3 + "<li><a href='/" + dataSet4.Tables[0].Rows[l]["Url"].ToString() + "'>" + dataSet4.Tables[0].Rows[l]["Name"].ToString() + "</a></li> ";
+                            }
+                            else
+                            {
+                                string text3 = text;
+                                text = text3 + "<li><a href='/content/" + dataSet4.Tables[0].Rows[l]["Url"].ToString() + "'>" + dataSet4.Tables[0].Rows[l]["Name"].ToString() + "</a></li> ";
+                            }
+                        }
+
+                        text += " </ul> ";
+                        text += " </li> ";
+                    }
+                    else if (dataSet.Tables[0].Rows[i]["MenuName"].ToString() == "Home")
+                    {
+                        text = text + " <li class=\"\"><a href='/'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + " </a>";
+                    }
+                    else
+                    {
+                        string text3 = text;
+                        text = text3 + "<li><a href='/content/" + dataSet.Tables[0].Rows[i]["Link"].ToString() + "'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a></li> ";
+                    }
+                }
+                else
+                {
+                    string text3 = text;
+                    text = text3 + "<li><a href='/" + dataSet.Tables[0].Rows[i]["Link"].ToString() + "'>" + dataSet.Tables[0].Rows[i]["MenuName"].ToString() + "</a></li> ";
+                }
+            }
+        }
+
+        return text;
+    }
+
+    public string getTopMenuM11()
     {
         bool IsCMSPage = false;
         DataSet dsT = new DataSet();
