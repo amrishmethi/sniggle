@@ -2,31 +2,31 @@
 
 <script runat="server">
 
-    void Application_Start(object sender, EventArgs e) 
+    void Application_Start(object sender, EventArgs e)
     {
         // Code that runs on application startup
 
     }
-    
-    void Application_End(object sender, EventArgs e) 
+
+    void Application_End(object sender, EventArgs e)
     {
         //  Code that runs on application shutdown
 
     }
-        
-    void Application_Error(object sender, EventArgs e) 
-    { 
+
+    void Application_Error(object sender, EventArgs e)
+    {
         // Code that runs when an unhandled error occurs
 
     }
 
-    void Session_Start(object sender, EventArgs e) 
+    void Session_Start(object sender, EventArgs e)
     {
         // Code that runs when a new session is started
 
     }
 
-    void Session_End(object sender, EventArgs e) 
+    void Session_End(object sender, EventArgs e)
     {
         // Code that runs when a session ends. 
         // Note: The Session_End event is raised only when the sessionstate mode
@@ -34,11 +34,11 @@
         // or SQLServer, the event is not raised.
 
     }
-     void Application_BeginRequest(object sender, EventArgs e)
+    void Application_BeginRequest(object sender, EventArgs e)
     {
         string cmspage = "";
         string smartbolg = "";
-        Data data = new Data(); 
+        Data data = new Data();
         string strCustomPath;
         string url = Request.Url.AbsolutePath;
         string newurl = Request.Url.ToString();
@@ -101,7 +101,7 @@
             {
                 strCustomPath = "~/Logout.aspx";
                 app.Context.RewritePath(strCustomPath, true);
-            } 
+            }
             else if (path1 == "Shopping-Cart")
             {
                 strCustomPath = "~/ShoppingCart.aspx";
@@ -245,11 +245,13 @@
                     if (path1.Contains("-"))
                     {
                         string[] aa = path1.Split('-');
-                        if (data.Exist("select PCL.name from ps_category_lang as PCL inner join ps_category as PC on PC.id_category = PCL.id_category  where PC.IsDeleted = 0 and PC.active = 1 and PCL.IsDeleted = 0 and PCL.id_category=" + aa[0] + ""))
+                        //if (data.Exist("select PCL.name from ps_category_lang as PCL inner join ps_category as PC on PC.id_category = PCL.id_category  where PC.IsDeleted = 0 and PC.active = 1 and PCL.IsDeleted = 0 and PCL.id_category=" + aa[0] + ""))
+                        if (data.Exist("select PCL.name from ps_category_lang as PCL inner join ps_category as PC on PC.id_category = PCL.id_category  where PC.IsDeleted = 0 and PC.active = 1 and PCL.IsDeleted = 0 and PCL.link_rewrite='" + path1 + "'"))
                         {
                             string qq = " SELECT * FROM ps_category a ";
                             qq += " LEFT JOIN ps_category_lang b ON (b.id_category = a.id_category AND b.id_lang = 1 AND b.id_shop = 1) ";
-                            qq += "  WHERE  a.IsDeleted=0 and b.IsDeleted=0 and id_parent = " + aa[0] + "	  and a.active = 1 ORDER BY a.position ASC ";
+                            //qq += "  WHERE  a.IsDeleted=0 and b.IsDeleted=0 and id_parent = " + aa[0] + "	  and a.active = 1 ORDER BY a.position ASC ";
+                            qq += "  WHERE  a.IsDeleted=0 and b.IsDeleted=0 and b.link_rewrite='" + path1 + "' and a.active = 1 ORDER BY a.position ASC ";
                             if (data.Exist(qq))
                             {
                                 string st = CheckUrlExist(path1, "subcat");
@@ -323,7 +325,8 @@
         Data data = new Data();
         string qq = "Select * From ps_category as a inner join ps_category_lang as b on a.id_category = b.id_category ";
         qq += " where  b.id_lang = 1 ";
-        qq += " and   ISNULL(cast( a.id_category as nvarchar ),'') + '-' +  ISNULL(REPLACE(b.link_rewrite ,' ','-'),'')   = '" + Url + "'";
+        //qq += " and   ISNULL(cast( a.id_category as nvarchar ),'') + '-' +  ISNULL(REPLACE(b.link_rewrite ,' ','-'),'')   = '" + Url + "'";
+        qq += " and    ISNULL(REPLACE(b.link_rewrite ,' ','-'),'')   = '" + Url + "'";
         if (data.Exist(qq))
         {
             status = "True";
@@ -354,5 +357,5 @@
         }
         return status;
     }
-       
+
 </script>

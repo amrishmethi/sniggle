@@ -37,7 +37,7 @@ public class GetData
 
     public DataSet getCategory(string CatID)
     {
-        query = "select '/img/c/'+cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, cat.description,  cat.meta_title, cat.meta_keywords, cat.meta_description, ISNULL(cast( cat.id_category as nvarchar(500)),'') + '-' +  ISNULL(REPLACE(cat.link_rewrite ,' ','-'),'')  as Url   from ps_category_lang cat  where cat.id_lang = 1 and cat.id_category = " + CatID.Split('-')[0].ToString() + "";
+        query = "select '/img/c/'+cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, cat.description,  cat.meta_title, cat.meta_keywords, cat.meta_description, ISNULL(cast( cat.id_category as nvarchar(500)),'') + '-' +  ISNULL(REPLACE(cat.link_rewrite ,' ','-'),'')  as Url   from ps_category_lang cat  where cat.id_lang = 1 and cat.link_rewrite = '" + CatID.ToString() + "'";
         ds = data.getDataSet(query);
         return ds;
     }
@@ -801,7 +801,7 @@ public class GetData
                     IsCMSPage = true;
                 }
                 DataSet dsS = new DataSet();
-                DataSet dsTH = new DataSet(); 
+                DataSet dsTH = new DataSet();
                 dsS = getSearchCategory("0", dsT.Tables[0].Rows[i]["id_Menu"].ToString());
                 if (dsS.Tables[0].Rows.Count > 0)
                 {
@@ -1316,7 +1316,7 @@ public class GetData
         cmd.CommandType = CommandType.StoredProcedure;
         cmd.Parameters.Clear();
         cmd.Parameters.AddWithValue("@ParentId", ParentId);
-        cmd.Parameters.AddWithValue("@MenuId", MenuId); 
+        cmd.Parameters.AddWithValue("@MenuId", MenuId);
         cmd.Parameters.AddWithValue("@type", type);
         ds = data.getDataSet(cmd);
         return ds;
@@ -1413,7 +1413,7 @@ public class GetData
         str += "<div class=\"price\"><del class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">₹<span id=\"prodwithoutdiscountprice\">" + ds.Tables[0].Rows[0]["ProdPrice"].ToString() + "</span></del> ₹<span id=\"sppricenewquik\">" + ds.Tables[0].Rows[0]["DiscountPrice"].ToString() + "</span> <span  class=\"" + ds.Tables[0].Rows[0]["pDis"].ToString() + "\">(" + ds.Tables[0].Rows[0]["Discount"].ToString() + "% Off)</span></div>";
         str += "</div>";
         str += " <hr/>";
-        str += "  <h4 class=\"title pb-2 pt-2\">Available Options</h4>"; 
+        str += "  <h4 class=\"title pb-2 pt-2\">Available Options</h4>";
         #endregion
         #region Product According to Group Id
         if (ds.Tables[2].Rows.Count > 0)
