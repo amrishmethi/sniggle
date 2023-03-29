@@ -784,6 +784,7 @@ public class GetData
 
     public string getTopMenu()
     {
+        bool IsMegaMenu = false;
         bool IsCMSPage = false;
         DataSet dsT = new DataSet();
         string str = "";
@@ -794,38 +795,115 @@ public class GetData
             for (int i = 0; i < dsT.Tables[0].Rows.Count; i++)
             {
                 IsCMSPage = false;
+                IsMegaMenu = Convert.ToBoolean(dsT.Tables[0].Rows[i]["IsMegaMenu"].ToString());
                 if (dsT.Tables[0].Rows[i]["IsCMS"].ToString() == "True")
                 {
                     IsCMSPage = true;
                 }
                 DataSet dsS = new DataSet();
-                dsS = getSearchCategory("2", dsT.Tables[0].Rows[i]["id_Menu"].ToString());
+                DataSet dsTH = new DataSet(); 
+                dsS = getSearchCategory("0", dsT.Tables[0].Rows[i]["id_Menu"].ToString());
                 if (dsS.Tables[0].Rows.Count > 0)
                 {
-                    if (dsT.Tables[0].Rows[i]["Link"].ToString() != null && dsT.Tables[0].Rows[i]["Link"].ToString() != "")
+                    if (IsMegaMenu == true)
                     {
-                        string link = dsT.Tables[0].Rows[i]["Link"].ToString();
-                        if (link != "" && link != "#")
+                        #region Mega Menu
+                        if (dsT.Tables[0].Rows[i]["Link"].ToString() != null && dsT.Tables[0].Rows[i]["Link"].ToString() != "")
                         {
-                            str += " <li><a href='/" + dsT.Tables[0].Rows[i]["Link"].ToString() + "'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                            string link = dsT.Tables[0].Rows[i]["Link"].ToString();
+                            if (link != "" && link != "#")
+                            {
+                                str += " <li class=\"has-dropdown has-megaitem\"><a href='/" + dsT.Tables[0].Rows[i]["Link"].ToString() + "'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + " <i class=\"fa fa-angle-down\"></i></a>";
+                            }
+                            else
+                            {
+                                str += "<li class=\"has-dropdown has-megaitem\"><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "<i class=\"fa fa-angle-down\"></i></a>";
+                            }
                         }
                         else
                         {
-                            str += "<li><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                            str += "<li class=\"has-dropdown has-megaitem\"><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "<i class=\"fa fa-angle-down\"></i></a>";
                         }
-                        str += " <ul class=\"sub-menu\" >";
+                        str += " <div class=\"mega-menu\">";
+                        str += " <div class=\"row\">";
+                        int sNo = 0;
+                        int lNo = 3;
+                        int totCount = dsS.Tables[0].Rows.Count;
+                        for (int ii = 0; ii < dsS.Tables[0].Rows.Count; ii++)
+                        {
+
+                            str += "<div class=\"col-3\">";
+                            dsTH = getSearchCategory(dsS.Tables[0].Rows[ii]["id_category"].ToString(), dsT.Tables[0].Rows[i]["id_Menu"].ToString(), "Mega");
+
+                            str += "<div class=\"title\"><a href='/" + dsS.Tables[0].Rows[ii]["Url"].ToString() + "'><strong>" + dsS.Tables[0].Rows[ii]["name"].ToString() + "</strong></a></div> ";
+                            if (dsTH.Tables[0].Rows.Count > 0)
+                            {
+                                str += " <ul class=\"mega-menu-sub\">";
+                                for (int th = 0; th < dsTH.Tables[0].Rows.Count; th++)
+                                {
+                                    str += "<li><a href='/" + dsTH.Tables[0].Rows[th]["url"].ToString() + "'>" + dsTH.Tables[0].Rows[th]["name"].ToString() + "</a></li>";
+                                }
+                                str += " </ul> ";
+                            }
+                            str += " </div> ";
+                        }
+                        str += " </div> ";
+                        str += " </div> ";
+                        #endregion
                     }
                     else
                     {
-                        str += "<li><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
-                        str += " <ul class=\"mobile-sub-menu\" >";
+                        #region Normal Menu
+                        if (dsT.Tables[0].Rows[i]["Link"].ToString() != null && dsT.Tables[0].Rows[i]["Link"].ToString() != "")
+                        {
+                            string link = dsT.Tables[0].Rows[i]["Link"].ToString();
+                            if (link != "" && link != "#")
+                            {
+                                str += " <li class=\"has-dropdown\"><a href='/" + dsT.Tables[0].Rows[i]["Link"].ToString() + "'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + " <i class=\"fa fa-angle-down\"></i></a>";
+                            }
+                            else
+                            {
+                                str += "<li class=\"has-dropdown\"><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "<i class=\"fa fa-angle-down\"></i></a>";
+                            }
+                            str += " <ul class=\"sub-menu\" >";
+                        }
+                        else
+                        {
+                            str += "<li class=\"has-dropdown\"><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "<i class=\"fa fa-angle-down\"></i></a>";
+                            str += " <ul class=\"sub-menu\" >";
+                        }
+                        for (int ii = 0; ii < dsS.Tables[0].Rows.Count; ii++)
+                        {
+                            str += "<li><a href='/" + dsS.Tables[0].Rows[ii]["Url"].ToString() + "'>" + dsS.Tables[0].Rows[ii]["name"].ToString() + "</a></li> ";
+                        }
+                        str += " </ul> ";
+                        str += " </li> ";
+                        #endregion
                     }
-                    for (int ii = 0; ii < dsS.Tables[0].Rows.Count; ii++)
-                    {
-                        str += "<li><a href='/" + dsS.Tables[0].Rows[ii]["Url"].ToString() + "'>" + dsS.Tables[0].Rows[ii]["name"].ToString() + "</a></li> ";
-                    }
-                    str += " </ul> ";
-                    str += " </li> ";
+                    //if (dsT.Tables[0].Rows[i]["Link"].ToString() != null && dsT.Tables[0].Rows[i]["Link"].ToString() != "")
+                    //{
+                    //    string link = dsT.Tables[0].Rows[i]["Link"].ToString();
+                    //    if (link != "" && link != "#")
+                    //    {
+                    //        str += " <li><a href='/" + dsT.Tables[0].Rows[i]["Link"].ToString() + "'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                    //    }
+                    //    else
+                    //    {
+                    //        str += "<li><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                    //    }
+                    //    str += " <ul class=\"sub-menu\" >";
+                    //}
+                    //else
+                    //{
+                    //    str += "<li><a href='#'>" + dsT.Tables[0].Rows[i]["MenuName"].ToString() + "</a>";
+                    //    str += " <ul class=\"mobile-sub-menu\" >";
+                    //}
+                    //for (int ii = 0; ii < dsS.Tables[0].Rows.Count; ii++)
+                    //{
+                    //    str += "<li><a href='/" + dsS.Tables[0].Rows[ii]["Url"].ToString() + "'>" + dsS.Tables[0].Rows[ii]["name"].ToString() + "</a></li> ";
+                    //}
+                    //str += " </ul> ";
+                    //str += " </li> ";
                 }
                 else
                 {
@@ -1077,13 +1155,14 @@ public class GetData
         return str;
     }
 
-    public DataSet getSearchCategory(string ParentId, string MenuId)
+    public DataSet getSearchCategory(string ParentId, string MenuId, string type = "Normal")
     {
         cmd = new SqlCommand("sp_GetCategoryS");
         cmd.CommandType = CommandType.StoredProcedure;
         cmd.Parameters.Clear();
         cmd.Parameters.AddWithValue("@ParentId", ParentId);
-        cmd.Parameters.AddWithValue("@MenuId", MenuId);
+        cmd.Parameters.AddWithValue("@MenuId", MenuId); 
+        cmd.Parameters.AddWithValue("@type", type);
         ds = data.getDataSet(cmd);
         return ds;
     }
