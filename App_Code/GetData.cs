@@ -1359,7 +1359,32 @@ public class GetData
         return ds;
     }
 
+    public DataSet getSizeChart(string ProdID)
+    {
+        cmd = new SqlCommand("Select top 1 * from tbl_sizechart where CategoryId in (select IIF(SizeChartCatId is null,id_category_default,SizeChartCatId) from ps_Product where id_Product=" + ProdID + ")");
+        cmd.CommandType = CommandType.Text;
+        //cmd.Parameters.Clear();
+        //cmd.Parameters.AddWithValue("@ProdId", ProdID);
+        ds = data.getDataSet(cmd);
+        return ds;
 
+        //query = "select img.id_image,imgl.legend,img.position,img.cover,'/img/'+REPLACE(REPLACE(RTRIM(c.name),' ',' '),'/-','')+'/'+cast(img.id_image as nvarchar)+'.jpg' as ImageUrl, '/img/' + REPLACE(REPLACE(RTRIM(c.name), ' ', ' '), '/', '') + '/' + cast(img.id_image as nvarchar) + '-tm_cart_default.jpg' as smallimg, '/img/' + REPLACE(REPLACE(RTRIM(c.name), ' ', ' '), '/', '') + '/' + cast(img.id_image as nvarchar) + '-tm_thickbox_default.jpg' as bigimg  from ps_image as img inner join ps_image_lang as imgl on img.id_image = imgl.id_image inner join ps_product as P on p.id_product = img.id_product inner join ps_category_lang as C on p.id_category_default = C.id_category and C.id_lang = 1 where img.IsDeleted = 0 and imgl.id_lang = 1 and img.id_product = " + ProdID + " order by img.position";
+        //ds = data.getDataSet(query);
+        //return ds;
+    }
+    public DataSet getItemImagesList(string ProdID)
+    {
+        cmd = new SqlCommand("sp_GetItemImageList");
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.Clear();
+        cmd.Parameters.AddWithValue("@ProdId", ProdID);
+        ds = data.getDataSet(cmd);
+        return ds;
+
+        //query = "select img.id_image,imgl.legend,img.position,img.cover,'/img/'+REPLACE(REPLACE(RTRIM(c.name),' ',' '),'/-','')+'/'+cast(img.id_image as nvarchar)+'.jpg' as ImageUrl, '/img/' + REPLACE(REPLACE(RTRIM(c.name), ' ', ' '), '/', '') + '/' + cast(img.id_image as nvarchar) + '-tm_cart_default.jpg' as smallimg, '/img/' + REPLACE(REPLACE(RTRIM(c.name), ' ', ' '), '/', '') + '/' + cast(img.id_image as nvarchar) + '-tm_thickbox_default.jpg' as bigimg  from ps_image as img inner join ps_image_lang as imgl on img.id_image = imgl.id_image inner join ps_product as P on p.id_product = img.id_product inner join ps_category_lang as C on p.id_category_default = C.id_category and C.id_lang = 1 where img.IsDeleted = 0 and imgl.id_lang = 1 and img.id_product = " + ProdID + " order by img.position";
+        //ds = data.getDataSet(query);
+        //return ds;
+    }
     public DataSet GetFromTheBlog()
     {
         cmd = new SqlCommand("sp_GetFromBlog");

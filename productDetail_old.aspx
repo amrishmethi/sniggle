@@ -1,7 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" %>
 
-
-
 <%@ Import Namespace="System.Data" %>
 <script runat="server">
     DataSet ds = new DataSet();
@@ -15,7 +13,6 @@
     public string caturl;
     public string productname;
     public string catname;
-    public string sizedescription;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -40,16 +37,15 @@
         string proIdd = Request.QueryString[0].ToString();
         lblProdId.Text = proIdd;
         lblProdIdDtailPage.Text = proIdd;
-
-        ds = data.getItemImagesList(catid);
-        rptImgThumb.DataSource = ds;
-        rptImgThumb.DataBind();
-
-        ds = data.getSizeChart(catid);
-        if (ds.Tables[0].Rows.Count > 0)
-            sizedescription = ds.Tables[0].Rows[0]["Description"].ToString();
-
         ds = data.getItemImages(catid);
+        rptImgThumb.DataSource = ds.Tables[4];
+        rptImgThumb.DataBind();
+        if (ds.Tables[4].Rows.Count > 0)
+        {
+            rptImgThumb.DataSource = ds.Tables[4];
+            rptImgThumb.DataBind();
+        }
+
         if (ds.Tables[0].Rows.Count > 0)
         {
             productname = ds.Tables[0].Rows[0]["ProdName"].ToString();
@@ -60,9 +56,9 @@
             catnameb.InnerText = catname;
             prodlinkb.HRef = "/" + produrl;
             prodnameb.InnerText = productname;
-            lblImgDtailPage.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
-            //imgReview.Src = ds.Tables[0].Rows[0]["bigimg"].ToString();
-            lblBigImg.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            //lblImgDtailPage.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            ////imgReview.Src = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            //lblBigImg.Text = ds.Tables[0].Rows[0]["bigimg"].ToString();
 
             if (ds.Tables[0].Rows[0]["available_nowTag"].ToString().ToUpper() == "OUT OF STOCK")
             {
@@ -140,7 +136,7 @@
                         break;
                     case "og:image":
                         tag.Attributes.Add("property", "og:image");
-                        tag.Content = String.Format(ds.Tables[0].Rows[0]["bigimg"].ToString());
+                        tag.Content = String.Format(ds.Tables[4].Rows[0]["bigimg"].ToString());
                         Page.Header.Controls.Add(tag);
                         break;
                     case "og:type":
@@ -160,11 +156,17 @@
         if (ds.Tables[3].Rows.Count > 0)
         {
             szDesc.InnerHtml = ds.Tables[3].Rows[0]["Description"].ToString();
-            //<% --szImg.Src = ds.Tables[3].Rows[0]["imgUrl"].ToString(); --%>
+            szImg.Src = ds.Tables[3].Rows[0]["imgUrl"].ToString();
         }
 
-        rptImgBig.DataSource = ds;
-        rptImgBig.DataBind();
+        if (ds.Tables[4].Rows.Count > 0)
+        {
+            lblImgDtailPage.Text = ds.Tables[4].Rows[0]["bigimg"].ToString();
+            //imgReview.Src = ds.Tables[0].Rows[0]["bigimg"].ToString();
+            lblBigImg.Text = ds.Tables[4].Rows[0]["bigimg"].ToString();
+            rptImgBig.DataSource = ds;
+            rptImgBig.DataBind();
+        }
 
         ds = dta.getDataSet("select * from  ps_product_attribute where id_product=" + catid + " and default_on=1");
         if (ds.Tables[0].Rows.Count > 0)
@@ -383,8 +385,7 @@
                                     <asp:Repeater ID="rptImgBig" runat="server">
                                         <ItemTemplate>
                                             <div class="product-image-large-image swiper-slide zoom-image-hover img-responsive">
-                                                <img id="bigimg" src='<%#Eval("bigimg").ToString().TrimEnd() %>' alt='<%#Eval("Caption").ToString().TrimEnd() %>' title='<%#Eval("ProdName").ToString().TrimEnd() %>' />
-
+                                                <img src='<%#Eval("bigimg").ToString().TrimEnd() %>' alt='<%#Eval("Caption").ToString().TrimEnd() %>' title='<%#Eval("ProdName").ToString().TrimEnd() %>' />
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -396,31 +397,18 @@
                                 <div class="swiper-wrapper">
                                     <asp:Repeater ID="rptImgThumb" runat="server">
                                         <ItemTemplate>
-                                            <%--<div id='<%#Eval("id_image") %>' class="product-image-thumb-single swiper-slide">
-                                                <img onclick="image(this)" class="img-fluid" src='<%#Eval("smallimg").ToString().TrimEnd() %>' title='<%#Eval("ProdName").ToString().TrimEnd() %>' height="" alt='<%#Eval("Caption") %>' />
-                                                <script>
-                                                    function image(img) {
-                                                        $('#bigimg').attr('src', img.src);
-                                                        $('.zoomImg').attr('src', img.src);
-                                                        $('.zoomImg').attr('url', img.src);
-                                                        $('.zoom-image-hover').trigger('zoom.destroy');
-                                                        $('.zoom-image-hover').zoom({ url: img.src });
-                                                    }
-
-                                                </script>
-                                            </div>--%>
                                             <div id='<%#Eval("id_image") %>' class="product-image-thumb-single swiper-slide">
                                                 <img onclick="image(this)" class="img-fluid" src='<%#Eval("smallimg").ToString().TrimEnd() %>' title='<%#Eval("ProdName").ToString().TrimEnd() %>' alt='<%#Eval("Caption") %>' />
-                                                <script>
-                                                    function image(img) {
-                                                        $('#bigimg').attr('src', img.src);
-                                                        $('.zoomImg').attr('src', img.src);
-                                                        $('.zoomImg').attr('url', img.src);
-                                                        $('.zoom-image-hover').trigger('zoom.destroy');
-                                                        $('.zoom-image-hover').zoom({ url: img.src });
-                                                    }
+                                                 <script>
+                                                     function image(img) {
+                                                         $('#bigimg').attr('src', img.src);
+                                                         $('.zoomImg').attr('src', img.src);
+                                                         $('.zoomImg').attr('url', img.src);
+                                                         $('.zoom-image-hover').trigger('zoom.destroy');
+                                                         $('.zoom-image-hover').zoom({ url: img.src });
+                                                     }
 
-                                                </script>
+                                                 </script>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -440,7 +428,7 @@
                             <div id="sizeModal" class="modal">
                                 <!-- Modal content -->
                                 <div class="modal-content">
-                                    <span class="close1">&times;</span>
+                                    <span class="close1" id="close1">&times;</span>
                                     <h2 class="text-center">Size Chart</h2>
                                     <div id="szDesc" runat="server"></div>
                                     <img id="szImg" runat="server" />
@@ -473,7 +461,6 @@
                                     }
                                 }
                             </script>
-                            <!-- The Modal -->
                         </div>
                     </div>
                 </div>
@@ -482,7 +469,7 @@
         <!-- End Product Details Section -->
 
         <!-- Start Product Content Tab Section -->
-        <div class="product-details-content-tab-section section-top-gap-100 mt-10">
+        <div class="product-details-content-tab-section section-top-gap-100">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -491,7 +478,7 @@
                             <ul class="nav tablist product-details-content-tab-btn d-flex justify-content-center">
                                 <li><a class="nav-link active" data-bs-toggle="tab" href="#description">Description
                                 </a></li>
-                                <li><a class="nav-link" data-bs-toggle="tab" href="#specification">Specification
+                                <li style="display: none;"><a class="nav-link" data-bs-toggle="tab" href="#specification">Specification
                                 </a></li>
                                 <li><a class="nav-link" data-bs-toggle="tab" href="#review">Reviews
                                 </a></li>
@@ -514,8 +501,8 @@
                                             <table class="table table-bordered mb-20">
                                                 <tbody>
                                                     <tr data-ng-repeat="a in fets">
-                                                        <%--<th scope="row">{{a.SNO}}</th>--%>
-                                                        <td>{{a.ITem}}</td>
+                                                        <th scope="row">{{a.name}}</th>
+                                                        <td>{{a.value}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -530,45 +517,31 @@
                                                 <!-- Start - Review Comment list-->
                                                 <li class="comment-list" data-ng-repeat="re in revs">
                                                     <div class="comment-wrapper">
-                                                        <div class="comment-img">
+                                                        <%--<div class="comment-img">
                                                             <img src="/assets/images/user/image-3.png" alt="">
-                                                        </div>
+                                                        </div>--%>
                                                         <div class="comment-content">
                                                             <div class="comment-content-top">
                                                                 <div class="comment-content-left">
                                                                     <h6 class="comment-name">{{re.customer_name}}</h6>
                                                                     <div>
                                                                         <ul class="review-star">
-                                                                            <li class="fill"><i class="ion-android-star"></i></li>
-                                                                            <li class="fill"><i class="ion-android-star"></i>
+                                                                            <li data-ng-class="{'fill': re.grade >= 1}"><i class="ion-android-star"></i></li>
+                                                                            <li data-ng-class="{'fill': re.grade >= 2}"><i class="ion-android-star"></i>
                                                                             </li>
-                                                                            <li class="fill"><i class="ion-android-star"></i>
+                                                                            <li data-ng-class="{'fill': re.grade >= 3}"><i class="ion-android-star"></i>
                                                                             </li>
-                                                                            <li class="fill"><i class="ion-android-star"></i>
+                                                                            <li data-ng-class="{'fill': re.grade >= 4}"><i class="ion-android-star"></i>
                                                                             </li>
-                                                                            <li class="fill"><i class="ion-android-star"></i>
-                                                                            </li>
-                                                                            <li class="fill"><i class="ion-android-star"></i>
+                                                                            <li data-ng-class="{'fill': re.grade >= 5}"><i class="ion-android-star"></i>
                                                                             </li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
-                                                                <div class="comment-content-right">
-                                                                    <a href="#"><i class="fa fa-reply"></i>Reply</a>
-                                                                </div>
                                                             </div>
-
                                                             <div class="para-content">
                                                                 <p>
-                                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Tempora inventore dolorem a unde modi iste odio amet,
-                                                                fugit fuga aliquam, voluptatem maiores animi dolor nulla
-                                                                magnam ea! Dignissimos aspernatur cumque nam quod sint
-                                                                provident modi alias culpa, inventore deserunt
-                                                                accusantium amet earum soluta consequatur quasi eum eius
-                                                                laboriosam, maiores praesentium explicabo enim dolores
-                                                                quaerat! Voluptas ad ullam quia odio sint sunt. Ipsam
-                                                                officia, saepe repellat.
+                                                                    {{re.content}}
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -581,39 +554,52 @@
                                                 <div class="review-form-text-top">
                                                     <h5>ADD A REVIEW</h5>
                                                 </div>
-
-                                                <form action="#" method="post">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="default-form-box">
-                                                                <label for="comment-name">Your name <span>*</span></label>
-                                                                <input id="comment-name" type="text"
-                                                                    placeholder="Enter your name" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="default-form-box">
-                                                                <label for="comment-email">Your Email <span>*</span></label>
-                                                                <input id="comment-email" type="email"
-                                                                    placeholder="Enter your email" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="default-form-box">
-                                                                <label for="comment-review-text">
-                                                                    Your review
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="default-form-box">
+                                                            <label for="comment-review-text">
+                                                                Rating
                                                                 <span>*</span></label>
-                                                                <textarea id="comment-review-text"
-                                                                    placeholder="Write a review" required></textarea>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <button class="btn btn-md btn-black-default-hover"
-                                                                type="submit">
-                                                                Submit</button>
+                                                            <label id="lblRating" style="display: none;">5</label>
+                                                            <ul class="review-star">
+                                                                <li id="ratingFill1" class="fill" data-ng-click="ratingValue(1)"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li id="ratingFill2" class="fill" data-ng-click="ratingValue(2)"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li id="ratingFill3" class="fill" data-ng-click="ratingValue(3)"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li id="ratingFill4" class="fill" data-ng-click="ratingValue(4)"><i class="ion-android-star"></i>
+                                                                </li>
+                                                                <li id="ratingFill5" class="fill" data-ng-click="ratingValue(5)"><i class="ion-android-star"></i>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                </form>
+                                                    <div class="col-md-6">
+                                                        <div class="default-form-box">
+                                                            <label for="comment-name">Your name <sup class="required">*</sup><span id="reqName" style="color: red; display: none;">Required</span></label>
+                                                            <input id="custName" name="custName" type="text"
+                                                                placeholder="Enter your name" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="default-form-box">
+                                                            <label for="comment-email">Your Email <sup class="required">*</sup><span id="reqEmail" style="color: red; display: none;">Required</span></label>
+                                                            <input id="custEmail" name="custEmail" type="email" placeholder="Enter your email" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="default-form-box">
+                                                            <label for="comment-review-text">
+                                                                Your review<sup class="required">*</sup><span id="reqReview" style="color: red; display: none;">Required</span></label>
+                                                            <textarea id="custReview" name="custReview"
+                                                                placeholder="Write a review" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <button class="btn btn-md btn-black-default-hover" type="button" data-ng-click="addReview();">Submit</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -630,7 +616,7 @@
         <!-- End Product Content Tab Section -->
 
         <!-- Start Product Default Slider Section -->
-        <div class="product-default-slider-section section-top-gap-100 section-fluid mt-10">
+        <div class="product-default-slider-section section-top-gap-100 section-fluid">
             <!-- Start Section Content Text Area -->
             <div class="section-title-wrapper" data-aos="fade-up" data-aos-delay="0">
                 <div class="container">
@@ -659,38 +645,36 @@
                                         <asp:Repeater ID="rptRelatedProd" runat="server">
                                             <ItemTemplate>
                                                 <!-- Start Product Default Single Item -->
-                                                <div class="product-default-single-item product-color--aqua swiper-slide product-color--golden">
+                                                <div class="product-default-single-item product-color--aqua swiper-slide">
                                                     <div class="image-box">
                                                         <a href='/<%#Eval("DetailUrl") %>' class="image-link">
                                                             <img src='<%#Eval("URL") %>' alt='<%#Eval("ImgCaption") %>' title='<%#Eval("ImgCaption") %>' />
                                                             <img src='<%#Eval("imgSecond") %>' alt='<%#Eval("imgSecondCaption") %>' title='<%#Eval("imgSecondCaption") %>' />
                                                         </a>
-                                                        <div class='tag1 <%#Eval("pDis") %>'>
-                                                            <span><%#Eval("Discount") %>%</span>
+                                                        <div class="tag <%#Eval("pDis") %>">
+                                                            <span><%#Eval("Discount") %>% Off</span>
+                                                        </div>
+                                                        <div class="action-link">
+                                                            <div class="action-link-left">
+                                                                <a href="#" data-bs-toggle="modal"
+                                                                    data-bs-target="#modalAddcart" onclick="addProdDetail(<%#Eval("ProdID") %>);">Add to Cart</a>
+                                                            </div>
+                                                            <div class="action-link-right">
+                                                                <a href="javaScript:void(0);" onclick="addWishList(<%#Eval("ProdID") %>);"><i class="icon-heart"></i></a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="content">
                                                         <div class="content-left">
-                                                            <h6 class="title  text-center"><a href='/<%#Eval("DetailUrl") %>'><%#Eval("ProdName") %></a></h6>
+                                                            <h6 class="title"><a href='<%#Eval("DetailUrl") %>'><%#Eval("ProdName") %></a></h6>
+                                                            <%--  <ul class="review-star">
+                                                                <%# data.BindStar(Eval("Rating").ToString()) %>
+                                                            </ul>--%>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xl-6 col-lg-6 col-sm-8 col-8 text-center">
-                                                            <ul class="review-star">
-                                                                <%# gdata.BindStar(Eval("Rating").ToString()) %>
-                                                            </ul>
+                                                        <div class="content-right">
+                                                            <span class="price font-weight-bold">₹ <%#Eval("DiscountPrice") %></span>
                                                         </div>
-                                                        <div class="col-xl-6 col-lg-6 col-sm-4 col-4 text-center action-link-right">
-                                                            <a href="javaScript:void(0);" onclick="addWishList('<%#Eval("ProdID") %>');"><i class="icon-heart"></i></a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-xl-6 col-lg-6 col-sm-6 col-12 text-center">
-                                                            <span class="price"><del class='<%#Eval("pDis") %>'>₹<%#Eval("ProdPrice") %></del>₹ <%#Eval("DiscountPrice") %></span>
-                                                        </div>
-                                                        <div class="col-xl-6 col-lg-6 col-sm-6 col-12  text-center">
-                                                            <a href='/<%#Eval("DetailUrl") %>' class="btb btn-sm btn-black-default-hover"><b>Add To Cart</b></a>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                                 <!-- End Product Default Single Item -->
@@ -707,6 +691,15 @@
                 </div>
             </div>
         </div>
+
+        <!-- The Modal -->
+        <%-- <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+            </div>
+        </div>--%>
         <div id="myModal" class="modal">
             <!-- Modal content -->
 
@@ -715,6 +708,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="Server">
-    <script src="/appjs/product.js"></script>
+    <script src="/appjs/product.js?v=1"></script>
+
 </asp:Content>
 
