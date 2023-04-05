@@ -519,7 +519,7 @@
         <script src="/Toster/jquery.toast.js"></script>
         <script src="/AngJs/angular.min.js"></script>
         <script src="/AngJs/dirPagination.js"></script>
-        <script src="/appjs/master.js?v=7"></script>
+        <script src="/appjs/master.js?v=70"></script>
         <script>
             var loadMultipleCss = function () {
                 //load local stylesheet  
