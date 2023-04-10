@@ -1272,6 +1272,20 @@
                                                                                         <span class="valueTwo hidden"><%#Eval("id_category") %></span>
                                                                                         <input type="checkbox" id="chk1" runat="server" class="shan box" value='<%#Eval("name") %>' />
                                                                                         <span class="valueOne"><%#Eval("name") %></span>
+                                                                                         <asp:Repeater ID="repSub2" runat="server" OnItemDataBound="repSub2_ItemDataBound">
+                                                                                            <ItemTemplate>
+                                                                                                <ul class="list-group nested active" id="myUL2">
+                                                                                                    <li class="list-group-item">
+                                                                                                        <asp:Label ID="lblSubParentId" runat="server" Text='<%#Eval("id_parent") %>' Visible="false"></asp:Label>
+                                                                                                        <asp:Label ID="lblSubID" runat="server" CssClass="bb valueOne" Text='<%#Eval("id_category") %>' Visible="false"></asp:Label>
+                                                                                                        <asp:Label ID="lblSubCatName2" runat="server" Text='<%#Eval("name") %>' Visible="false"></asp:Label>
+                                                                                                        <span class="valueTwo hidden"><%#Eval("id_category") %></span>
+                                                                                                        <input type="checkbox" id="chk2" runat="server" class="shan box" value='<%#Eval("name") %>' />
+                                                                                                        <span class="valueOne"><%#Eval("name") %></span>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </ItemTemplate>
+                                                                                        </asp:Repeater>
                                                                                     </li>
                                                                                 </ul>
                                                                             </ItemTemplate>

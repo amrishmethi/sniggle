@@ -1900,10 +1900,12 @@ reduction_tax, reduction_type, from, to);
     {
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
+            Repeater repSub2 = (Repeater)e.Item.FindControl("repSub2");
             Label lblID = (Label)e.Item.FindControl("lblID");
             Label lblParentId = (Label)e.Item.FindControl("lblParentId");
             Label lblSubCatName = (Label)e.Item.FindControl("lblSubCatName");
             HtmlInputCheckBox lnkAnchorRejection = (HtmlInputCheckBox)e.Item.FindControl("chk1");
+            DataSet dsS = gdata.GetSubCategory(lblID.Text);
             if (ViewState["PID"] != null || Request.QueryString["id"] != null)
             {
 
@@ -1919,7 +1921,10 @@ reduction_tax, reduction_type, from, to);
                 {
                     lnkAnchorRejection.Checked = false;
                 }
+
             }
+            repSub2.DataSource = dsS;
+            repSub2.DataBind();
         }
     }
     //public string ProcessMyDataItem(object myValue)
@@ -2526,7 +2531,30 @@ reduction_tax, reduction_type, from, to);
 
 
 
+    protected void repSub2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    {
+        if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+        {
+            Label lblID = (Label)e.Item.FindControl("lblSubID");
+            Label lblParentId = (Label)e.Item.FindControl("lblSubParentId");
+            Label lblSubCatName = (Label)e.Item.FindControl("lblSubCatName2");
+            HtmlInputCheckBox lnkAnchorRejection = (HtmlInputCheckBox)e.Item.FindControl("chk2");
+            if (ViewState["PID"] != null || Request.QueryString["id"] != null)
+            {
+                string sqCat = "select PCP.*, PS.id_parent from ps_category_product as PCP Inner Join ps_category as PS on ps.id_category = PCP.id_category where PCP.IsDeleted = 0 and PCP.id_category ='" + lblID.Text + "' and PCP.id_product = '" + Request.QueryString["id"].ToString() + "' and PS.id_parent ='" + lblParentId.Text + "'";
 
+                DataSet dsC = data.getDataSet(sqCat);
+                if (dsC.Tables[0].Rows.Count > 0)
+                {
+                    lnkAnchorRejection.Checked = true;
+                }
+                else
+                {
+                    lnkAnchorRejection.Checked = false;
+                }
+            }
+        }
+    }
 
 
 
