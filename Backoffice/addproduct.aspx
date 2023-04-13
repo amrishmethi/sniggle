@@ -5,7 +5,7 @@
 
     <script src="../Admin/multiUpload/jquery-1.3.2.js"></script>
     <script src="../Admin/multiUpload/jquery.MultiFile.js"></script>
-    <style>
+    <style> 
         .MultiFile-list {
             padding: 2px;
         }
