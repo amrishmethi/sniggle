@@ -1684,12 +1684,22 @@ public class GetData
         str += " <input id=\"Qty\" name=\"Qty\" min=\"1\" max=\"100\" value=\"1\" type=\"number\" />";
         str += " </div>";
         str += " </div>";
-
-        str += "<div class=\"product-add-to-cart-btn\" style=\"width:100%;\">";
-        str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" style=\"width:40%; margin-right: 5px;\" onclick =\"addToCartOnDetail();\">+ Add To Cart</a>";
-        str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" onclick=\"BuyNow();\" style=\"width:35%;\">Buy Now</a>";
-        str += " </div>";
-        str += "</div>";
+        if (ds.Tables[0].Rows[0]["quantity"].ToString()==""|| ds.Tables[0].Rows[0]["quantity"].ToString() == "0")
+        {
+            str += "<div class=\"product-add-to-cart-btn\" style=\"width:100%;\">";
+            str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" style=\"width:40%; margin-right: 5px;\">Out Of Stock</a>";
+            //str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" onclick=\"BuyNow();\" style=\"width:35%;\">Buy Now</a>";
+            str += " </div>";
+            str += "</div>";
+        }
+        else
+        {
+            str += "<div class=\"product-add-to-cart-btn\" style=\"width:100%;\">";
+            str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" style=\"width:40%; margin-right: 5px;\" onclick =\"addToCartOnDetail();\">+ Add To Cart</a>";
+            str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" onclick=\"BuyNow();\" style=\"width:35%;\">Buy Now</a>";
+            str += " </div>";
+            str += "</div>";
+        }
         #region Customize Image 
         str += "<input type=\"hidden\" name=\"IsFluCustomize\" value=\"" + IsPersonalized + "\" id=\"IsFluCustomize\">";
         if (IsPersonalized == "True")
