@@ -220,7 +220,7 @@
                                                 <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
                                                 <div>Help</div>
                                             </a>
-                                        </li>
+                                        </li> 
                                     </ul>
                                     <%--<ul class="breadcome-menu alignright" style="margin-top: -21px;">
                                         <li><a href="addcategory.aspx">
