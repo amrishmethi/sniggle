@@ -668,6 +668,7 @@ function getPrice(th) {
         $('#minQty').html(price.split('_')[4]);
         $('#Qty').val(price.split('_')[4]);
         $('#stockQty').val(price.split('_')[5]);
+        //if (price.split('_')[5] == "" || price.split('_')[5] == "0") {
         if (price.split('_')[6] == 'OutofStock') {
             $('.EnqNotifyDiv').css('background', '#b22222')
             $('.EnqNotifyDiv').html("Notify me when restock");

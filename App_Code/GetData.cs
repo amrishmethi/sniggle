@@ -1612,7 +1612,7 @@ public class GetData
                             {
                                 sizeStr = "<div class=\"d-flex align-items-center\">";
                                 sizeStr += "<div class=\"variable-single-item\">";
-                                sizeStr += "<span>Slect Size</span>";
+                                sizeStr += "<span>Select Size</span>";
                                 sizeStr += "<div class=\"selectSize\">";
                             }
                             if (dsi.Tables[0].Rows[j]["groupname"].ToString() == "Size")
@@ -1633,7 +1633,7 @@ public class GetData
                                 {
                                     sizeStr = "<div class=\"d-flex align-items-center\">";
                                     sizeStr += "<div class=\"variable-single-item\">";
-                                    sizeStr += "<span>Slect Size</span>";
+                                    sizeStr += "<span>Select Size</span>";
                                     sizeStr += "<div class=\"selectSize\">";
                                 }
                                 sizeStr += "<div id=\"size_" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "\" class=\"eachSize\" onclick=\"getPrice('s-" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "');\"><span>" + dsi.Tables[0].Rows[j]["attributename"].ToString() + "</span></div>";
@@ -1644,7 +1644,7 @@ public class GetData
                                 {
                                     sizeStr = "<div class=\"d-flex align-items-center\">";
                                     sizeStr += "<div class=\"variable-single-item\">";
-                                    sizeStr += "<span>Slect Size</span>";
+                                    sizeStr += "<span>Select Size</span>";
                                     sizeStr += "<div class=\"selectSize\">";
                                 }
                                 sizeStr += "<div id=\"size_" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "\" class=\"eachSize\" onclick=\"getPrice('s-" + dsi.Tables[0].Rows[j]["id_attribute"].ToString() + "');\"><span>" + dsi.Tables[0].Rows[j]["attributename"].ToString() + "</span></div>";
@@ -1686,7 +1686,7 @@ public class GetData
         str += " </div>";
         if (ds.Tables[0].Rows[0]["quantity"].ToString()==""|| ds.Tables[0].Rows[0]["quantity"].ToString() == "0")
         {
-            str += "<div class=\"product-add-to-cart-btn\" style=\"width:100%;\">";
+            str += "<divclass=\"outofstockdiv\" style=\"width:100%;\">";
             str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" style=\"width:40%; margin-right: 5px;\">Out Of Stock</a>";
             //str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" onclick=\"BuyNow();\" style=\"width:35%;\">Buy Now</a>";
             str += " </div>";

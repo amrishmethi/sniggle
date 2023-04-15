@@ -12,6 +12,7 @@ using System.IO;
 using System.Data.OleDb;
 using System.Data.Common;
 using System.Data.SqlClient;
+using Razorpay.Api;
 
 public partial class Backoffice_Products : System.Web.UI.Page
 {
@@ -347,9 +348,9 @@ public partial class Backoffice_Products : System.Web.UI.Page
     protected void btnDownload_Click(object sender, EventArgs e)
     {
         string sp = "";
-        Label lblid; 
+        Label lblid;
         for (int i = 0; i < rep.Items.Count; i++)
-        { 
+        {
             HtmlInputCheckBox chk = (HtmlInputCheckBox)rep.Items[i].FindControl("chk");
             lblid = (Label)rep.Items[i].FindControl("lblid");
             if (chk.Checked == true)
@@ -371,7 +372,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
             {
                 name = @"D:\GitHub\sniggle\ExcelDownload\MyExcel.xlsx";
             }
-            else 
+            else
                 name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/ExcelDownload/MyExcel.xlsx";
 
             workbook.SaveToFile(name);
@@ -394,7 +395,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 name = @"D:\GitHub\sniggle\Excel\MyExcel.xlsx";
             else
                 name = "C:/HostingSpaces/admin/sniggle.in/wwwroot/Excel/MyExcel.xlsx";
-             
+
 
             workbook.LoadFromFile(name);
             Worksheet worksheet = workbook.Worksheets[0];
@@ -446,15 +447,15 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 worksheet.Range[m, 37].Text = dr["id_product_attribute"].ToString();
                 worksheet.Range[m, 38].Text = dr["IsDeleted"].ToString();
                 worksheet.Range[m, 39].Text = dr["Size"].ToString();
-                worksheet.Range[m, 40].Text = dr["Weight"].ToString(); 
-                worksheet.Range[m, 42].Text = dr["ImgURL1"].ToString(); 
-                worksheet.Range[m, 43].Text = dr["ImgURL2"].ToString(); 
-                worksheet.Range[m, 44].Text = dr["ImgURL3"].ToString(); 
-                worksheet.Range[m, 45].Text = dr["ImgURL4"].ToString(); 
-                worksheet.Range[m, 46].Text = dr["ImgURL5"].ToString(); 
-                worksheet.Range[m, 47].Text = dr["ImgURL6"].ToString(); 
-                worksheet.Range[m, 48].Text = dr["GroupId"].ToString(); 
-         
+                worksheet.Range[m, 40].Text = dr["Weight"].ToString();
+                worksheet.Range[m, 42].Text = dr["ImgURL1"].ToString();
+                worksheet.Range[m, 43].Text = dr["ImgURL2"].ToString();
+                worksheet.Range[m, 44].Text = dr["ImgURL3"].ToString();
+                worksheet.Range[m, 45].Text = dr["ImgURL4"].ToString();
+                worksheet.Range[m, 46].Text = dr["ImgURL5"].ToString();
+                worksheet.Range[m, 47].Text = dr["ImgURL6"].ToString();
+                worksheet.Range[m, 48].Text = dr["GroupId"].ToString();
+
                 worksheet.Range[m, 2, m, 48].HorizontalAlignment = HorizontalAlignType.Left;
                 worksheet.Range[m, 2, m, 48].VerticalAlignment = VerticalAlignType.Center;
                 i++;
@@ -482,7 +483,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
     protected void btnFormate_Click(object sender, EventArgs e)
     {
         if (flpFormate.HasFile)
-        { 
+        {
             flpFormate.SaveAs(Server.MapPath("../ExcelDownload/" + flpFormate.FileName));
             flpFormate.SaveAs(Server.MapPath("../Excel/" + flpFormate.FileName));
         }
@@ -903,7 +904,7 @@ public partial class Backoffice_Products : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@Action", "Update");
                 cmd.Parameters.AddWithValue("@ID", drExcel["Update"]);
                 cmd.Parameters.AddWithValue("@PrdID", drExcel["id_product"]);
-                cmd.Parameters.AddWithValue("@PrdAttID", drExcel["id_product_attribute"]); 
+                cmd.Parameters.AddWithValue("@PrdAttID", drExcel["id_product_attribute"]);
                 cmd.Parameters.AddWithValue("@IsDeleted", drExcel["IsDeleted"]);
                 ss = data.executeCommandP(cmd);
             }

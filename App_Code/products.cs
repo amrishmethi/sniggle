@@ -423,6 +423,8 @@ public class products : System.Web.Services.WebService
             str += " <div class=\"col-md-12\" style=\"padding-top: 1px;\">";
             str += "<p class=\"notoutofstockdiv\">The minimum purchase order quanitity of the product is <span id=\"minQty\">" + ds.Tables[0].Rows[0]["minimal_quantity"].ToString() + " </span>&nbsp;" + ds.Tables[0].Rows[0]["unity"].ToString() + "</p>";
         }
+        else
+        { }
         #endregion
         str += "</div>";
         str += "</div>";

@@ -756,7 +756,7 @@ public class FrontWeb : System.Web.Services.WebService
                 double finalprice = oldprice + newprice1;
                 double discountprice = olddisprice + newprice;
                 string prodAttID = ds.Tables[0].Rows[0]["id_product_attribute"].ToString();
-                string prodStatus = ds.Tables[0].Rows[0]["StockStatus"].ToString();
+                string prodStatus = ds.Tables[0].Rows[0]["ProdStatus"].ToString();
                 str = String.Format("{0:0.00}", finalprice) + "_" + String.Format("{0:0.00}", discountprice) + "_" + prodAttID + "_" + ds.Tables[0].Rows[0]["reference"].ToString() + "_" + MinOrderQty + "_" + StockQty + "_" + prodStatus;
             }
             else
@@ -2674,6 +2674,8 @@ public class FrontWeb : System.Web.Services.WebService
             str += " <div class=\"col-md-12\" style=\"padding-top: 1px;\">";
             str += "<p class=\"notoutofstockdiv\">The minimum purchase order quanitity of the product is <span id=\"minQty\">" + ds.Tables[0].Rows[0]["minimal_quantity"].ToString() + " </span>&nbsp;" + ds.Tables[0].Rows[0]["unity"].ToString() + "</p>";
         }
+        else
+        { }
         #endregion
         str += "</div>";
         str += "</div>";
