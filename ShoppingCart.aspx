@@ -307,7 +307,7 @@
     <!-- ...:::: End Account Dashboard Section:::... -->
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="Server">
-    <script src="/appjs/shoppingCart.js?v=1"></script>
+    <script src="/appjs/shoppingCart.js?v=2"></script>
     <%-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script> 
         var descc = "SNIGGLE";

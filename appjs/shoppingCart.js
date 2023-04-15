@@ -96,19 +96,19 @@
             dataType: "json"
         }).then(function (response) {
             var cart = response.data;
-            //cart = cart.d;
-            //cart = $.parseJSON(cart);
-            //var IsStockAllow = cart[0].IsStockAllow.trim();
-            //var stockQty = cart[0].StockQty.trim();
-            //var Qty = th2;
-            //if (IsStockAllow === 'Deny') {
-            //    Qty = parseInt(Qty) + 1;
-            //    if (parseInt(Qty) > parseInt(stockQty)) {
-            //        tostpro("" + Qty + " quantity not available in stock.", 'Error', 'error', 'mid-center', '2000');
-            //        Qty = parseInt(Qty) - 1;
-            //        return;
-            //    }
-            //}
+            cart = cart.d;
+            cart = $.parseJSON(cart);
+            var IsStockAllow = cart[0].IsStockAllow.trim();
+            var stockQty = cart[0].StockQty.trim();
+            var Qty = th2;
+            if (IsStockAllow === 'Deny') {
+                Qty = parseInt(Qty) + 1;
+                if (parseInt(Qty) > parseInt(stockQty)) {
+                    tostpro("" + Qty + " quantity not available in stock.", 'Error', 'error', 'mid-center', '2000');
+                    Qty = parseInt(Qty) - 1;
+                    return;
+                }
+            }
             $http({
                 method: 'POST',
                 url: '/FrontWeb.asmx/addQtyToCart',
