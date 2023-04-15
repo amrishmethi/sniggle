@@ -1055,20 +1055,47 @@ public class FrontWeb : System.Web.Services.WebService
             }
             else
             {
-                dat.executeCommand("insert into ps_cart_product (id_cart, id_product, id_address_delivery, id_shop, id_product_attribute, quantity, date_add) values(" + cartID + "," + ProdID + ",0,1," + AttriID + "," + Qty + ",'" + DateTime.Now + "')");
-                DataRow dtrow = tbl.NewRow();
-                dtrow["ProdID"] = ProdID;
-                dtrow["SKU"] = SKU;
-                dtrow["AttributeID"] = AttriID;
-                // dtrow["Attribute"] = ds.Tables[0].Rows[0]["Weight"].ToString() + " " + ds.Tables[0].Rows[0]["Unit"].ToString();
-                dtrow["Qty"] = Convert.ToInt32(Qty);
-                dtrow["Price"] = string.Format("{0:0.00}", (Price));
-                dtrow["DisPrice"] = string.Format("{0:0.00}", (DiscountPrice));
-                Amount = Convert.ToDecimal(DiscountPrice) * (Convert.ToDecimal(Qty));
-                dtrow["Amount"] = string.Format("{0:0.00}", (Amount));
-                dtrow["Image1"] = Image1;
-                dtrow["ProdName"] = ProductName;
-                tbl.Rows.Add(dtrow);
+                bool isBuyQtyUpdate = true;
+                #region Check Stock Qty
+                DataSet dsqty = new DataSet();
+                dsqty = gdata.getProductStockDetail(ProdID, AttriID);
+                if (dsqty.Tables[0].Rows.Count > 0)
+                {
+                    string IsStockAllow = dsqty.Tables[0].Rows[0]["IsStockAllow"].ToString().Trim();
+                    string stockQty = dsqty.Tables[0].Rows[0]["stockQty"].ToString().Trim();
+                    double sQty = 1;
+                    int bQty =   Convert.ToInt32(Qty);
+                    if (stockQty != "")
+                    {
+                        sQty = Convert.ToDouble(stockQty);
+                    }
+                    if (IsStockAllow == "Deny")
+                    {
+                        if (bQty > sQty)
+                        {
+                            isBuyQtyUpdate = false;
+                            status = "2";
+                        }
+                    }
+                }
+                #endregion
+                if (isBuyQtyUpdate == true)
+                {
+                    dat.executeCommand("insert into ps_cart_product (id_cart, id_product, id_address_delivery, id_shop, id_product_attribute, quantity, date_add) values(" + cartID + "," + ProdID + ",0,1," + AttriID + "," + Qty + ",'" + DateTime.Now + "')");
+                    DataRow dtrow = tbl.NewRow();
+                    dtrow["ProdID"] = ProdID;
+                    dtrow["SKU"] = SKU;
+                    dtrow["AttributeID"] = AttriID;
+                    // dtrow["Attribute"] = ds.Tables[0].Rows[0]["Weight"].ToString() + " " + ds.Tables[0].Rows[0]["Unit"].ToString();
+                    dtrow["Qty"] = Convert.ToInt32(Qty);
+                    dtrow["Price"] = string.Format("{0:0.00}", (Price));
+                    dtrow["DisPrice"] = string.Format("{0:0.00}", (DiscountPrice));
+                    Amount = Convert.ToDecimal(DiscountPrice) * (Convert.ToDecimal(Qty));
+                    dtrow["Amount"] = string.Format("{0:0.00}", (Amount));
+                    dtrow["Image1"] = Image1;
+                    dtrow["ProdName"] = ProductName;
+                    tbl.Rows.Add(dtrow);
+                }
             }
         }
 
@@ -1880,7 +1907,7 @@ public class FrontWeb : System.Web.Services.WebService
         }
 
         if (tbl.Rows.Count > 0)
-        { 
+        {
             //tbl.Rows[0]["cust_msg"] = cust_msg;
             double netAmount = 0;
             double TttolAmt = Convert.ToDouble(tbl.Compute("SUM(Amount)", "").ToString());
@@ -2094,7 +2121,7 @@ public class FrontWeb : System.Web.Services.WebService
         {
             HttpCookie user = HttpContext.Current.Request.Cookies["wishlistSG"];
             wishListID = user.Values["wishListID"].ToString();
-        } 
+        }
         if (UserID != "0")
         {
             if (wishListID == "0")
