@@ -116,7 +116,7 @@
                             </div>
                             <div class="cart_submit" role="tablist">
                                 <a class="btn btn-md btn-golden float-left" href="/">Continue Shopping</a> 
-                                <a data-ng-show="carts[0].NetAmount > 0" class="btn btn-md btn-golden center-center" href="/CODSuccess.aspx">Cash On Delivery</a> &nbsp;&nbsp;
+                                <a data-ng-show="carts[0].NetAmount > 0" class="btn btn-md btn-golden center-center d-none" href="/CODSuccess.aspx">Cash On Delivery</a> &nbsp;&nbsp;
                                 <a data-ng-show="carts[0].NetAmount > 0" runat="server" class="btn btn-md btn-golden float-right" onclick='payNow();'>I CONFIRM MY ORDER</a>
                             </div>
                         </div>
