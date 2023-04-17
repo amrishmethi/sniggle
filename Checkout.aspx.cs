@@ -40,23 +40,23 @@ public partial class Checkout : System.Web.UI.Page
                 Page.Header.Controls.Add(new LiteralControl("\n"));
                 this.Page.Header.Controls.Add(keywords1);
             }
-            if (HttpContext.Current.Request.Cookies["custQC"] != null)
+            if (HttpContext.Current.Request.Cookies["custSniggle"] != null)
             {
-                HttpCookie user = HttpContext.Current.Request.Cookies["custQC"];
+                HttpCookie user = HttpContext.Current.Request.Cookies["custSniggle"];
                 UserID = user.Values["id_customer"].ToString();
             }
             else { 
-                    return;
+                    //return;
             }
             string cartID = "";
              
-            if (HttpContext.Current.Request.Cookies["cartQC"] != null)//cartSG
+            if (HttpContext.Current.Request.Cookies["cartSG"] != null)//cartSG
             {
                 if (Session["TotalProdAmt"] != null)
                 {
                     totProdAmt = Session["TotalProdAmt"].ToString();
                     double totproamt = Convert.ToDouble(totProdAmt);
-                    HttpCookie user = HttpContext.Current.Request.Cookies["cartQC"];//cartSG
+                    HttpCookie user = HttpContext.Current.Request.Cookies["cartSG"];//cartSG
                     cartID = user.Values["cartID"].ToString();
                     
                 string orderid=    FillRazorPayDetail(totproamt, UserID, cartID);
@@ -81,8 +81,13 @@ public partial class Checkout : System.Web.UI.Page
         Order order = client.Order.Create(options);
         hddOrderId.Value = order["id"].ToString();// order.Attributes.id;
         return order["id"].ToString();// order.Attributes.id;
-         
-        //  string ddd = "Update ps_cart set secure_key = '" + order.Attributes.id + "' where id_cart = " + cartId + " and id_customer = '" + userID + "'";
-        // dat.executeCommand(ddd);
-    } 
+
+        string ddd = "Update ps_cart set secure_key = '" + order.Attributes.id + "' where id_cart = " + cartId + " and id_customer = '" + userID + "'";
+        dat.executeCommand(ddd);
+    }
+
+    protected void btnCOnfirm_Click(object sender, EventArgs e)
+    {
+
+    }
 }

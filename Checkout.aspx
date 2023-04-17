@@ -115,9 +115,10 @@
                                 </table>
                             </div>
                             <div class="cart_submit" role="tablist">
-                                <a class="btn btn-md btn-golden float-left" href="/">Continue Shopping</a> 
+                                <a class="btn btn-md btn-golden float-left" href="/">Continue Shopping</a>
                                 <a data-ng-show="carts[0].NetAmount > 0" class="btn btn-md btn-golden center-center d-none" href="/CODSuccess.aspx">Cash On Delivery</a> &nbsp;&nbsp;
-                                <a data-ng-show="carts[0].NetAmount > 0" runat="server" class="btn btn-md btn-golden float-right" onclick='payNow();'>I CONFIRM MY ORDER</a>
+                                 
+                                <a data-ng-show="carts[0].NetAmount > 0" runat="server" class="btn btn-md btn-golden float-right"  onclick='payNow();'>I CONFIRM MY ORDER</a>
                             </div>
                         </div>
                     </div>
@@ -128,14 +129,13 @@
     <input id="hddOrderId" runat="server" type="hidden" />
     <!-- ...:::: End Account Dashboard Section:::... -->
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="footer" runat="Server">
+<asp:Content ID="Content4" ContentPlaceHolderID="footer" runat="Server">
     <script src="/appjs/shoppingCart.js"></script>
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
         //var ddd = ₹ ('#ContentPlaceHolder1_hddPaymentAmt').text();
         //var amount = $('#ContentPlaceHolder1_lblPaymentAmt').text();
         //amount = parseFloat(amount) * 100;
-		 function payNow() { 
         var descc = "SNIGGLE";
         var oid = $('#content_hddOrderId').val();
         var options = {
@@ -143,7 +143,8 @@
             "description": "SNIGGLE",
             "image": "https://cdn.razorpay.com/logos/7K3b6d18wHwKzL_medium.png",
             "order_id": oid,
-            "callback_url": "https://sniggle.in//PaySuccess.aspx",
+            "callback_url": "https://sniggle.in/PaySuccess.aspx",
+            //   "callback_url": "http://localhost:59187/PaySuccess.aspx",
             "prefill": {
                 "name": "",
                 "email": "",
@@ -151,17 +152,16 @@
             },
             "notes": {
                 "address": "Razorpay Corporate Office"
-				
             },
             "theme": {
                 "color": "#6A59CE"
             }
         };
         var rzp1 = new Razorpay(options);
-        function payNow() { 
+        function payNow() {
+            debugger
             var ss = $('#lblName').html();
             rzp1.open();
         }
     </script>
-</asp:Content>
-
+</asp:Content> 
