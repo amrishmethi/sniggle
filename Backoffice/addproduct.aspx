@@ -5,7 +5,7 @@
 
     <script src="../Admin/multiUpload/jquery-1.3.2.js"></script>
     <script src="../Admin/multiUpload/jquery.MultiFile.js"></script>
-    <style> 
+    <style>
         .MultiFile-list {
             padding: 2px;
         }
@@ -42,6 +42,16 @@
             margin: 0;
             padding: 10px;
         }
+
+        ul, #myUL3 {
+            list-style-type: none;
+        }
+
+        #myUL3 {
+            margin: 0;
+            padding: 10px;
+        }
+
 
         .box {
             cursor: pointer;
@@ -220,7 +230,7 @@
                                                 <i class="fa fa-question-circle fa-2x" aria-hidden="true"></i>
                                                 <div>Help</div>
                                             </a>
-                                        </li> 
+                                        </li>
                                     </ul>
                                     <%--<ul class="breadcome-menu alignright" style="margin-top: -21px;">
                                         <li><a href="addcategory.aspx">
@@ -523,7 +533,8 @@
                                                 <%--    <textarea id="txtDes" runat="server" class="myTextEditor" style="width: 100%"></textarea>--%>
                                             </div>
                                         </div>
-                                    </div>   <div class="clearfix">&nbsp;</div>
+                                    </div>
+                                    <div class="clearfix">&nbsp;</div>
                                     <div class="row">
                                         <div class="col-lg-2">
                                             &nbsp;
@@ -535,7 +546,7 @@
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="login-input-area">
-                                                <CKEditor:CKEditorControl ID="txtTerms" BasePath="../Admin/ckeditor/" runat="server"></CKEditor:CKEditorControl> 
+                                                <CKEditor:CKEditorControl ID="txtTerms" BasePath="../Admin/ckeditor/" runat="server"></CKEditor:CKEditorControl>
                                             </div>
                                         </div>
                                     </div>
@@ -1262,9 +1273,10 @@
                                                                         <span class="valueTwo hidden"><%#Eval("id_category") %></span>
                                                                         <input id="chk1" runat="server" type="checkbox" class="shan" value='<%#Eval("name") %>' />
                                                                         <span class="valueOne"><%#Eval("name") %></span>
-                                                                        <asp:Repeater ID="repSub" runat="server" OnItemDataBound="repSub_ItemDataBound">
-                                                                            <ItemTemplate>
-                                                                                <ul class="list-group nested active" id="myUL2">
+                                                                        <ul class="list-group nested active" id="myUL2">
+                                                                            <asp:Repeater ID="repSub" runat="server" OnItemDataBound="repSub_ItemDataBound">
+                                                                                <ItemTemplate>
+
                                                                                     <li class="list-group-item">
                                                                                         <asp:Label ID="lblParentId" runat="server" Text='<%#Eval("id_parent") %>' Visible="false"></asp:Label>
                                                                                         <asp:Label ID="lblID" runat="server" CssClass="bb valueOne" Text='<%#Eval("id_category") %>' Visible="false"></asp:Label>
@@ -1272,9 +1284,10 @@
                                                                                         <span class="valueTwo hidden"><%#Eval("id_category") %></span>
                                                                                         <input type="checkbox" id="chk1" runat="server" class="shan box" value='<%#Eval("name") %>' />
                                                                                         <span class="valueOne"><%#Eval("name") %></span>
-                                                                                         <asp:Repeater ID="repSub2" runat="server" OnItemDataBound="repSub2_ItemDataBound">
-                                                                                            <ItemTemplate>
-                                                                                                <ul class="list-group nested active" id="myUL2">
+                                                                                        <ul class="list-group active" id="myUL3">
+                                                                                            <asp:Repeater ID="repSub2" runat="server" OnItemDataBound="repSub2_ItemDataBound">
+                                                                                                <ItemTemplate>
+
                                                                                                     <li class="list-group-item">
                                                                                                         <asp:Label ID="lblSubParentId" runat="server" Text='<%#Eval("id_parent") %>' Visible="false"></asp:Label>
                                                                                                         <asp:Label ID="lblSubID" runat="server" CssClass="bb valueOne" Text='<%#Eval("id_category") %>' Visible="false"></asp:Label>
@@ -1283,14 +1296,14 @@
                                                                                                         <input type="checkbox" id="chk2" runat="server" class="shan box" value='<%#Eval("name") %>' />
                                                                                                         <span class="valueOne"><%#Eval("name") %></span>
                                                                                                     </li>
-                                                                                                </ul>
-                                                                                            </ItemTemplate>
-                                                                                        </asp:Repeater>
+                                                                                                </ItemTemplate>
+                                                                                            </asp:Repeater>
+                                                                                        </ul>
                                                                                     </li>
-                                                                                </ul>
-                                                                            </ItemTemplate>
-                                                                        </asp:Repeater>
-                                                                        </span></li>
+                                                                                </ItemTemplate>
+                                                                            </asp:Repeater>
+                                                                        </ul>
+                                                                    </li>
                                                                 </ItemTemplate>
                                                             </asp:Repeater>
                                                         </ul>
