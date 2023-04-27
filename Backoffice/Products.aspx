@@ -136,7 +136,7 @@
                             </div>
                             
                             <div class="clearfix">&nbsp;</div>
-                            <div class="row">
+                            <div class="row hidden">
                                 <div class="col-lg-6">
                                     <div class=" alignleft">
                                         <asp:FileUpload ID="flpFormate" runat="server" Width="200px" />
