@@ -37,7 +37,10 @@ public class GetData
 
     public DataSet getCategory(string CatID)
     {
-        query = "select '/img/c/'+cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, cat.description,  cat.meta_title, cat.meta_keywords, cat.meta_description, ISNULL(cast( cat.id_category as nvarchar(500)),'') + '-' +  ISNULL(REPLACE(cat.link_rewrite ,' ','-'),'')  as Url   from ps_category_lang cat  where cat.id_lang = 1 and cat.link_rewrite = '" + CatID.Split('-')[1].ToString() + "'";
+        string[] CID = CatID.Split('-');
+        string Cat = "";
+        Cat = CatID.Replace(CID[0]+"-", "");
+        query = "select '/img/c/'+cast(cat.id_category as nvarchar(50))+'.jpg' as CatImage, cat.name as CatName, cat.description,  cat.meta_title, cat.meta_keywords, cat.meta_description, ISNULL(cast( cat.id_category as nvarchar(500)),'') + '-' +  ISNULL(REPLACE(cat.link_rewrite ,' ','-'),'')  as Url   from ps_category_lang cat  where cat.id_lang = 1 and cat.link_rewrite = '" + Cat + "'";
         ds = data.getDataSet(query);
         return ds;
     }
@@ -1684,7 +1687,7 @@ public class GetData
         str += " <input id=\"Qty\" name=\"Qty\" min=\"1\" max=\"100\" value=\"1\" type=\"number\" />";
         str += " </div>";
         str += " </div>";
-        if (ds.Tables[0].Rows[0]["quantity"].ToString()==""|| ds.Tables[0].Rows[0]["quantity"].ToString() == "0")
+        if (ds.Tables[0].Rows[0]["quantity"].ToString() == "" || ds.Tables[0].Rows[0]["quantity"].ToString() == "0")
         {
             str += "<divclass=\"outofstockdiv\" style=\"width:100%;\">";
             str += "<a href=\"#\" class=\"btn btn-block btn-lg btn-black-default-hover\" style=\"width:40%; margin-right: 5px;\">Out Of Stock</a>";
