@@ -516,7 +516,7 @@ app.controller('ProductDetailController', function ($scope, $http) {
             var sts = response.data;
             sts = sts.d;
             if (sts === "2") {
-                tostpro("There are not enough products in stock.", 'Stock Not Available', 'info', 'mid-center', '2000');
+                tostpro("There are not enough products in stock.", 'Out Of Stock', 'info', 'mid-center', '2000');
             }
             $.ajax({
                 method: 'POST',
